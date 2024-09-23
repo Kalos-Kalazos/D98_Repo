@@ -15,17 +15,11 @@ public class Spaceship_Control : MonoBehaviour
     [SerializeField]
     private float pitchTorque = 1000f;
     [SerializeField]
-    private float rollTorque = 1000f;
-    [SerializeField]
     private float thrust = 100f;
-    [SerializeField]
-    private float upThrust = 50f;
     [SerializeField]
     private float strafeThrust = 50f;
     [SerializeField, Range(0.111f, 0.999f)]
     private float thrustGlideReduction = 0.999f;
-    [SerializeField, Range(0.111f, 0.999f)]
-    private float upDownGlideReduction = 0.111f;
     [SerializeField, Range(0.111f, 0.999f)]
     private float leftRightGlideReduction = 0.111f;
 
@@ -67,8 +61,6 @@ public class Spaceship_Control : MonoBehaviour
     //Input Values
     private float thrust1D;
     private float strafe1D;
-    private float UpDown1D;
-    private float roll1D;
     private float pitch1D;
     private float yaw1D;
     private float stabilize;
@@ -147,6 +139,7 @@ public class Spaceship_Control : MonoBehaviour
             fireCooldown = 5;
         }
     }
+
     void HandleStabilize()
     {
         //Stabilize
@@ -178,10 +171,9 @@ public class Spaceship_Control : MonoBehaviour
             }
         }
     }
+
     void HandleMovement()
     {
-        //Roll
-        rb.AddRelativeTorque(Vector3.back * roll1D * rollTorque * Time.deltaTime);
         //Pitch
         rb.AddRelativeTorque(Vector3.up * yaw1D * pitchTorque * Time.deltaTime);
         //Yaw
@@ -210,37 +202,20 @@ public class Spaceship_Control : MonoBehaviour
             glide *= thrustGlideReduction;
         }
 
-        //UP / Down
-        if (UpDown1D > 0.1f || UpDown1D < -0.1f)
-        {
-            float currenThrust = thrust;
-
-            rb.AddRelativeForce(Vector3.up * UpDown1D * upThrust * Time.fixedDeltaTime);
-            verticalGlide = thrust;
-        }
-        else
-        {
-            rb.AddRelativeForce(Vector3.up * verticalGlide * Time.fixedDeltaTime);
-            verticalGlide *= thrustGlideReduction;
-        }
-
         //Strafing
         if (strafe1D > 0.1f || strafe1D < -0.1f)
         {
-            float currenThrust = thrust;
 
-            rb.AddRelativeForce(Vector3.right * strafe1D * upThrust * Time.fixedDeltaTime);
+            rb.AddRelativeForce(Vector3.right * strafe1D * strafeThrust * Time.fixedDeltaTime);
             horizontalGlide = thrust;
         }
         else
         {
             rb.AddRelativeForce(Vector3.right * horizontalGlide * Time.fixedDeltaTime);
-            horizontalGlide *= thrustGlideReduction;
+            horizontalGlide *= leftRightGlideReduction;
         }
 
     }
-
-
 
     void HandleShoot()
     {
@@ -262,6 +237,8 @@ public class Spaceship_Control : MonoBehaviour
         }
     }
 
+    //En esta region estan los metodos llamados en el input system y se vinculan con las variables
+
     #region InputsMethods
     public void OnThrust(InputAction.CallbackContext context)
     {
@@ -270,14 +247,6 @@ public class Spaceship_Control : MonoBehaviour
     public void OnStrafe(InputAction.CallbackContext context)
     {
         strafe1D = context.ReadValue<float>();
-    }
-    public void OnUpDown(InputAction.CallbackContext context)
-    {
-        UpDown1D = context.ReadValue<float>();
-    }
-    public void OnRoll(InputAction.CallbackContext context)
-    {
-        roll1D = context.ReadValue<float>();
     }
     public void OnPitch(InputAction.CallbackContext context)
     {

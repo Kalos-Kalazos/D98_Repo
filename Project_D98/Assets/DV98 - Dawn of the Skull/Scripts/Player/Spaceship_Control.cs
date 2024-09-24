@@ -16,6 +16,12 @@ public class Spaceship_Control : MonoBehaviour
     public float currentBoost;
     [SerializeField]
     public float maxBoost;
+    [SerializeField]
+    public float currentHeat;
+    [SerializeField]
+    public float maxHeat;
+    [SerializeField]
+    public bool overHeated = false;
 
     [Header("=== Movement Settings ===")]
     [SerializeField]
@@ -66,6 +72,9 @@ public class Spaceship_Control : MonoBehaviour
     public delegate void BoostChanged(float currentBoost);
     public event BoostChanged OnBoostChanged;
 
+    public delegate void HeatChanged(float currentHeat);
+    public event HeatChanged OnHeatChanged;
+
 
     float glide, horizontalGlide = 0f;
 
@@ -73,7 +82,7 @@ public class Spaceship_Control : MonoBehaviour
 
 
     //Input Values
-    private float thrust1D;
+    public float thrust1D;
     private float strafe1D;
     private float pitch1D;
     private float yaw1D;
@@ -130,7 +139,7 @@ public class Spaceship_Control : MonoBehaviour
 
     private void Update()
     {
-        if (fireCooldown <= 0 && pumPuming)
+        if (fireCooldown <= 0 && pumPuming && !overHeated)
         {
             pumPuming = false;
             Shoot();
@@ -138,6 +147,8 @@ public class Spaceship_Control : MonoBehaviour
         }
         else
         {
+            currentHeat -= Time.deltaTime;
+
             if (fireCooldown > 0)
             {
                 fireCooldown -= Time.deltaTime;
@@ -148,6 +159,32 @@ public class Spaceship_Control : MonoBehaviour
         {
             OnBoostChanged(currentBoost);
         }
+
+        if (OnHeatChanged != null)
+        {
+            OnHeatChanged(currentHeat);
+        }
+
+        if (currentHeat >= maxHeat)
+        {
+            overHeated = true;
+        }
+
+        if (currentHeat <= 0)
+        {
+            overHeated = false;
+        }
+
+        #region Mantener Health, fireCooldown y Heat en sus limites
+
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        if (currentHeat > maxHeat) currentHeat = maxHeat;
+
+        if (currentHealth < 0) currentHealth = 0;
+        if (currentHeat < 0) currentHeat = 0;
+        if (fireCooldown < 0) fireCooldown = 0;
+
+        #endregion
 
     }
 
@@ -165,7 +202,10 @@ public class Spaceship_Control : MonoBehaviour
     {
         if (ammo > 0)
         {
-            ammo -= 1;
+            ammo--;
+
+            currentHeat++;
+
             GameObject bullet = ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {
@@ -173,10 +213,6 @@ public class Spaceship_Control : MonoBehaviour
                 bullet.transform.rotation = shootingPoint.rotation;
                 bullet.SetActive(true);
             }
-        }
-        else
-        {
-            fireCooldown = 5;
         }
     }
 

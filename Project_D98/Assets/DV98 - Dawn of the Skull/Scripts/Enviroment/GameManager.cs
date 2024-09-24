@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public Slider healthSlider;           
-    public Slider boostSlider;             
+    public Slider boostSlider;
+    public Slider heatSlider;
     private Spaceship_Control player;         
     
 
@@ -18,16 +19,22 @@ public class GameManager : MonoBehaviour
         {
             healthSlider.maxValue = player.maxHealth;
             healthSlider.value = player.currentHealth;
+
             boostSlider.maxValue = player.maxBoost;
             boostSlider.value = player.currentBoost;
 
+            heatSlider.maxValue = player.maxHeat;
+            heatSlider.value = player.currentHeat;
+
             player.OnHealthChanged += UpdateHealthBar;
             player.OnBoostChanged += UpdateBoostBar;
+            player.OnHeatChanged += UpdateHeatBar;
         }
     }
 
     #region Cambios de Slider de Vida, Boost y Heat
 
+    //Health bar update
     public void UpdateHealthBar(int currentHealth)
     {
         StartCoroutine(HealthChange(currentHealth));
@@ -48,6 +55,7 @@ public class GameManager : MonoBehaviour
         healthSlider.value = targetHealth;
     }
 
+    //Boost bar update
     public void UpdateBoostBar(float currentBoost)
     {
         StartCoroutine(BoostChange(currentBoost));
@@ -55,7 +63,7 @@ public class GameManager : MonoBehaviour
     IEnumerator BoostChange(float targetBoost)
     {
         float elapsedTime = 0f;
-        float duration = 0.5f;
+        float duration = 0.25f;
         float startValue = boostSlider.value;
 
         while (elapsedTime < duration)
@@ -68,7 +76,26 @@ public class GameManager : MonoBehaviour
         boostSlider.value = targetBoost;
     }
 
-    //Falta el de Heat
+    //Heat bar update
+    public void UpdateHeatBar(float currentHeat)
+    {
+        StartCoroutine(HeatChange(currentHeat));
+    }
+    IEnumerator HeatChange(float targetHeat)
+    {
+        float elapsedTime = 0f;
+        float duration = 0.1f;
+        float startValue = heatSlider.value;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            heatSlider.value = Mathf.Lerp(startValue, targetHeat, elapsedTime / duration);
+            yield return null;
+        }
+
+        heatSlider.value = targetHeat;
+    }
 
     #endregion
 }

@@ -425,10 +425,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd7204eeccd14343acf3a44aa64604b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
+  currentBoost: 0
+  maxBoost: 20
+  currentHeat: 0
+  maxHeat: 10
+  overHeated: 0
   yawTorque: 400
   pitchTorque: 400
-  thrust: 250
-  strafeThrust: 100
+  thrust: 500
+  strafeThrust: 250
   thrustGlideReduction: 0.338
   leftRightGlideReduction: 0.111
   maxBoostAmount: 20
@@ -443,7 +450,7 @@ MonoBehaviour:
   pumPuming: 0
   locking: 0
   shootingPoint: {fileID: 9134196651137091157}
-  currentBoostAmount: 0
+  thrust1D: 0
 --- !u!114 &1680639295779702030
 MonoBehaviour:
   m_ObjectHideFlags: 0

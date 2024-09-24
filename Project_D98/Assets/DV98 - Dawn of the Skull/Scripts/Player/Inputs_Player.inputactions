@@ -93,7 +93,7 @@
                 {
                     "name": "negative",
                     "id": "135bea8e-9f1f-4cbe-9434-5f56f68fba3e",
-                    "path": "<AndroidJoystick>/stick/down",
+                    "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -104,7 +104,7 @@
                 {
                     "name": "positive",
                     "id": "8a76301f-3dcd-44b0-bc2a-67204b6091b2",
-                    "path": "<AndroidJoystick>/stick/up",
+                    "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -159,7 +159,7 @@
                 {
                     "name": "negative",
                     "id": "ee9572f8-bcf1-448e-9d71-b474655750d3",
-                    "path": "<AndroidJoystick>/stick/left",
+                    "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -170,7 +170,7 @@
                 {
                     "name": "positive",
                     "id": "02f6c871-46c9-407a-a787-288a2ac89d79",
-                    "path": "<AndroidJoystick>/stick/right",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -225,7 +225,7 @@
                 {
                     "name": "negative",
                     "id": "ccc23e1e-32a0-495c-8e5f-d5f56099c6ea",
-                    "path": "",
+                    "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -236,7 +236,7 @@
                 {
                     "name": "positive",
                     "id": "efacdfb9-9a3c-4713-862d-10792ae121c3",
-                    "path": "",
+                    "path": "<Gamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -291,7 +291,7 @@
                 {
                     "name": "negative",
                     "id": "32cf563f-f4da-4693-990a-130ec7fb9406",
-                    "path": "",
+                    "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -302,7 +302,7 @@
                 {
                     "name": "positive",
                     "id": "44904817-38c0-4f12-9231-17d774d42bbe",
-                    "path": "",
+                    "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -356,8 +356,30 @@
                 },
                 {
                     "name": "",
+                    "id": "ecd9e4e1-062c-4e18-9ce9-158efc98fbb7",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Stabilize",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "782d4184-5f7d-4306-a17c-f23631b4f2cb",
                     "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "526428a3-f7c7-4f0c-aedd-8d25a48619d6",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -378,8 +400,30 @@
                 },
                 {
                     "name": "",
+                    "id": "f10ad727-012b-42f1-8a09-6f81f9683009",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PumPum",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e51eb3b2-7349-4902-bd53-a9e308e8e37f",
                     "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LockIn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4af570dd-adc2-462c-804c-c12ec9b900a4",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

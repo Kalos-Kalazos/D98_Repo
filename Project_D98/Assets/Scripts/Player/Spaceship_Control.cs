@@ -7,9 +7,17 @@ using UnityEngine.InputSystem;
 
 public class Spaceship_Control : MonoBehaviour
 {
+    [Header("=== Status Settings ===")]
+    [SerializeField]
+    public int currentHealth;
+    [SerializeField]
+    public int maxHealth;
+    [SerializeField]
+    public float currentBoost;
+    [SerializeField]
+    public float maxBoost;
 
-
-    [Header("=== Ship Movement Settings ===")]
+    [Header("=== Movement Settings ===")]
     [SerializeField]
     private float yawTorque = 500f;
     [SerializeField]
@@ -51,9 +59,15 @@ public class Spaceship_Control : MonoBehaviour
     [SerializeField]
     private Transform shootingPoint;
 
-    public float currentBoostAmount;
 
-    float glide, verticalGlide, horizontalGlide = 0f;
+    public delegate void HealthChanged(int currentHealth);
+    public event HealthChanged OnHealthChanged;
+
+    public delegate void BoostChanged(float currentBoost);
+    public event BoostChanged OnBoostChanged;
+
+
+    float glide, horizontalGlide = 0f;
 
     Rigidbody rb;
 
@@ -68,8 +82,9 @@ public class Spaceship_Control : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        currentBoostAmount = maxBoostAmount;
-        
+        currentBoost = maxBoostAmount;
+
+        currentHealth = maxHealth;
         ammo = maxAmmo;
     }
 
@@ -87,8 +102,30 @@ public class Spaceship_Control : MonoBehaviour
                 explosion.SetActive(true);
             }
 
+            TakeDamage(2);
         }
 
+    }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        if (OnHealthChanged != null)
+        {
+            OnHealthChanged(currentHealth);
+        }
+    }
+
+    public void Heal(int healAmount)
+    {
+        currentHealth += healAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        if (OnHealthChanged != null)
+        {
+            OnHealthChanged(currentHealth);
+        }
     }
 
     private void Update()
@@ -107,18 +144,21 @@ public class Spaceship_Control : MonoBehaviour
             }
         }
 
+        if (OnBoostChanged != null)
+        {
+            OnBoostChanged(currentBoost);
+        }
+
     }
 
 
     void FixedUpdate()
-    {
-
-        //Stabilize
-        HandleStabilize();
-        //Boost
-        HandleBoosting();
-        //Move
-        HandleMovement();
+    {        
+        Stabilize();
+        
+        Boosting();
+        
+        Movement();
     }
 
     void Shoot()
@@ -140,9 +180,8 @@ public class Spaceship_Control : MonoBehaviour
         }
     }
 
-    void HandleStabilize()
+    void Stabilize()
     {
-        //Stabilize
         if (stabilize > 0)
         {
             rb.angularDrag = 1.5f;
@@ -153,26 +192,27 @@ public class Spaceship_Control : MonoBehaviour
         }
     }
 
-    void HandleBoosting() 
+    void Boosting() 
     {
-        if (boosting && currentBoostAmount > 0f)
+        if (boosting && currentBoost > 0f)
         {
-            currentBoostAmount -= boostDeprecationRate;
-            if (currentBoostAmount<=0f)
+            currentBoost -= boostDeprecationRate;
+
+            if (currentBoost<=0f)
             {
                 boosting = false;
             }
         }
         else
         {
-            if (currentBoostAmount <  maxBoostAmount)
+            if (currentBoost <  maxBoostAmount)
             {
-                currentBoostAmount += boostRechargeRate;
+                currentBoost += boostRechargeRate;
             }
         }
     }
 
-    void HandleMovement()
+    void Movement()
     {
         //Pitch
         rb.AddRelativeTorque(Vector3.up * yaw1D * pitchTorque * Time.deltaTime);
@@ -215,26 +255,6 @@ public class Spaceship_Control : MonoBehaviour
             horizontalGlide *= leftRightGlideReduction;
         }
 
-    }
-
-    void HandleShoot()
-    {
-
-        if (pumPuming && currentBoostAmount > 0f)
-        {
-            currentBoostAmount -= boostDeprecationRate;
-            if (currentBoostAmount <= 0f)
-            {
-                boosting = false;
-            }
-        }
-        else
-        {
-            if (currentBoostAmount < maxBoostAmount)
-            {
-                currentBoostAmount += boostRechargeRate;
-            }
-        }
     }
 
     //En esta region estan los metodos llamados en el input system y se vinculan con las variables

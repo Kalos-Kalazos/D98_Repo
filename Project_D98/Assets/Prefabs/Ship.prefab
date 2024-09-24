@@ -427,12 +427,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yawTorque: 400
   pitchTorque: 400
-  rollTorque: 50
   thrust: 250
-  upThrust: 100
   strafeThrust: 100
   thrustGlideReduction: 0.338
-  upDownGlideReduction: 0.111
   leftRightGlideReduction: 0.111
   maxBoostAmount: 20
   boostDeprecationRate: 0.1
@@ -441,7 +438,7 @@ MonoBehaviour:
   boosting: 0
   ammo: 50
   fireCooldown: 1
-  fireRate: 0.5
+  fireRate: 0.25
   maxAmmo: 50
   pumPuming: 0
   locking: 0
@@ -505,38 +502,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7c217249-27f6-4694-9e9f-fdb84138b18f
     m_ActionName: Ship Controls/Strafe[/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4697636090080541407}
-        m_TargetAssemblyTypeName: Spaceship_Control, Assembly-CSharp
-        m_MethodName: OnUpDown
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 44e3c93a-3cdb-4ed2-ad16-3181921b6beb
-    m_ActionName: Ship Controls/UpDown[/Keyboard/ctrl,/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4697636090080541407}
-        m_TargetAssemblyTypeName: Spaceship_Control, Assembly-CSharp
-        m_MethodName: OnRoll
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7f72eda5-ca8e-49f6-8fbc-75d5805f473a
-    m_ActionName: Ship Controls/Roll[/Keyboard/q,/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4697636090080541407}
@@ -714,12 +679,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  lockOnRange: 20
-  maxLockDistance: 30
+  lockOnRange: 100
+  maxLockDistance: 105
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  rotationSpeed: 6
+  rotationSpeed: 10
   control: {fileID: 4697636090080541407}
 --- !u!1 &8188864543971828301
 GameObject:

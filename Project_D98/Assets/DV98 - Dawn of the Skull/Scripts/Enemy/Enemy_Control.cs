@@ -18,7 +18,7 @@ public class Enemy_Control : MonoBehaviour
     [SerializeField]
     private float maxAmmo = 2;
     [SerializeField]
-    private bool shooting;
+    private bool shooting, empty;
     [SerializeField]
     private float fireCooldown = 0;
     [SerializeField]
@@ -35,10 +35,7 @@ public class Enemy_Control : MonoBehaviour
 
     private void Start()
     {
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody>();
-        }
+        rb = GetComponent<Rigidbody>();
 
         player = GameObject.FindWithTag("Player").transform;
 
@@ -117,7 +114,7 @@ public class Enemy_Control : MonoBehaviour
     {
         //Si aun hay municion resto uno, cojo un objeto de la pool y este orientado al shootingPoint
 
-        if (ammo > 0)
+        if (ammo > 0 && !empty)
         {
             ammo -= 1; 
             GameObject bullet = ObjectPooling.SharedInstance.GetPooledBullet();

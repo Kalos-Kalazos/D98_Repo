@@ -16,28 +16,9 @@ public class Aim_Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
-
-    private void AimAtPlayer()
-    {
-        GameObject enemy = ObjectPooling.SharedInstance.GetPooledEnemy();
-        if (enemy != null)
-        {
-            //enemy.transform.position = collision.collider.transform.position;
-            // enemy.transform.rotation = collision.collider.transform.rotation;
-            enemy.SetActive(true);
-        }
-
-        if (enemy != null)
-        {
-            Vector3 directionToPlayer = enemy.transform.position - transform.position;
-
-            transform.rotation = Quaternion.LookRotation(directionToPlayer);
-
-            Debug.DrawLine(transform.position, enemy.transform.position, Color.green);
-        }
-    }
 
     // Update is called once per frame
     void Update()

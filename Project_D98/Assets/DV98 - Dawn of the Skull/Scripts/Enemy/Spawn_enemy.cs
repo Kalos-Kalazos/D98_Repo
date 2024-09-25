@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class Spawn_enemy : MonoBehaviour
 {
+    [Header("=== Enemy Spawn Settings ===")]
+    [SerializeField]
+    private float spawnCooldown;
+    [SerializeField]
+    private bool overLoad = false;
+    [SerializeField]
+    private float spawnRate;
+    [SerializeField]
+    private float spawnCount=0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +24,41 @@ public class Spawn_enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (spawnCooldown <= 0) spawnCooldown = 0;
+
+        if (spawnCount > 10)
+        {
+            spawnCooldown = 120;
+            spawnCount = 0;
+        }
+
+        if (spawnCooldown <= 0 || overLoad)
+        {
+            Spawn();
+            if (overLoad)
+            {
+                spawnCooldown = 0.2f;
+            }
+            else
+            {
+                spawnCooldown = spawnRate;
+            }
+        }
+        else
+        {
+            if (spawnCooldown > 0)
+            {
+                spawnCooldown -= Time.deltaTime;
+            }
+        }
+
+
+
+    }
+
+    public void Spawn()
+    {
+        spawnCount++;
 
         GameObject enemy = ObjectPooling.SharedInstance.GetPooledEnemy();
         if (enemy != null)

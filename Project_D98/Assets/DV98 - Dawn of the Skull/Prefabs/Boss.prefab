@@ -97,21 +97,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  rotationSpeedTurret: 1
   rotationSpeedBody: 1
   angularDrag: 0.5
   linearDrag: 0.5
-  ammo: 100
-  maxAmmo: 100
-  shooting: 0
-  empty: 0
-  fireCooldown: 3
-  fireRate: 3
   player: {fileID: 0}
-  shootPointFront: {fileID: 7364450139552236249}
-  shootPointBack: {fileID: 0}
-  shootPointLeft: {fileID: 0}
-  shootPointRight: {fileID: 0}
+  shootPointFront: {fileID: 3722499251518004261}
+  pivot: {fileID: 7364450139552236249}
   bulletPrefab: {fileID: 555203903054649178, guid: 87ade854e02eba84a9b0520df562e801,
     type: 3}
 --- !u!1 &1542658709287016228
@@ -351,7 +342,7 @@ Transform:
   m_GameObject: {fileID: 3187442822021398308}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -471,6 +462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3722499251518004261}
+  - component: {fileID: 956926910944580081}
   m_Layer: 0
   m_Name: ShootPointFront
   m_TagString: Untagged
@@ -494,3 +486,28 @@ Transform:
   - {fileID: 8645273751560413101}
   m_Father: {fileID: 6252174396402524056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &956926910944580081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9091927855227914947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbc9fb1b18646641990eef89150bf6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  shootPointFront: {fileID: 0}
+  pivot: {fileID: 7364450139552236249}
+  bulletPrefab: {fileID: 555203903054649178, guid: 87ade854e02eba84a9b0520df562e801,
+    type: 3}
+  padre: {fileID: 0}
+  ammo: 0
+  maxAmmo: 2
+  shooting: 0
+  empty: 0
+  fireCooldown: 0
+  fireRate: 1
+  rotationSpeedTurret: 1

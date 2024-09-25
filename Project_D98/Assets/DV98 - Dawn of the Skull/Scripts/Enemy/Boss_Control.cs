@@ -8,8 +8,6 @@ public class Boss_Control : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 10;
     [SerializeField]
-    private float rotationSpeedTurret = 5f;
-    [SerializeField]
     private float rotationSpeedBody = 5f;
     [SerializeField]
     private float angularDrag = 0.1f;

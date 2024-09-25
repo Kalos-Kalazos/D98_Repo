@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Turret_Script : MonoBehaviour
 {
-    public Transform player, shootPointFront, pivot;
+    public Transform player, pivot;
     public GameObject bulletPrefab;
     public Boss_Control padre;
 
@@ -28,6 +28,8 @@ public class Turret_Script : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
 
         padre = FindObjectOfType<Boss_Control>();
+
+        ammo = maxAmmo;
     }
 
     // Update is called once per frame
@@ -53,17 +55,17 @@ public class Turret_Script : MonoBehaviour
     {
         //Calculo la direccion del jugador y hago el shootingPoint mirar hacia alli con velocidad configurable
 
-        if (player != null && shootPointFront != null)
+        if (player != null)
         {
-            Vector3 directionToPlayer = player.position - shootPointFront.position;
+            Vector3 directionToPlayer = player.position - transform.position;
 
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
 
             //Roto el punto de disparo
-            shootPointFront.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeedTurret);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeedTurret);
 
 
-            Debug.DrawLine(shootPointFront.position, player.position, Color.cyan);
+            Debug.DrawLine(transform.position, player.position, Color.cyan);
         }
     }
 

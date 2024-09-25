@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Aim_Control : MonoBehaviour
 {
-    public Transform currentTarget; // El enemigo fijado
-    public float lockOnRange = 10f; // Rango para fijar objetivo
-    public float maxLockDistance = 15f; // Máxima distancia permitida antes de recalcular objetivo
-    public LayerMask enemyLayer; // Capa donde están los enemigos
-    public float rotationSpeed = 5f; // Velocidad de rotación del jugador al apuntar
+    public Transform currentTarget;
+    public float lockOnRange = 10f;
+    public float maxLockDistance = 15f;
+    public LayerMask enemyLayer;
+    public float rotationSpeed = 5f;
 
     [SerializeField]
     private Spaceship_Control control;
 
-    // Start is called before the first frame update
+
     void Start()
     {
 
@@ -23,19 +23,19 @@ public class Aim_Control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (control.locking) // Suponiendo que el jugador presiona "L" para hacer lock-in
+        if (control.locking) 
         {
             LockOnTarget();
         }
 
         if (currentTarget != null)
         {
-            AimAtTarget(); // El jugador apunta al objetivo actual
+            AimAtTarget(); 
 
             // Si el objetivo se aleja demasiado, recalcular
             if (Vector3.Distance(transform.position, currentTarget.position) > maxLockDistance)
             {
-                LockOnTarget(); // Recalcula otro objetivo
+                LockOnTarget(); 
             }
         }
 

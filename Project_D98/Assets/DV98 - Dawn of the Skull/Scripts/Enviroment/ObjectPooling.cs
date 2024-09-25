@@ -8,24 +8,34 @@ public class ObjectPooling : MonoBehaviour
     public static ObjectPooling SharedInstance;
 
     [Header("=== Pool Settings ===")]
+    //Bullets
     [SerializeField]
     List<GameObject> pooledBullets;
     [SerializeField]
     GameObject bulletToPool;
     [SerializeField]
     int amountToPoolB;
+    //Explosiones
     [SerializeField]
     List<GameObject> pooledExplosions;
     [SerializeField]
     GameObject explosionToPool;
     [SerializeField]
     int amountToPoolE;
+    //Enemigos
     [SerializeField]
     List<GameObject> pooledEnemy;
     [SerializeField]
     GameObject enemyToPool;
     [SerializeField]
     int amountToPoolX;
+    //Big Explosiones "BE"
+    [SerializeField]
+    List<GameObject> pooledBE;
+    [SerializeField]
+    GameObject beToPool;
+    [SerializeField]
+    int amountToPoolBE;
 
     void Awake()
     {
@@ -61,6 +71,15 @@ public class ObjectPooling : MonoBehaviour
             tmpX.SetActive(false);
             pooledEnemy.Add(tmpX);
         }
+
+        pooledBE = new List<GameObject>();
+        GameObject tmpXL;
+        for (int i = 0; i < amountToPoolBE; i++)
+        {
+            tmpXL = Instantiate(beToPool);
+            tmpXL.SetActive(false);
+            pooledBE.Add(tmpXL);
+        }
     }
 
     public GameObject GetPooledBullet()
@@ -81,6 +100,17 @@ public class ObjectPooling : MonoBehaviour
             if (!pooledExplosions[i].activeInHierarchy)
             {
                 return pooledExplosions[i];
+            }
+        }
+        return null;
+    }
+    public GameObject GetPooledBE()
+    {
+        for (int i = 0; i < amountToPoolBE; i++)
+        {
+            if (!pooledBE[i].activeInHierarchy)
+            {
+                return pooledBE[i];
             }
         }
         return null;

@@ -8,7 +8,15 @@ public class Turret_Script : MonoBehaviour
     public GameObject bulletPrefab;
     public Boss_Control padre;
 
+    Rigidbody rb;
+
+    public bool hit, dead;
+
+    Vector3 explosionPos;
+
     [Header("=== Turret Combat Settings ===")]
+    [SerializeField]
+    private float health;
     [SerializeField]
     private float ammo;
     [SerializeField]
@@ -21,6 +29,8 @@ public class Turret_Script : MonoBehaviour
     private float fireRate = 1;
     [SerializeField]
     private float rotationSpeedTurret = 1;
+    [SerializeField]
+    private float power = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -29,13 +39,17 @@ public class Turret_Script : MonoBehaviour
 
         padre = FindObjectOfType<Boss_Control>();
 
+        rb = GetComponent<Rigidbody>();
+
         ammo = maxAmmo;
+
+        dead = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (fireCooldown <= 0)
+        if (fireCooldown <= 0 && health > 0)
         {
             ShootPlayer();
             fireCooldown = fireRate;
@@ -44,11 +58,36 @@ public class Turret_Script : MonoBehaviour
         {
             fireCooldown -= Time.deltaTime;
         }
+
+        if (health <= 0 && !dead)
+        {
+            rb.constraints = RigidbodyConstraints.None;
+
+            //                  power     pos  radius and modifier
+            rb.AddExplosionForce(power, explosionPos, 5,      3);
+
+            GameObject explosion = ObjectPooling.SharedInstance.GetPooledBE();
+            if (explosion != null)
+            {
+                explosion.transform.position = transform.position;
+                explosion.transform.rotation = transform.rotation;
+                explosion.SetActive(true);
+            }
+
+            dead = true;
+        }
+
     }
 
     private void FixedUpdate()
     {
-        AimAtPlayer();
+        if (health > 0)
+        {
+            AimAtPlayer();
+        }
+        else
+            //                  power     pos  radius and modifier
+            rb.AddExplosionForce(power, explosionPos, 5, 3);
     }
 
     private void AimAtPlayer()
@@ -87,6 +126,22 @@ public class Turret_Script : MonoBehaviour
         else
         {
             fireCooldown = 5;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            explosionPos = collision.transform.position;
+            hit = true;
+            health--;
+            GameObject explosion = ObjectPooling.SharedInstance.GetPooledExplosion();
+            if (explosion != null)
+            {
+                explosion.transform.SetPositionAndRotation(collision.collider.transform.position, collision.collider.transform.rotation);
+                explosion.SetActive(true);
+            }
         }
     }
 }

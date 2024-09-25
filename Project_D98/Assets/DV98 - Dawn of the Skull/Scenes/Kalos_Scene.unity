@@ -1500,13 +1500,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2341213758585372769, guid: a2ec6288ade79064097c3d33560f6c66,
         type: 3}
+      propertyPath: beToPool
+      value: 
+      objectReference: {fileID: 7557097169498202617, guid: 39659c74eb22d4d44853403b21dd4a46,
+        type: 3}
+    - target: {fileID: 2341213758585372769, guid: a2ec6288ade79064097c3d33560f6c66,
+        type: 3}
       propertyPath: amountToPoolB
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2341213758585372769, guid: a2ec6288ade79064097c3d33560f6c66,
         type: 3}
+      propertyPath: amountToPoolE
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341213758585372769, guid: a2ec6288ade79064097c3d33560f6c66,
+        type: 3}
       propertyPath: amountToPoolX
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341213758585372769, guid: a2ec6288ade79064097c3d33560f6c66,
+        type: 3}
+      propertyPath: amountToPoolBE
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2377880354408147702, guid: a2ec6288ade79064097c3d33560f6c66,
         type: 3}
@@ -3345,52 +3361,22 @@ PrefabInstance:
     - target: {fileID: 809219203560149911, guid: e7c348780255aa84391148cc37941a13,
         type: 3}
       propertyPath: m_Name
-      value: Boss (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 956926910944580081, guid: e7c348780255aa84391148cc37941a13,
-        type: 3}
-      propertyPath: ammo
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 956926910944580081, guid: e7c348780255aa84391148cc37941a13,
-        type: 3}
-      propertyPath: maxAmmo
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 956926910944580081, guid: e7c348780255aa84391148cc37941a13,
-        type: 3}
-      propertyPath: fireRate
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 956926910944580081, guid: e7c348780255aa84391148cc37941a13,
-        type: 3}
-      propertyPath: rotationSpeedTurret
-      value: 10
+      value: Boss (que se mueve)
       objectReference: {fileID: 0}
     - target: {fileID: 5297456764470389685, guid: e7c348780255aa84391148cc37941a13,
         type: 3}
-      propertyPath: moveSpeed
-      value: 0.05
+      propertyPath: pivot
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5297456764470389685, guid: e7c348780255aa84391148cc37941a13,
         type: 3}
-      propertyPath: linearDrag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5297456764470389685, guid: e7c348780255aa84391148cc37941a13,
-        type: 3}
-      propertyPath: angularDrag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5297456764470389685, guid: e7c348780255aa84391148cc37941a13,
-        type: 3}
-      propertyPath: rotationSpeedBody
-      value: 0.05
+      propertyPath: shootPointFront
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6252174396402524056, guid: e7c348780255aa84391148cc37941a13,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 120
+      value: 501
       objectReference: {fileID: 0}
     - target: {fileID: 6252174396402524056, guid: e7c348780255aa84391148cc37941a13,
         type: 3}
@@ -3400,7 +3386,7 @@ PrefabInstance:
     - target: {fileID: 6252174396402524056, guid: e7c348780255aa84391148cc37941a13,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 254
+      value: 874
       objectReference: {fileID: 0}
     - target: {fileID: 6252174396402524056, guid: e7c348780255aa84391148cc37941a13,
         type: 3}

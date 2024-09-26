@@ -47,7 +47,9 @@ public class Spaceship_Control : MonoBehaviour
     [SerializeField]
     private float boostMultiplier = 5f;
     [SerializeField]
-    private bool boosting = false;
+    private float boosting;
+    [SerializeField]
+    private bool resetBoost;
 
     [Header("=== Shoot Settings ===")]
     [SerializeField]
@@ -59,11 +61,15 @@ public class Spaceship_Control : MonoBehaviour
     [SerializeField]
     private float maxAmmo;
     [SerializeField]
-    private bool pumPuming = false;
+    private float pumPuming;
     [SerializeField]
-    public bool locking = false;
+    public float locking;
     [SerializeField]
     private Transform shootingPoint;
+
+    [Header("=== Inputs Settings ===")]
+    [SerializeField]
+    private InputAction onMove, onRotate, onStabilize, onShoot, onBoost, onLockIn;
 
 
     public delegate void HealthChanged(int currentHealth);
@@ -82,14 +88,19 @@ public class Spaceship_Control : MonoBehaviour
 
 
     //Input Values
-    public float thrust1D;
-    private float strafe1D;
-    private float pitch1D;
-    private float yaw1D;
+    public Vector2 moveValue;
+    private Vector2 rotateValue;
     private float stabilize;
 
     void Start()
     {
+        onMove.Enable();
+        onRotate.Enable();
+        onStabilize.Enable();
+        onShoot.Enable();
+        onBoost.Enable();
+        onLockIn.Enable();
+
         rb = GetComponent<Rigidbody>();
         currentBoost = maxBoostAmount;
 
@@ -139,9 +150,21 @@ public class Spaceship_Control : MonoBehaviour
 
     private void Update()
     {
-        if (fireCooldown <= 0 && pumPuming && !overHeated)
+
+        #region Inputs Enabled
+
+        moveValue = onMove.ReadValue<Vector2>();
+        rotateValue = onRotate.ReadValue<Vector2>();
+        stabilize = onStabilize.ReadValue<float>();
+        boosting = onBoost.ReadValue<float>();
+        pumPuming = onShoot.ReadValue<float>();
+        locking = onLockIn.ReadValue<float>();
+
+        #endregion
+
+
+        if (fireCooldown <= 0 && pumPuming>0 && !overHeated)
         {
-            pumPuming = false;
             Shoot();
             fireCooldown = fireRate;
         }
@@ -230,14 +253,9 @@ public class Spaceship_Control : MonoBehaviour
 
     void Boosting() 
     {
-        if (boosting && currentBoost > 0f)
+        if (boosting>0 && currentBoost > 0f && !resetBoost)
         {
             currentBoost -= boostDeprecationRate;
-
-            if (currentBoost<=0f)
-            {
-                boosting = false;
-            }
         }
         else
         {
@@ -251,16 +269,16 @@ public class Spaceship_Control : MonoBehaviour
     void Movement()
     {
         //Pitch
-        rb.AddRelativeTorque(Vector3.up * yaw1D * pitchTorque * Time.deltaTime);
+        rb.AddRelativeTorque(Vector3.up * rotateValue.x * pitchTorque * Time.deltaTime);
         //Yaw
-        rb.AddRelativeTorque(Vector3.right * -pitch1D * yawTorque * Time.deltaTime);
+        rb.AddRelativeTorque(Vector3.right * -rotateValue.y * yawTorque * Time.deltaTime);
 
         //Thrust
-        if(thrust1D > 0.1f || thrust1D < -0.1f)
+        if(moveValue.y > 0.1f || moveValue.y < -0.1f)
         {
             float currenThrust;
 
-            if (boosting)
+            if (boosting>0)
             {
                 currenThrust = thrust * boostMultiplier;
             }
@@ -269,7 +287,7 @@ public class Spaceship_Control : MonoBehaviour
                 currenThrust = thrust;
             }
 
-            rb.AddRelativeForce(Vector3.forward * thrust1D * currenThrust * Time.deltaTime);
+            rb.AddRelativeForce(Vector3.forward * moveValue.y * currenThrust * Time.deltaTime);
             glide = thrust;
         }
         else
@@ -279,10 +297,10 @@ public class Spaceship_Control : MonoBehaviour
         }
 
         //Strafing
-        if (strafe1D > 0.1f || strafe1D < -0.1f)
+        if (moveValue.x > 0.1f || moveValue.x < -0.1f)
         {
 
-            rb.AddRelativeForce(Vector3.right * strafe1D * strafeThrust * Time.fixedDeltaTime);
+            rb.AddRelativeForce(Vector3.right * moveValue.x * strafeThrust * Time.fixedDeltaTime);
             horizontalGlide = thrust;
         }
         else
@@ -293,40 +311,4 @@ public class Spaceship_Control : MonoBehaviour
 
     }
 
-    //En esta region estan los metodos llamados en el input system y se vinculan con las variables
-
-    #region InputsMethods
-    public void OnThrust(InputAction.CallbackContext context)
-    {
-        thrust1D = context.ReadValue<float>();
-    }
-    public void OnStrafe(InputAction.CallbackContext context)
-    {
-        strafe1D = context.ReadValue<float>();
-    }
-    public void OnPitch(InputAction.CallbackContext context)
-    {
-        pitch1D = context.ReadValue<float>();
-    }
-    public void OnYaw(InputAction.CallbackContext context)
-    {
-        yaw1D = context.ReadValue<float>();
-    }
-    public void Stabilize(InputAction.CallbackContext context)
-    {
-        stabilize = context.ReadValue<float>();
-    }
-    public void Boost(InputAction.CallbackContext context)
-    {
-        boosting = context.performed;
-    }
-    public void PumPum(InputAction.CallbackContext context)
-    {
-        pumPuming = context.performed;
-    }
-    public void LockIn(InputAction.CallbackContext context)
-    {
-        locking = context.performed;
-    }
-    #endregion
 }

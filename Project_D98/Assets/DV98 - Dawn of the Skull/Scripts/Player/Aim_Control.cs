@@ -23,7 +23,7 @@ public class Aim_Control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (control.locking) 
+        if (control.locking>0) 
         {
             LockOnTarget();
         }

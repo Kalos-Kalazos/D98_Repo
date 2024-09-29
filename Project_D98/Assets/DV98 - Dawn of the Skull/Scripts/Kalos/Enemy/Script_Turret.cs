@@ -62,8 +62,6 @@ public class Script_Turret : MonoBehaviour
         if (health <= 0 && !dead)
         {
             rb.constraints = RigidbodyConstraints.None;
-
-
             player.GetComponentInChildren<Script_Aim>().locking = false;
 
             //                  power     pos  radius and modifier
@@ -87,12 +85,6 @@ public class Script_Turret : MonoBehaviour
         if (health > 0)
         {
             AimAtPlayer();
-        }
-        else
-        {
-            //                  power     pos  radius and modifier
-            rb.AddExplosionForce(power, explosionPos, 5, 3);
-
         }
     }
 

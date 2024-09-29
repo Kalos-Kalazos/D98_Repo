@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Script : MonoBehaviour
+public class Script_Bullet : MonoBehaviour
 {
     Rigidbody rb;
 

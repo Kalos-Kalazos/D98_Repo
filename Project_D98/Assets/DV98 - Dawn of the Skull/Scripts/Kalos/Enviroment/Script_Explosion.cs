@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionControl : MonoBehaviour
+public class Script_Explosion : MonoBehaviour
 {
 
     [SerializeField] float timeToDeactivate = 3f;

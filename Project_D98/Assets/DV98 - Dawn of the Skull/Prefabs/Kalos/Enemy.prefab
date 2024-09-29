@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162ddea7a1a8c954580fffc016aa16a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 2
   rotationSpeed: 5
   angularDrag: 0.2
   linearDrag: 0.2
@@ -235,8 +235,8 @@ MonoBehaviour:
   fireCooldown: 0
   fireRate: 1
   pivotCooldown: 0
-  player: {fileID: 0}
   shootingPoint: {fileID: 1751801424755569170}
+  player: {fileID: 0}
   bulletPrefab: {fileID: 555203903054649178, guid: 87ade854e02eba84a9b0520df562e801,
     type: 3}
   playerPivot: {fileID: 0}

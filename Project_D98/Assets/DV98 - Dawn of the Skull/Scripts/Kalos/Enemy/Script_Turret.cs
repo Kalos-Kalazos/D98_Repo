@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret_Script : MonoBehaviour
+public class Script_Turret : MonoBehaviour
 {
     public Transform player, pivot;
     public GameObject bulletPrefab;
-    public Boss_Control padre;
+    public Script_Boss padre;
 
     Rigidbody rb;
 
@@ -20,7 +20,7 @@ public class Turret_Script : MonoBehaviour
     [SerializeField]
     private float ammo;
     [SerializeField]
-    private float maxAmmo = 2;
+    private float maxAmmo = 200;
     [SerializeField]
     private bool shooting, empty;
     [SerializeField]
@@ -37,7 +37,7 @@ public class Turret_Script : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
 
-        padre = FindObjectOfType<Boss_Control>();
+        padre = FindObjectOfType<Script_Boss>();
 
         rb = GetComponent<Rigidbody>();
 
@@ -63,10 +63,13 @@ public class Turret_Script : MonoBehaviour
         {
             rb.constraints = RigidbodyConstraints.None;
 
+
+            player.GetComponentInChildren<Script_Aim>().locking = false;
+
             //                  power     pos  radius and modifier
             rb.AddExplosionForce(power, explosionPos, 5,      3);
 
-            GameObject explosion = ObjectPooling.SharedInstance.GetPooledBE();
+            GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledBE();
             if (explosion != null)
             {
                 explosion.transform.position = transform.position;
@@ -86,8 +89,11 @@ public class Turret_Script : MonoBehaviour
             AimAtPlayer();
         }
         else
+        {
             //                  power     pos  radius and modifier
             rb.AddExplosionForce(power, explosionPos, 5, 3);
+
+        }
     }
 
     private void AimAtPlayer()
@@ -115,7 +121,7 @@ public class Turret_Script : MonoBehaviour
         if (ammo > 0)
         {
             ammo -= 1;
-            GameObject bullet = ObjectPooling.SharedInstance.GetPooledBullet();
+            GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBB();
             if (bullet != null)
             {
                 bullet.transform.position = pivot.transform.position;
@@ -125,7 +131,8 @@ public class Turret_Script : MonoBehaviour
         }
         else
         {
-            fireCooldown = 5;
+            fireCooldown = 50;
+            ammo = maxAmmo;
         }
     }
 
@@ -136,7 +143,7 @@ public class Turret_Script : MonoBehaviour
             explosionPos = collision.transform.position;
             hit = true;
             health--;
-            GameObject explosion = ObjectPooling.SharedInstance.GetPooledExplosion();
+            GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
             if (explosion != null)
             {
                 explosion.transform.SetPositionAndRotation(collision.collider.transform.position, collision.collider.transform.rotation);

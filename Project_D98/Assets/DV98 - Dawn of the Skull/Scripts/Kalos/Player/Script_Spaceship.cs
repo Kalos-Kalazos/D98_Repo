@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class Spaceship_Control : MonoBehaviour
+public class Script_Spaceship : MonoBehaviour
 {
     [Header("=== Status Settings ===")]
     [SerializeField]
@@ -114,7 +114,7 @@ public class Spaceship_Control : MonoBehaviour
 
         if (collision.collider.CompareTag("Bullet"))
         {
-            GameObject explosion = ObjectPooling.SharedInstance.GetPooledExplosion();
+            GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
             if (explosion != null)
             {
                 explosion.transform.position = collision.collider.transform.position;
@@ -229,7 +229,7 @@ public class Spaceship_Control : MonoBehaviour
 
             currentHeat++;
 
-            GameObject bullet = ObjectPooling.SharedInstance.GetPooledBullet();
+            GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {
                 bullet.transform.position = shootingPoint.position;

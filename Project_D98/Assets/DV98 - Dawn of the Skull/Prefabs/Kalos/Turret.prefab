@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   pivot: {fileID: 2939285288781575275}
-  bulletPrefab: {fileID: 555203903054649178, guid: 87ade854e02eba84a9b0520df562e801,
+  bulletPrefab: {fileID: 555203903054649178, guid: 03986ffa15c59f54aaff3dde0e6daf1e,
     type: 3}
   padre: {fileID: 0}
   hit: 0

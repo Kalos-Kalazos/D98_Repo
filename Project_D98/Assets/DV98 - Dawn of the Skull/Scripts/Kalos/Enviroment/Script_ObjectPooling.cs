@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooling : MonoBehaviour
+public class Script_ObjectPooling : MonoBehaviour
 {
 
-    public static ObjectPooling SharedInstance;
+    public static Script_ObjectPooling SharedInstance;
 
     [Header("=== Pool Settings ===")]
     //Bullets
@@ -15,6 +15,7 @@ public class ObjectPooling : MonoBehaviour
     GameObject bulletToPool;
     [SerializeField]
     int amountToPoolB;
+
     //Explosiones
     [SerializeField]
     List<GameObject> pooledExplosions;
@@ -22,6 +23,7 @@ public class ObjectPooling : MonoBehaviour
     GameObject explosionToPool;
     [SerializeField]
     int amountToPoolE;
+
     //Enemigos
     [SerializeField]
     List<GameObject> pooledEnemy;
@@ -29,6 +31,7 @@ public class ObjectPooling : MonoBehaviour
     GameObject enemyToPool;
     [SerializeField]
     int amountToPoolX;
+
     //Big Explosiones "BE"
     [SerializeField]
     List<GameObject> pooledBE;
@@ -36,6 +39,14 @@ public class ObjectPooling : MonoBehaviour
     GameObject beToPool;
     [SerializeField]
     int amountToPoolBE;
+
+    //Big Bullets "BB"
+    [SerializeField]
+    List<GameObject> pooledBB;
+    [SerializeField]
+    GameObject bbToPool;
+    [SerializeField]
+    int amountToPoolBB;
 
     void Awake()
     {
@@ -80,6 +91,15 @@ public class ObjectPooling : MonoBehaviour
             tmpXL.SetActive(false);
             pooledBE.Add(tmpXL);
         }
+
+        pooledBB = new List<GameObject>();
+        GameObject tmpBB;
+        for (int i = 0; i < amountToPoolBB; i++)
+        {
+            tmpBB = Instantiate(bbToPool);
+            tmpBB.SetActive(false);
+            pooledBB.Add(tmpBB);
+        }
     }
 
     public GameObject GetPooledBullet()
@@ -89,6 +109,17 @@ public class ObjectPooling : MonoBehaviour
             if (!pooledBullets[i].activeInHierarchy)
             {
                 return pooledBullets[i];
+            }
+        }
+        return null;
+    }
+    public GameObject GetPooledBB()
+    {
+        for (int i = 0; i < amountToPoolBB; i++)
+        {
+            if (!pooledBB[i].activeInHierarchy)
+            {
+                return pooledBB[i];
             }
         }
         return null;

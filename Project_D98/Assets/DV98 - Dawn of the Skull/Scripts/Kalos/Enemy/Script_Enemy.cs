@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Android.Gradle;
 using UnityEngine;
 
-public class Enemy_Control : MonoBehaviour
+public class Script_Enemy : MonoBehaviour
 {
     [Header("=== Enemy Ship Movement Settings ===")]
     [SerializeField]
@@ -26,7 +27,9 @@ public class Enemy_Control : MonoBehaviour
     [SerializeField]
     private float pivotCooldown = 0;
 
-    public Transform player, shootingPoint;
+    public Transform shootingPoint;
+
+    public GameObject player;
 
     public GameObject bulletPrefab;
     public Transform playerPivot;
@@ -37,9 +40,9 @@ public class Enemy_Control : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameObject.FindWithTag("Player");
 
-        playerPivot = player.GetChild(Random.Range(2, 5));
+        playerPivot = player.transform.GetChild(Random.Range(2, 5));
 
         ammo = maxAmmo;
 
@@ -85,7 +88,7 @@ public class Enemy_Control : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             gameObject.SetActive(false);
-            GameObject explosion = ObjectPooling.SharedInstance.GetPooledExplosion();
+            GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
             if (explosion != null)
             {
                 explosion.transform.position = collision.collider.transform.position;
@@ -96,17 +99,27 @@ public class Enemy_Control : MonoBehaviour
 
     }
 
+    private void OnDisable()
+    {
+        if (player.GetComponentInChildren<Script_Aim>().currentTarget == gameObject.transform)
+        {
+            player.GetComponentInChildren<Script_Aim>().currentTarget = null;
+            player.GetComponentInChildren<Script_Aim>().locking = false;
+        }
+    }
+
+
     private void AimAtPlayer()
     {
         //Calculo la direccion del jugador y hago el shootingPoint mirar hacia alli
 
         if (player != null && shootingPoint != null)
         {
-            Vector3 directionToPlayer = player.position - shootingPoint.position;
+            Vector3 directionToPlayer = player.transform.position - shootingPoint.position;
 
             shootingPoint.rotation = Quaternion.LookRotation(directionToPlayer);
 
-            Debug.DrawLine(shootingPoint.position, player.position, Color.red);
+            Debug.DrawLine(shootingPoint.position, player.transform.position, Color.red);
         }
     }
 
@@ -117,7 +130,7 @@ public class Enemy_Control : MonoBehaviour
         if (ammo > 0 && !empty)
         {
             ammo -= 1; 
-            GameObject bullet = ObjectPooling.SharedInstance.GetPooledBullet();
+            GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {
                 bullet.transform.position = shootingPoint.transform.position;
@@ -134,7 +147,7 @@ public class Enemy_Control : MonoBehaviour
     private void ResetObjective()
     {
         //Cambio el pivote objetivo de la direccion
-        playerPivot = player.GetChild(Random.Range(2, 5));
+        playerPivot = player.transform.GetChild(Random.Range(2, 5));
 
     } 
 

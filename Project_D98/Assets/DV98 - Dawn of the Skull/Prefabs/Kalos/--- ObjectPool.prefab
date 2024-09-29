@@ -47,12 +47,19 @@ MonoBehaviour:
   pooledBullets: []
   bulletToPool: {fileID: 555203903054649178, guid: 87ade854e02eba84a9b0520df562e801,
     type: 3}
-  amountToPoolB: 10
+  amountToPoolB: 50
   pooledExplosions: []
   explosionToPool: {fileID: 7557097169498202617, guid: fae676cfca1652744be57859ceb4689a,
     type: 3}
-  amountToPoolE: 10
+  amountToPoolE: 5
   pooledEnemy: []
   enemyToPool: {fileID: 7999205941447918916, guid: 90d71e5348b340a47861d9a33257c9da,
     type: 3}
   amountToPoolX: 1
+  pooledBE: []
+  beToPool: {fileID: 7557097169498202617, guid: 39659c74eb22d4d44853403b21dd4a46,
+    type: 3}
+  amountToPoolBE: 5
+  pooledBB: []
+  bbToPool: {fileID: 555203903054649178, guid: 03986ffa15c59f54aaff3dde0e6daf1e, type: 3}
+  amountToPoolBB: 10

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawn_enemy : MonoBehaviour
+public class Script_Spawn_enemy : MonoBehaviour
 {
     [Header("=== Enemy Spawn Settings ===")]
     [SerializeField]
@@ -60,7 +60,7 @@ public class Spawn_enemy : MonoBehaviour
     {
         spawnCount++;
 
-        GameObject enemy = ObjectPooling.SharedInstance.GetPooledEnemy();
+        GameObject enemy = Script_ObjectPooling.SharedInstance.GetPooledEnemy();
         if (enemy != null)
         {
             enemy.transform.position = gameObject.transform.position;

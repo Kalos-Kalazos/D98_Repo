@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class Script_GameManager : MonoBehaviour
 {
     public Slider healthSlider;           
     public Slider boostSlider;
     public Slider heatSlider;
-    private Spaceship_Control player;         
+    private Script_Spaceship player;         
     
 
     void Start()
     {
-        player = FindObjectOfType<Spaceship_Control>();
+        player = FindObjectOfType<Script_Spaceship>();
 
         if (player != null)
         {

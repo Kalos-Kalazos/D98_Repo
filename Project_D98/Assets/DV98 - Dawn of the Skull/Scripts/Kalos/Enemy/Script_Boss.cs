@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss_Control : MonoBehaviour
+public class Script_Boss : MonoBehaviour
 {
     [Header("=== Boss Movement Settings ===")]
     [SerializeField]

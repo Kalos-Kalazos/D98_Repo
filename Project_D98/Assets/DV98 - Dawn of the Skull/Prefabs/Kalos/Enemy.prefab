@@ -233,7 +233,7 @@ MonoBehaviour:
   shooting: 0
   empty: 0
   fireCooldown: 0
-  fireRate: 1
+  fireRate: 5
   pivotCooldown: 0
   shootingPoint: {fileID: 1751801424755569170}
   player: {fileID: 0}

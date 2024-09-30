@@ -7,27 +7,36 @@ using UnityEngine.Rendering;
 
 public class Script_Aim : MonoBehaviour
 {
+    [Header("=== Aim Settings ===")]
+    [SerializeField]
     public Transform currentTarget;
-    public float lockOnRange = 10f;
-    public float maxLockDistance = 15f;
-    public LayerMask enemyLayer;
-    public float rotationSpeed = 5f;
+    [SerializeField]
+    float lockOnRange = 10f;
+    [SerializeField]
+    float maxLockDistance = 15f;
+    [SerializeField]
+    LayerMask enemyLayer;
+    [SerializeField]
+    float rotationSpeed = 5f;
+    [SerializeField]
     public bool locking;
+    [SerializeField]
+    float angleToTarget;
+    [SerializeField]
+    float maxLockAngle = 60f;
+    [SerializeField]
+    private Script_Spaceship control;
+    [SerializeField]
+    float closestEnemy;
+    [SerializeField]
+    Collider[] enemiesInRange;
 
     Quaternion forwardLook;
 
-    public float closestEnemy;
-
-    public Collider[] enemiesInRange;
-
-    [SerializeField]
-    private Script_Spaceship control;
-
-    CapsuleCollider capsuleAim;
 
     void Start()
     {
-        capsuleAim = GetComponent<CapsuleCollider>();
+
     }
 
 
@@ -42,13 +51,11 @@ public class Script_Aim : MonoBehaviour
         else
         {
            if(!locking)
-            {
+           {
                 transform.rotation = Quaternion.Slerp(transform.rotation, forwardLook, Time.deltaTime * rotationSpeed);
                 Debug.Log("Resuming locking off");
-            }
-              
+           }
         }
-
         if (currentTarget != null)
         {
             AimAtTarget(); 
@@ -60,30 +67,12 @@ public class Script_Aim : MonoBehaviour
             }
         }
     }
-
-    private void OnDrawGizmos()
-    {
-
-        Gizmos.color = Color.yellow;
-        Gizmos.matrix = transform.localToWorldMatrix;
-        Gizmos.DrawSphere(transform.forward + new Vector3(0, 0, 80), lockOnRange);
-
-    }
-
-
     void LockOnTarget()
     {
-
         locking = true;
-        Debug.Log("Locking true");
-
 
         // Busca el enemigo más cercano dentro del rango
-        enemiesInRange = Physics.OverlapSphere(transform.localPosition, lockOnRange, enemyLayer);
-
-
-        //enemiesInRange = Physics.OverlapCapsule(transform.position+new Vector3(0,0,40), transform.position+new Vector3(0, 0, 150), lockOnRange, enemyLayer);
-        
+        enemiesInRange = Physics.OverlapSphere(transform.position + new Vector3(0, 0, 80), lockOnRange, enemyLayer);
 
         if (enemiesInRange.Length > 0)
         {
@@ -96,21 +85,26 @@ public class Script_Aim : MonoBehaviour
         }
     }
 
-    Collider GetClosestEnemy(Collider[] enemiesInRange)
+    Transform GetClosestEnemy(Collider[] enemiesInRange)
     {
         closestEnemy = 200;
-        Collider bestEnemy = null;
+        Transform bestEnemy = null;
 
         foreach (Collider enemy in enemiesInRange)
         {
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            Vector3 directionToEnemy = (enemy.transform.position - transform.position).normalized;
 
-            if (distance < closestEnemy)
+            // Calcular el ángulo entre la z dela nave y el enemigo + tiene que estar dentro de el limite
+            float angleToEnemy = Vector3.Angle(control.transform.forward, directionToEnemy);
+
+            if (distance < closestEnemy && angleToEnemy < maxLockAngle)
             {
                 closestEnemy = distance;
-                bestEnemy = enemy;
+                bestEnemy = enemy.transform;
             }
         }
+
         Debug.Log("Enemigo seleccionado");
         return bestEnemy;
     }
@@ -119,6 +113,11 @@ public class Script_Aim : MonoBehaviour
     {
         Vector3 direction = currentTarget.position - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        angleToTarget = Vector3.Angle(transform.forward, direction);
+
+        if (angleToTarget < maxLockAngle)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
     }
 }

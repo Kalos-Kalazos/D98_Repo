@@ -8,11 +8,15 @@ public class Script_Spawn_enemy : MonoBehaviour
     [SerializeField]
     private float spawnCooldown;
     [SerializeField]
+    private float maxCooldown;
+    [SerializeField]
     private bool overLoad = false;
     [SerializeField]
     private float spawnRate;
     [SerializeField]
     private float spawnCount=0;
+    [SerializeField]
+    private float maxSpawnCount;
 
 
     // Start is called before the first frame update
@@ -26,9 +30,9 @@ public class Script_Spawn_enemy : MonoBehaviour
     {
         if (spawnCooldown <= 0) spawnCooldown = 0;
 
-        if (spawnCount > 10)
+        if (spawnCount > maxSpawnCount)
         {
-            spawnCooldown = 120;
+            spawnCooldown = maxCooldown;
             spawnCount = 0;
         }
 
@@ -51,9 +55,6 @@ public class Script_Spawn_enemy : MonoBehaviour
                 spawnCooldown -= Time.deltaTime;
             }
         }
-
-
-
     }
 
     public void Spawn()

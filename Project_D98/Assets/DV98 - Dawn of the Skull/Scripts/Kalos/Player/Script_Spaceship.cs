@@ -69,7 +69,7 @@ public class Script_Spaceship : MonoBehaviour
 
     [Header("=== Inputs Settings ===")]
     [SerializeField]
-    private InputAction onMove, onRotate, onStabilize, onShoot, onBoost, onLockIn;
+    private InputAction onMove, onRotate, onStabilize, onShoot, onBoost, onLockIn, onStart, onQuit;
 
 
     public delegate void HealthChanged(int currentHealth);
@@ -94,12 +94,18 @@ public class Script_Spaceship : MonoBehaviour
 
     void Start()
     {
+        #region Inputs Enabled
+
         onMove.Enable();
         onRotate.Enable();
         onStabilize.Enable();
         onShoot.Enable();
         onBoost.Enable();
         onLockIn.Enable();
+        onStart.Enable();
+        onQuit.Enable();
+
+        #endregion
 
         rb = GetComponent<Rigidbody>();
         currentBoost = maxBoostAmount;
@@ -123,6 +129,19 @@ public class Script_Spaceship : MonoBehaviour
             }
 
             TakeDamage(2);
+        }
+
+        if (collision.collider.CompareTag("BB"))
+        {
+
+            GameObject explosionB = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
+            if (explosionB != null)
+            {
+                explosionB.transform.SetPositionAndRotation(collision.collider.transform.position, collision.collider.transform.rotation);
+                explosionB.SetActive(true);
+            }
+
+            TakeDamage(4);
         }
 
     }
@@ -151,7 +170,7 @@ public class Script_Spaceship : MonoBehaviour
     private void Update()
     {
 
-        #region Inputs Enabled
+        #region Read Inputs
 
         moveValue = onMove.ReadValue<Vector2>();
         rotateValue = onRotate.ReadValue<Vector2>();

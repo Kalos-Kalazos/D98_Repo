@@ -18,7 +18,7 @@ public class Script_Aim : MonoBehaviour
 
     public float closestEnemy;
 
-    Collider[] enemiesInRange;
+    public Collider[] enemiesInRange;
 
     [SerializeField]
     private Script_Spaceship control;
@@ -41,8 +41,12 @@ public class Script_Aim : MonoBehaviour
         }
         else
         {
-            if(!locking)
+           if(!locking)
+            {
                 transform.rotation = Quaternion.Slerp(transform.rotation, forwardLook, Time.deltaTime * rotationSpeed);
+                Debug.Log("Resuming locking off");
+            }
+              
         }
 
         if (currentTarget != null)
@@ -71,24 +75,19 @@ public class Script_Aim : MonoBehaviour
     {
 
         locking = true;
+        Debug.Log("Locking true");
+
+
         // Busca el enemigo más cercano dentro del rango
-        enemiesInRange = Physics.OverlapSphere(transform.forward + new Vector3 (0, 0, 80), lockOnRange, enemyLayer);
+        enemiesInRange = Physics.OverlapSphere(transform.localPosition, lockOnRange, enemyLayer);
 
 
         //enemiesInRange = Physics.OverlapCapsule(transform.position+new Vector3(0,0,40), transform.position+new Vector3(0, 0, 150), lockOnRange, enemyLayer);
         
-        closestEnemy = 200;
 
         if (enemiesInRange.Length > 0)
         {
-            foreach (Collider enemy in enemiesInRange)
-            {
-                if (Vector3.Distance(transform.position, enemy.transform.position) < closestEnemy)
-                {
-                    closestEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                    currentTarget = enemy.transform;
-                }
-            }
+            currentTarget = GetClosestEnemy(enemiesInRange).transform;
         }
         else
         {
@@ -97,9 +96,27 @@ public class Script_Aim : MonoBehaviour
         }
     }
 
+    Collider GetClosestEnemy(Collider[] enemiesInRange)
+    {
+        closestEnemy = 200;
+        Collider bestEnemy = null;
+
+        foreach (Collider enemy in enemiesInRange)
+        {
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+
+            if (distance < closestEnemy)
+            {
+                closestEnemy = distance;
+                bestEnemy = enemy;
+            }
+        }
+        Debug.Log("Enemigo seleccionado");
+        return bestEnemy;
+    }
+
     void AimAtTarget()
     {
-        // Rotar hacia el objetivo actual
         Vector3 direction = currentTarget.position - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);

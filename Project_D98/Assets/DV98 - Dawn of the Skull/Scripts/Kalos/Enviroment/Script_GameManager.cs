@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Script_GameManager : MonoBehaviour
 {
@@ -10,6 +11,15 @@ public class Script_GameManager : MonoBehaviour
     public Slider heatSlider;
     private Script_Spaceship player;         
     
+    public void Restart()
+    {
+        SceneManager.LoadScene("Kalos_Scene");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 
     void Start()
     {
@@ -29,6 +39,17 @@ public class Script_GameManager : MonoBehaviour
             player.OnHealthChanged += UpdateHealthBar;
             player.OnBoostChanged += UpdateBoostBar;
             player.OnHeatChanged += UpdateHeatBar;
+        }
+    }
+
+    private void Update()
+    {
+        if (player != null)
+        {
+            if (player.currentHealth <= 0)
+            {
+                SceneManager.LoadScene("YouDied");
+            }
         }
     }
 

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Android.Gradle;
 using UnityEngine;
 
 public class Script_Enemy : MonoBehaviour
@@ -85,7 +84,7 @@ public class Script_Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("BB"))
         {
             gameObject.SetActive(false);
             GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
@@ -101,11 +100,16 @@ public class Script_Enemy : MonoBehaviour
 
     private void OnDisable()
     {
-        if (player.GetComponentInChildren<Script_Aim>().currentTarget == gameObject.transform)
+        if (player != null)
         {
-            player.GetComponentInChildren<Script_Aim>().currentTarget = null;
-            player.GetComponentInChildren<Script_Aim>().locking = false;
+            if (player.GetComponentInChildren<Script_Aim>().currentTarget == gameObject.transform)
+            {
+                player.GetComponentInChildren<Script_Aim>().currentTarget = null;
+                player.GetComponentInChildren<Script_Aim>().locking = false;
+            }
         }
+
+        
     }
 
 

@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 0
   m_Name: PivotUp
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 222950583690155062}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,7 +43,7 @@ GameObject:
   m_Layer: 0
   m_Name: PivotRight
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1777095344025625419}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 0}
+  m_LocalPosition: {x: 8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -121,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 4608843540970078429}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4.87}
+  m_LocalPosition: {x: 0, y: 0, z: -2.78}
   m_LocalScale: {x: 2, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -349,12 +349,12 @@ MonoBehaviour:
   currentHeat: 0
   maxHeat: 8
   overHeated: 0
-  yawTorque: 400
-  pitchTorque: 400
-  thrust: 500
-  strafeThrust: 250
-  thrustGlideReduction: 0.338
-  leftRightGlideReduction: 0.111
+  yawTorque: 1500
+  pitchTorque: 1500
+  thrust: 1000
+  strafeThrust: 500
+  thrustGlideReduction: 0.362
+  leftRightGlideReduction: 0.233
   maxBoostAmount: 20
   boostDeprecationRate: 0.1
   boostRechargeRate: 0.15
@@ -370,21 +370,181 @@ MonoBehaviour:
   shootingPoint: {fileID: 9134196651137091157}
   onMove:
     m_Name: On Move
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 2
+    m_ExpectedControlType: Vector2
     m_Id: 4a655a55-c460-44aa-b673-8c899de4863f
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: Stick
+      m_Id: 1a8bbebd-6a1c-46fe-9d77-0c35867c9651
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 85552c9a-2100-4605-b670-56cccdc83636
+      m_Path: <Gamepad>/leftStick/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: cce71ffa-3d2b-4f25-b522-2038a39e78fc
+      m_Path: <Gamepad>/leftStick/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 2448d8df-8572-4b14-bce9-0adbe208a8c8
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 01b3e3f0-5869-44e3-bbca-ca0ed727ab69
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 8
+    - m_Name: KB
+      m_Id: 7c45fe66-9912-4e61-84f1-dbb4e8fcb669
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: ebd4abd3-588e-4de0-9dea-bfbf051fc103
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 0a2b1067-42bb-4780-818a-c874a86864ac
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: a0a2a33f-af41-4b1c-8121-069c2cd77fb4
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: e1c03fb9-36ae-45d0-8953-d816819d6f2b
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Move
+      m_Flags: 8
     m_Flags: 0
   onRotate:
     m_Name: On Rotate
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 2
+    m_ExpectedControlType: Vector2
     m_Id: 5f9151ac-4628-48e2-8090-20ae8c8ac8ce
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: KB
+      m_Id: 1eb0f764-0ae1-4b10-948a-76aee9cedb44
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Rotate
+      m_Flags: 4
+    - m_Name: up
+      m_Id: c9a3a09a-7fad-4c89-9f8c-e05d9ac546b9
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Rotate
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 82f9bf4c-3fce-402c-ad6c-524c4b4fae16
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Rotate
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 49aa06d9-0da5-490b-8fd8-daea02b4da2b
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Rotate
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 4572545e-1a52-4c4b-9743-a3732542dd0f
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Rotate
+      m_Flags: 8
+    - m_Name: Stick
+      m_Id: 9d063fcc-16e6-4f45-8525-310de3bd70c3
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Rotate
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 8c700954-e45b-4413-bf74-509fd2eba3ee
+      m_Path: <Gamepad>/rightStick/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Rotate
+      m_Flags: 8
+    - m_Name: down
+      m_Id: e1621792-6791-4731-9ea0-00ec92558ae1
+      m_Path: <Gamepad>/rightStick/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Rotate
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 17535467-65d6-4726-8a3d-b4e7a805f7dc
+      m_Path: <Gamepad>/rightStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Rotate
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 39534c23-94e1-40f7-9daf-6e465ce939a5
+      m_Path: <Gamepad>/rightStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Rotate
+      m_Flags: 8
     m_Flags: 0
   onStabilize:
     m_Name: On Stabilize
@@ -393,7 +553,23 @@ MonoBehaviour:
     m_Id: 20efd5ce-7d02-463e-9eb9-59709662f97c
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 51d195e2-327f-4ec1-8b2e-aab1d149f620
+      m_Path: <Gamepad>/buttonEast
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Stabilize
+      m_Flags: 0
+    - m_Name: 
+      m_Id: b490f90e-37a5-4fa5-a1c2-16c1d45d6556
+      m_Path: <Keyboard>/f
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Stabilize
+      m_Flags: 0
     m_Flags: 0
   onShoot:
     m_Name: On Shoot
@@ -402,7 +578,23 @@ MonoBehaviour:
     m_Id: 27d3b324-5dd1-46ae-ab7c-d43fe3029960
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b75afd9a-1d20-41d0-9a4a-94fe5941d010
+      m_Path: <Gamepad>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Shoot
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ec836430-20b6-4c36-a4c5-6a8aa580b734
+      m_Path: <Keyboard>/j
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Shoot
+      m_Flags: 0
     m_Flags: 0
   onBoost:
     m_Name: On Boost
@@ -411,7 +603,23 @@ MonoBehaviour:
     m_Id: 4d6e9e04-2227-45a1-86ad-8e78cd99b0f4
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: af793e37-e606-455f-9c67-4790be557b98
+      m_Path: <Gamepad>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Boost
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 65f035a5-44b6-4743-aa53-3fef66aad258
+      m_Path: <Keyboard>/leftShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Boost
+      m_Flags: 0
     m_Flags: 0
   onLockIn:
     m_Name: On Lock In
@@ -420,7 +628,23 @@ MonoBehaviour:
     m_Id: ca6b1fd0-4620-4896-9185-207aa7006948
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: bc615fed-3845-4de5-9797-ed7671b0b52b
+      m_Path: <Gamepad>/buttonNorth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Lock In
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 8dfc6b66-82e9-4ad3-b1e1-35b97541035e
+      m_Path: <Keyboard>/l
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: On Lock In
+      m_Flags: 0
     m_Flags: 0
   moveValue: {x: 0, y: 0}
 --- !u!114 &1680639295779702030
@@ -516,11 +740,11 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 4f5df619-6f57-4586-a8c4-283580da77f5
-    m_ActionName: Ship Controls/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+    m_ActionName: Ship Controls/Move
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: f5209363-e13f-4b87-bf09-55dfcf6804fc
-    m_ActionName: Ship Controls/Rotate[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+    m_ActionName: Ship Controls/Rotate
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Ship Controls
@@ -538,7 +762,7 @@ GameObject:
   m_Layer: 0
   m_Name: PivotLeft
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -551,7 +775,7 @@ Transform:
   m_GameObject: {fileID: 7201802044626827331}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalPosition: {x: -8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -570,7 +794,7 @@ GameObject:
   m_Layer: 0
   m_Name: shootingPAM
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -583,7 +807,7 @@ Transform:
   m_GameObject: {fileID: 7505160162127140245}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.11, z: 4.08}
+  m_LocalPosition: {x: 0, y: 0.5, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -602,12 +826,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  lockOnRange: 100
-  maxLockDistance: 105
+  lockOnRange: 80
+  maxLockDistance: 82
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
   rotationSpeed: 10
+  locking: 0
+  closestEnemy: 200
   control: {fileID: 4697636090080541407}
 --- !u!1 &8188864543971828301
 GameObject:
@@ -652,7 +878,7 @@ GameObject:
   m_Layer: 0
   m_Name: PivotDown
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -665,7 +891,7 @@ Transform:
   m_GameObject: {fileID: 8337522010219990716}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

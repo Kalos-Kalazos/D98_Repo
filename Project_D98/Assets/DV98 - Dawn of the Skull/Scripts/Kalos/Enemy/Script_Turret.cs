@@ -49,7 +49,7 @@ public class Script_Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fireCooldown <= 0 && health > 0)
+        if (fireCooldown <= 0 && !dead)
         {
             ShootPlayer();
             fireCooldown = fireRate;
@@ -73,6 +73,15 @@ public class Script_Turret : MonoBehaviour
                 explosion.transform.position = transform.position;
                 explosion.transform.rotation = transform.rotation;
                 explosion.SetActive(true);
+            }
+
+            if (player != null)
+            {
+                if (player.GetComponentInChildren<Script_Aim>().currentTarget == gameObject.transform)
+                {
+                    player.GetComponentInChildren<Script_Aim>().currentTarget = null;
+                    player.GetComponentInChildren<Script_Aim>().locking = false;
+                }
             }
 
             dead = true;
@@ -110,7 +119,7 @@ public class Script_Turret : MonoBehaviour
     {
         //Si aun hay municion resto uno, cojo un objeto de la pool y este orientado al shootingPoint
 
-        if (ammo > 0)
+        if (ammo > 0 && !dead)
         {
             ammo -= 1;
             GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBB();

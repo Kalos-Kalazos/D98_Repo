@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/DV98 - Dawn of the Skull/Scenes/Kalos_Scene.unity
+    path: Assets/DV98 - Dawn of the Skull/Scenes/Kalos/Kalos_Scene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/DV98 - Dawn of the Skull/Scenes/Kalos/YouDied.unity
+    guid: f243ac5e09eb86a4aa83e4c6fd5536bf
   m_configObjects: {}

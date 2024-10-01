@@ -72,7 +72,7 @@ public class Script_Aim : MonoBehaviour
         locking = true;
 
         // Busca el enemigo más cercano dentro del rango
-        enemiesInRange = Physics.OverlapSphere(transform.position + new Vector3(0, 0, 80), lockOnRange, enemyLayer);
+        enemiesInRange = Physics.OverlapSphere(transform.position + new Vector3(0, 0, 90), lockOnRange, enemyLayer);
 
         if (enemiesInRange.Length > 0)
         {

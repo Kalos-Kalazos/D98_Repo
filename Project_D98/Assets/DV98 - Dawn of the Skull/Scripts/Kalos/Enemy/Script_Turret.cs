@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Script_Turret : MonoBehaviour
 {
     public Transform player, pivot;
     public GameObject bulletPrefab;
-    public Script_Boss padre;
+    public Transform padre;
+
+    Script_GameManager gameManager;
 
     Rigidbody rb;
 
@@ -41,7 +44,9 @@ public class Script_Turret : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
 
-        padre = FindObjectOfType<Script_Boss>();
+        padre = GameObject.FindWithTag("Boss").transform;
+
+        gameManager = FindObjectOfType<Script_GameManager>();
 
         rb = GetComponent<Rigidbody>();
 
@@ -86,6 +91,11 @@ public class Script_Turret : MonoBehaviour
                     player.GetComponentInChildren<Script_Aim>().currentTarget = null;
                     player.GetComponentInChildren<Script_Aim>().locking = false;
                 }
+            }
+
+            if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))
+            {
+                gameManager.StartSpawn();
             }
 
             dead = true;

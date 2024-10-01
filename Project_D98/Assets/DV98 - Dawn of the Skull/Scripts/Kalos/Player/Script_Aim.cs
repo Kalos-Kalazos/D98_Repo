@@ -54,7 +54,11 @@ public class Script_Aim : MonoBehaviour
            {
                 transform.rotation = Quaternion.Slerp(transform.rotation, forwardLook, Time.deltaTime * rotationSpeed);
                 Debug.Log("Resuming locking off");
-           }
+                for (int i = 0; i < enemiesInRange.Length; i++)
+                {
+                    enemiesInRange[i] = null;
+                }
+            }
         }
         if (currentTarget != null)
         {
@@ -72,7 +76,7 @@ public class Script_Aim : MonoBehaviour
         locking = true;
 
         // Busca el enemigo más cercano dentro del rango
-        enemiesInRange = Physics.OverlapSphere(transform.position + new Vector3(0, 0, 90), lockOnRange, enemyLayer);
+        enemiesInRange = Physics.OverlapSphere(transform.position, lockOnRange, enemyLayer);
 
         if (enemiesInRange.Length > 0)
         {

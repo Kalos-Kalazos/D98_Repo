@@ -9,7 +9,8 @@ public class Script_GameManager : MonoBehaviour
     public Slider healthSlider;           
     public Slider boostSlider;
     public Slider heatSlider;
-    private Script_Spaceship player;         
+    private Script_Spaceship player;
+    private Script_Spawn_enemy spawner;
     
     public void Restart()
     {
@@ -21,9 +22,33 @@ public class Script_GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void StartSpawn()
+    {
+        spawner.startSpawn = true;
+    }
+
+    public void LvlCompleted()
+    {
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))
+        {
+            SceneManager.LoadScene("Scene_Level1");
+        }
+
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Level1")))
+        {
+            SceneManager.LoadScene("Scene_LevelBoss");
+        }
+
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_LevelBoss")))
+        {
+            SceneManager.LoadScene("Scene_Victory");
+        }
+    }
+
     void Start()
     {
         player = FindObjectOfType<Script_Spaceship>();
+        spawner = FindObjectOfType<Script_Spawn_enemy>();
 
         if (player != null)
         {
@@ -49,6 +74,14 @@ public class Script_GameManager : MonoBehaviour
             if (player.currentHealth <= 0)
             {
                 SceneManager.LoadScene("YouDied");
+            }
+        }
+
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))
+        {
+            if (spawner.spawnCount >= 1)
+            {
+                LvlCompleted();
             }
         }
     }

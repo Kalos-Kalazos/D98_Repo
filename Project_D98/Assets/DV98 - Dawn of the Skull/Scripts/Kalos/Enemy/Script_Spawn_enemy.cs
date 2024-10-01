@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Script_Spawn_enemy : MonoBehaviour
 {
@@ -12,12 +13,13 @@ public class Script_Spawn_enemy : MonoBehaviour
     [SerializeField]
     private bool overLoad = false;
     [SerializeField]
+    public bool startSpawn = false;
+    [SerializeField]
     private float spawnRate;
     [SerializeField]
-    private float spawnCount=0;
+    public float spawnCount=0;
     [SerializeField]
     private float maxSpawnCount;
-
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +38,7 @@ public class Script_Spawn_enemy : MonoBehaviour
             spawnCount = 0;
         }
 
-        if (spawnCooldown <= 0 || overLoad)
+        if (spawnCooldown <= 0 && startSpawn)
         {
             Spawn();
             if (overLoad)

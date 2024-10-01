@@ -141,7 +141,7 @@ public class Script_Spaceship : MonoBehaviour
                 explosionB.SetActive(true);
             }
 
-            TakeDamage(4);
+            TakeDamage(10);
         }
 
     }

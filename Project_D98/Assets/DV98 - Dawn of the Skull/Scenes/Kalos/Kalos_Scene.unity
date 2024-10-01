@@ -1579,12 +1579,17 @@ PrefabInstance:
     - target: {fileID: 2341213758585372769, guid: a2ec6288ade79064097c3d33560f6c66,
         type: 3}
       propertyPath: amountToPoolX
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2341213758585372769, guid: a2ec6288ade79064097c3d33560f6c66,
         type: 3}
       propertyPath: amountToPoolBB
-      value: 0
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2341213758585372769, guid: a2ec6288ade79064097c3d33560f6c66,
+        type: 3}
+      propertyPath: amountToPoolBE
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2377880354408147702, guid: a2ec6288ade79064097c3d33560f6c66,
         type: 3}
@@ -4000,6 +4005,16 @@ PrefabInstance:
       propertyPath: pivot
       value: 
       objectReference: {fileID: 1348093642}
+    - target: {fileID: 802222351391679063, guid: e7c348780255aa84391148cc37941a13,
+        type: 3}
+      propertyPath: fireRate
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 802222351391679063, guid: e7c348780255aa84391148cc37941a13,
+        type: 3}
+      propertyPath: rotationSpeedTurret
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 809219203560149911, guid: e7c348780255aa84391148cc37941a13,
         type: 3}
       propertyPath: m_Name
@@ -4010,6 +4025,26 @@ PrefabInstance:
       propertyPath: pivot
       value: 
       objectReference: {fileID: 328309563}
+    - target: {fileID: 832042707255721569, guid: e7c348780255aa84391148cc37941a13,
+        type: 3}
+      propertyPath: fireRate
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 832042707255721569, guid: e7c348780255aa84391148cc37941a13,
+        type: 3}
+      propertyPath: rotationSpeedTurret
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551003070809159771, guid: e7c348780255aa84391148cc37941a13,
+        type: 3}
+      propertyPath: fireRate
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551003070809159771, guid: e7c348780255aa84391148cc37941a13,
+        type: 3}
+      propertyPath: rotationSpeedTurret
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6252174396402524056, guid: e7c348780255aa84391148cc37941a13,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4059,6 +4094,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917914067798884344, guid: e7c348780255aa84391148cc37941a13,
+        type: 3}
+      propertyPath: fireRate
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6917914067798884344, guid: e7c348780255aa84391148cc37941a13,
+        type: 3}
+      propertyPath: rotationSpeedTurret
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7383413626794547304, guid: e7c348780255aa84391148cc37941a13,
         type: 3}

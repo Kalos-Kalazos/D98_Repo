@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7037911164980396017}
   m_Layer: 0
   m_Name: Big_Bullet
-  m_TagString: Bullet
+  m_TagString: BB
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80be8e31764f9b740acee7a238b65614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 200
   timeToDeactivate: 5
 --- !u!1001 &1602670788413069516
 PrefabInstance:

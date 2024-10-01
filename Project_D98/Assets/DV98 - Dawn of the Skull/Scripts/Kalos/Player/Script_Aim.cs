@@ -11,19 +11,19 @@ public class Script_Aim : MonoBehaviour
     [SerializeField]
     public Transform currentTarget;
     [SerializeField]
-    float lockOnRange = 10f;
+    float lockOnRange;
     [SerializeField]
-    float maxLockDistance = 15f;
+    float maxLockDistance;
     [SerializeField]
     LayerMask enemyLayer;
     [SerializeField]
-    float rotationSpeed = 5f;
+    float rotationSpeed;
     [SerializeField]
     public bool locking;
     [SerializeField]
     float angleToTarget;
     [SerializeField]
-    float maxLockAngle = 60f;
+    float maxLockAngle;
     [SerializeField]
     private Script_Spaceship control;
     [SerializeField]

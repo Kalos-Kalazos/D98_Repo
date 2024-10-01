@@ -22,15 +22,19 @@ public class Script_Turret : MonoBehaviour
     [SerializeField]
     private float maxAmmo = 200;
     [SerializeField]
-    private bool shooting, empty;
+    private bool shooting, empty, cantShoot;
     [SerializeField]
-    private float fireCooldown = 0;
+    private float fireCooldown;
     [SerializeField]
     private float fireRate = 1;
     [SerializeField]
-    private float rotationSpeedTurret = 1;
+    private float rotationSpeedTurret;
     [SerializeField]
     private float power = 50;
+    [SerializeField]
+    private float angleToTarget;
+    [SerializeField]
+    private float maxLockAngle = 60;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +53,7 @@ public class Script_Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fireCooldown <= 0 && !dead)
+        if (fireCooldown <= 0 && !dead && !cantShoot)
         {
             ShootPlayer();
             fireCooldown = fireRate;
@@ -107,8 +111,15 @@ public class Script_Turret : MonoBehaviour
 
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
 
-            //Roto el punto de disparo
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeedTurret);
+            angleToTarget = Vector3.Angle(padre.transform.forward, directionToPlayer);
+
+            if (angleToTarget < maxLockAngle)
+            {
+                //Roto el punto de disparo dentro de un rango
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeedTurret);
+                cantShoot = false;
+            }
+            else cantShoot = true;
 
 
             Debug.DrawLine(transform.position, player.position, Color.cyan);

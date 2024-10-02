@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Script_Enemy : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class Script_Enemy : MonoBehaviour
     [SerializeField]
     private float pivotCooldown = 0;
 
+
+   public Script_GameManager gameManager;
+
     public Transform shootingPoint;
 
     public GameObject player;
@@ -40,6 +44,8 @@ public class Script_Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         player = GameObject.FindWithTag("Player");
+
+        gameManager = FindObjectOfType<Script_GameManager>();
 
         playerPivot = player.transform.GetChild(Random.Range(2, 5));
 
@@ -94,10 +100,22 @@ public class Script_Enemy : MonoBehaviour
                 explosion.transform.rotation = collision.collider.transform.rotation;
                 explosion.SetActive(true);
             }
+
+            Achieved();
+        }
+    }
+    void Achieved()
+    {
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))
+        {
+            gameManager.LvlCompleted();
         }
 
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Level1")) && gameManager.spawner.spawnCount >= 5)
+        {
+            gameManager.LvlCompleted();
+        }
     }
-
     private void OnDisable()
     {
         if (player != null)
@@ -109,10 +127,7 @@ public class Script_Enemy : MonoBehaviour
             }
         }
 
-        
     }
-
-
     private void AimAtPlayer()
     {
         //Calculo la direccion del jugador y hago el shootingPoint mirar hacia alli
@@ -126,7 +141,6 @@ public class Script_Enemy : MonoBehaviour
             Debug.DrawLine(shootingPoint.position, player.transform.position, Color.red);
         }
     }
-
     private void ShootPlayer()
     {
         //Si aun hay municion resto uno, cojo un objeto de la pool y este orientado al shootingPoint
@@ -147,16 +161,12 @@ public class Script_Enemy : MonoBehaviour
             fireCooldown = 5;
         }
     }
-
     private void ResetObjective()
     {
         //Cambio el pivote objetivo de la direccion
         playerPivot = player.transform.GetChild(Random.Range(2, 5));
 
     } 
-
-
-
     private void PursuePlayer()
     {
         //Calculo la direccion de los pivotes del jugador y añado una fuerza hacia el

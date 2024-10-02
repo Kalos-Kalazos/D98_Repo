@@ -10,11 +10,11 @@ public class Script_GameManager : MonoBehaviour
     public Slider boostSlider;
     public Slider heatSlider;
     private Script_Spaceship player;
-    private Script_Spawn_enemy spawner;
+    public Script_Spawn_enemy spawner;
     
     public void Restart()
     {
-        SceneManager.LoadScene("Kalos_Scene");
+        SceneManager.LoadScene("Scene_Tutorial");
     }
 
     public void Quit()
@@ -73,15 +73,7 @@ public class Script_GameManager : MonoBehaviour
         {
             if (player.currentHealth <= 0)
             {
-                SceneManager.LoadScene("YouDied");
-            }
-        }
-
-        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))
-        {
-            if (spawner.spawnCount >= 1)
-            {
-                LvlCompleted();
+                SceneManager.LoadScene("Scene_Lose");
             }
         }
     }

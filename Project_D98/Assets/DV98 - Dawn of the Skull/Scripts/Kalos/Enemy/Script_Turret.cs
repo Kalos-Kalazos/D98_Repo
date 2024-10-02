@@ -44,8 +44,6 @@ public class Script_Turret : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
 
-        padre = GameObject.FindWithTag("Boss").transform;
-
         gameManager = FindObjectOfType<Script_GameManager>();
 
         rb = GetComponent<Rigidbody>();

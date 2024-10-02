@@ -174,10 +174,13 @@ MonoBehaviour:
   maxAmmo: 100
   shooting: 0
   empty: 0
+  cantShoot: 0
   fireCooldown: 0
   fireRate: 3
-  rotationSpeedTurret: 10
+  rotationSpeedTurret: 2
   power: 200
+  angleToTarget: 0
+  maxLockAngle: 60
 --- !u!135 &2991549296098639493
 SphereCollider:
   m_ObjectHideFlags: 0

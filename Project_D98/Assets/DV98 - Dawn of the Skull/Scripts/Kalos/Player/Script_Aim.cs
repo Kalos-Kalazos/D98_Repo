@@ -27,52 +27,79 @@ public class Script_Aim : MonoBehaviour
     [SerializeField]
     private Script_Spaceship control;
     [SerializeField]
-    float closestEnemy;
+    float closeEnemy;
     [SerializeField]
     Collider[] enemiesInRange;
+    [SerializeField]
+    float lockCount;
+    [SerializeField]
+    bool isLocked;
 
     Quaternion forwardLook;
 
 
     void Start()
     {
-
+        if (control == null)
+        {
+            control = GetComponentInParent<Script_Spaceship>();
+        }
     }
 
 
     void Update()
     {
+
         forwardLook = control.transform.rotation;
 
-        if (control.locking>0) 
+        if (control.locking>0)
         {
-            LockOnTarget();
+            if (!isLocked)
+            {
+                LockOnTarget();
+                isLocked = true;
+            }
         }
         else
         {
-           if(!locking)
-           {
-                transform.rotation = Quaternion.Slerp(transform.rotation, forwardLook, Time.deltaTime * rotationSpeed);
-                Debug.Log("Resuming locking off");
-                for (int i = 0; i < enemiesInRange.Length; i++)
-                {
-                    enemiesInRange[i] = null;
-                }
+            if (isLocked)
+            {
+                ReleaseLock();
+                isLocked = false;
             }
         }
-        if (currentTarget != null)
+
+        if (!locking)
         {
-            AimAtTarget(); 
+            transform.rotation = Quaternion.Slerp(transform.rotation, forwardLook, Time.deltaTime * rotationSpeed);
+            Debug.Log("Resuming locking off");
+            for (int i = 0; i < enemiesInRange.Length; i++)
+            {
+                enemiesInRange[i] = null;
+            }
+        }
+
+        if (currentTarget != null && isLocked)
+        {
+            AimAtTarget();
 
             // Si el objetivo se aleja demasiado, recalcular
             if (Vector3.Distance(transform.position, currentTarget.position) > maxLockDistance)
             {
-                LockOnTarget(); 
+                LockOnTarget();
             }
         }
     }
+    void ReleaseLock()
+    {
+        currentTarget = null;
+        locking = false;
+    }
+
     void LockOnTarget()
     {
+        if (control == null) return;
+
         locking = true;
 
         // Busca el enemigo más cercano dentro del rango
@@ -80,7 +107,16 @@ public class Script_Aim : MonoBehaviour
 
         if (enemiesInRange.Length > 0)
         {
-            currentTarget = GetClosestEnemy(enemiesInRange).transform;
+            Transform closestEnemy = GetClosestEnemy(enemiesInRange); 
+            if (closestEnemy != null)
+            {
+                currentTarget = closestEnemy; 
+            }
+            else
+            {
+                currentTarget = null; 
+                locking = false;
+            }
         }
         else
         {
@@ -91,7 +127,7 @@ public class Script_Aim : MonoBehaviour
 
     Transform GetClosestEnemy(Collider[] enemiesInRange)
     {
-        closestEnemy = 200;
+        closeEnemy = 200;
         Transform bestEnemy = null;
 
         foreach (Collider enemy in enemiesInRange)
@@ -102,9 +138,9 @@ public class Script_Aim : MonoBehaviour
             // Calcular el ángulo entre la z dela nave y el enemigo + tiene que estar dentro de el limite
             float angleToEnemy = Vector3.Angle(control.transform.forward, directionToEnemy);
 
-            if (distance < closestEnemy && angleToEnemy < maxLockAngle)
+            if (distance < closeEnemy && angleToEnemy < maxLockAngle)
             {
-                closestEnemy = distance;
+                closeEnemy = distance;
                 bestEnemy = enemy.transform;
             }
         }
@@ -115,6 +151,8 @@ public class Script_Aim : MonoBehaviour
 
     void AimAtTarget()
     {
+        if (currentTarget == null) return;
+
         Vector3 direction = currentTarget.position - transform.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         angleToTarget = Vector3.Angle(transform.forward, direction);

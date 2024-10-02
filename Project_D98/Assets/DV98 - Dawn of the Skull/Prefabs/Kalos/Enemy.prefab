@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162ddea7a1a8c954580fffc016aa16a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 5
   rotationSpeed: 5
   angularDrag: 0.2
   linearDrag: 0.2
@@ -233,7 +233,7 @@ MonoBehaviour:
   shooting: 0
   empty: 0
   fireCooldown: 0
-  fireRate: 5
+  fireRate: 3
   pivotCooldown: 0
   shootingPoint: {fileID: 1751801424755569170}
   player: {fileID: 0}

@@ -9,7 +9,9 @@ public class Script_GameManager : MonoBehaviour
     public Slider healthSlider;           
     public Slider boostSlider;
     public Slider heatSlider;
+    public Slider bossHealthSlider;
     private Script_Spaceship player;
+    private Script_Boss bossControl;
     public Script_Spawn_enemy spawner;
     
     public void Restart()
@@ -50,6 +52,11 @@ public class Script_GameManager : MonoBehaviour
         player = FindObjectOfType<Script_Spaceship>();
         spawner = FindObjectOfType<Script_Spawn_enemy>();
 
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_LevelBoss")))
+        {
+            bossControl = FindObjectOfType<Script_Boss>();
+        }
+
         if (player != null)
         {
             healthSlider.maxValue = player.maxHealth;
@@ -64,6 +71,13 @@ public class Script_GameManager : MonoBehaviour
             player.OnHealthChanged += UpdateHealthBar;
             player.OnBoostChanged += UpdateBoostBar;
             player.OnHeatChanged += UpdateHeatBar;
+        }
+
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_LevelBoss")))
+        {
+            bossHealthSlider.maxValue = bossControl.maxSkullHealth;
+            bossHealthSlider.value = bossControl.skullHealth;
+            bossControl.OnBossHealthChanged += UpdateBossHealth;
         }
     }
 
@@ -141,6 +155,27 @@ public class Script_GameManager : MonoBehaviour
         }
 
         heatSlider.value = targetHeat;
+    }
+
+    //Boss Heath bar update
+    public void UpdateBossHealth(float currentHeat)
+    {
+        StartCoroutine(BossHealthChange(currentHeat));
+    }
+    IEnumerator BossHealthChange(float targetBossHealth)
+    {
+        float elapsedTime = 0f;
+        float duration = 0.1f;
+        float startValue = bossHealthSlider.value;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            bossHealthSlider.value = Mathf.Lerp(startValue, targetBossHealth, elapsedTime / duration);
+            yield return null;
+        }
+
+        heatSlider.value = targetBossHealth;
     }
 
     #endregion

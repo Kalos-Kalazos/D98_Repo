@@ -362,6 +362,7 @@ MonoBehaviour:
   boosting: 0
   resetBoost: 0
   ammo: 200
+  damage: 2
   fireCooldown: 1
   fireRate: 0.25
   maxAmmo: 200
@@ -646,6 +647,24 @@ MonoBehaviour:
       m_Action: On Lock In
       m_Flags: 0
     m_Flags: 0
+  onStart:
+    m_Name: On Start
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e41a0dd5-5a8e-419b-bd16-a91e690088bd
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  onQuit:
+    m_Name: On Quit
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 55666caa-bf4d-4c66-bcb1-adc0fd3699f0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   moveValue: {x: 0, y: 0}
 --- !u!114 &1680639295779702030
 MonoBehaviour:
@@ -826,15 +845,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  lockOnRange: 80
-  maxLockDistance: 82
+  lockOnRange: 100
+  maxLockDistance: 101
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
   rotationSpeed: 10
   locking: 0
-  closestEnemy: 200
+  angleToTarget: 0
+  maxLockAngle: 30
   control: {fileID: 4697636090080541407}
+  closeEnemy: 0
+  enemiesInRange: []
+  lockCount: 0
+  isLocked: 0
 --- !u!1 &8188864543971828301
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,6 +55,8 @@ public class Script_Spaceship : MonoBehaviour
     [SerializeField]
     private float ammo;
     [SerializeField]
+    public int damage;
+    [SerializeField]
     private float fireCooldown;
     [SerializeField]
     private float fireRate;

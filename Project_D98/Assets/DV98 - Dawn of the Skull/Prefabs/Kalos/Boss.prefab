@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5020850957770792394}
   - component: {fileID: 5297456764470389685}
   - component: {fileID: 6313611840653597392}
+  - component: {fileID: 62720815889692582}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -104,6 +105,10 @@ MonoBehaviour:
   rotationSpeedBody: 0.05
   angularDrag: 2
   linearDrag: 2
+  health: 0
+  skullHealth: 1000
+  maxSkullHealth: 1000
+  noTurrets: 0
   player: {fileID: 0}
   shootPointFront: {fileID: 0}
   pivot: {fileID: 0}
@@ -130,6 +135,36 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 41.38091, y: 46.88298, z: 45.014343}
   m_Center: {x: -0.57442665, y: 4.4141884, z: -13.463577}
+--- !u!114 &62720815889692582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809219203560149911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 2f9c9a38a5c0cfa43a0c381716128420, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5297456764470389685}
+          m_TargetAssemblyTypeName: Script_Boss, Assembly-CSharp
+          m_MethodName: AnimatorDeactivate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5220564355142745860
 GameObject:
   m_ObjectHideFlags: 0

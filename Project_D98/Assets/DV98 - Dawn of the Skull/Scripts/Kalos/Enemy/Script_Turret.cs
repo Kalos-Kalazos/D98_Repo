@@ -9,6 +9,8 @@ public class Script_Turret : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform padre;
 
+    Script_Boss padreControl;
+
     Script_GameManager gameManager;
 
     Rigidbody rb;
@@ -45,6 +47,11 @@ public class Script_Turret : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
 
         gameManager = FindObjectOfType<Script_GameManager>();
+
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_LevelBoss")))
+        {
+            padreControl = FindObjectOfType<Script_Boss>();
+        }
 
         rb = GetComponent<Rigidbody>();
 
@@ -95,6 +102,8 @@ public class Script_Turret : MonoBehaviour
             {
                 gameManager.StartSpawn();
             }
+
+            padreControl.health--;
 
             dead = true;
         }

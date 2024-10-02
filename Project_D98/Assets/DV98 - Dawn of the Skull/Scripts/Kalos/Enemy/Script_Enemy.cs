@@ -111,7 +111,7 @@ public class Script_Enemy : MonoBehaviour
             gameManager.LvlCompleted();
         }
 
-        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Level1")) && gameManager.spawner.spawnCount >= 5)
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Level1")) && gameManager.spawner.spawnCount >= 40)
         {
             gameManager.LvlCompleted();
         }

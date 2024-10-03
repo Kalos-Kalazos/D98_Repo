@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(Rigidbody))]
 
@@ -69,6 +70,10 @@ public class Script_Spaceship : MonoBehaviour
     [SerializeField]
     private Transform shootingPoint;
 
+    [Header("=== Visual Settings ===")]
+    [SerializeField]
+    VisualEffect vfx_Boost;
+
     [Header("=== Inputs Settings ===")]
     [SerializeField]
     private InputAction onMove, onRotate, onStabilize, onShoot, onBoost, onLockIn, onStart, onQuit;
@@ -83,6 +88,7 @@ public class Script_Spaceship : MonoBehaviour
     public delegate void HeatChanged(float currentHeat);
     public event HeatChanged OnHeatChanged;
 
+    public int vfxDuration;
 
     float glide, horizontalGlide = 0f;
 
@@ -114,6 +120,8 @@ public class Script_Spaceship : MonoBehaviour
 
         currentHealth = maxHealth;
         ammo = maxAmmo;
+
+        vfxDuration = Shader.PropertyToID("Duration");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -277,9 +285,12 @@ public class Script_Spaceship : MonoBehaviour
         if (boosting>0 && currentBoost > 0f && !resetBoost)
         {
             currentBoost -= boostDeprecationRate;
+            vfx_Boost.SetFloat(vfxDuration, currentBoost);
         }
         else
         {
+            vfx_Boost.SetFloat(vfxDuration, 1f);
+
             if (currentBoost <  maxBoostAmount)
             {
                 currentBoost += boostRechargeRate;

@@ -51,6 +51,10 @@ public class Script_Spaceship : MonoBehaviour
     private float boosting;
     [SerializeField]
     private bool resetBoost;
+    [SerializeField]
+    private bool isBoostActive;
+    [SerializeField]
+    private bool isVFXBoost;
 
     [Header("=== Shoot Settings ===")]
     [SerializeField]
@@ -73,6 +77,8 @@ public class Script_Spaceship : MonoBehaviour
     [Header("=== Visual Settings ===")]
     [SerializeField]
     VisualEffect vfx_Boost;
+    [SerializeField]
+    float fadeSpeed;
 
     [Header("=== Inputs Settings ===")]
     [SerializeField]
@@ -122,6 +128,8 @@ public class Script_Spaceship : MonoBehaviour
         ammo = maxAmmo;
 
         vfxDuration = Shader.PropertyToID("Duration");
+
+        vfx_Boost.Stop();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -285,15 +293,35 @@ public class Script_Spaceship : MonoBehaviour
         if (boosting>0 && currentBoost > 0f && !resetBoost)
         {
             currentBoost -= boostDeprecationRate;
-            vfx_Boost.SetFloat(vfxDuration, currentBoost);
+
+            if (!isBoostActive)
+            {
+                isBoostActive = true;
+
+                if (!isVFXBoost)
+                {
+                    vfx_Boost.Play();
+                    isVFXBoost = true;
+                }
+            }
         }
         else
         {
-            vfx_Boost.SetFloat(vfxDuration, 1f);
 
             if (currentBoost <  maxBoostAmount)
             {
                 currentBoost += boostRechargeRate;
+            }
+
+            if (isBoostActive)
+            {
+                isBoostActive = false;
+
+                if (isVFXBoost)
+                {
+                    vfx_Boost.Stop();
+                    isVFXBoost = false;
+                }
             }
         }
     }

@@ -16,7 +16,7 @@ public class Script_ObjectPooling : MonoBehaviour
     [SerializeField]
     int amountToPoolB;
 
-    //Explosiones
+    //Explosions
     [SerializeField]
     List<GameObject> pooledExplosions;
     [SerializeField]
@@ -24,7 +24,7 @@ public class Script_ObjectPooling : MonoBehaviour
     [SerializeField]
     int amountToPoolE;
 
-    //Enemigos
+    //Enemies
     [SerializeField]
     List<GameObject> pooledEnemy;
     [SerializeField]
@@ -32,7 +32,7 @@ public class Script_ObjectPooling : MonoBehaviour
     [SerializeField]
     int amountToPoolX;
 
-    //Big Explosiones "BE"
+    //Big Explosions "BE"
     [SerializeField]
     List<GameObject> pooledBE;
     [SerializeField]
@@ -47,6 +47,14 @@ public class Script_ObjectPooling : MonoBehaviour
     GameObject bbToPool;
     [SerializeField]
     int amountToPoolBB;
+
+    //Power Up Fast Shooting "FS"
+    [SerializeField]
+    List<GameObject> pooledFS;
+    [SerializeField]
+    GameObject fsToPool;
+    [SerializeField]
+    int amountToPoolFS;
 
     void Awake()
     {
@@ -99,6 +107,15 @@ public class Script_ObjectPooling : MonoBehaviour
             tmpBB = Instantiate(bbToPool);
             tmpBB.SetActive(false);
             pooledBB.Add(tmpBB);
+        }
+
+        pooledFS = new List<GameObject>();
+        GameObject tmpFS;
+        for (int i = 0; i < amountToPoolFS; i++)
+        {
+            tmpFS = Instantiate(fsToPool);
+            tmpFS.SetActive(false);
+            pooledFS.Add(tmpFS);
         }
     }
 
@@ -153,6 +170,17 @@ public class Script_ObjectPooling : MonoBehaviour
             if (!pooledEnemy[i].activeInHierarchy)
             {
                 return pooledEnemy[i];
+            }
+        }
+        return null;
+    }
+    public GameObject GetPooledFS()
+    {
+        for (int i = 0; i < amountToPoolFS; i++)
+        {
+            if (!pooledFS[i].activeInHierarchy)
+            {
+                return pooledFS[i];
             }
         }
         return null;

@@ -103,7 +103,10 @@ public class Script_Turret : MonoBehaviour
                 gameManager.StartSpawn();
             }
 
-            padreControl.health--;
+            if (padreControl!=null)
+            {
+                padreControl.health--;
+            }
 
             dead = true;
         }

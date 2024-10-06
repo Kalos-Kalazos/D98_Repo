@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
 
-[RequireComponent(typeof(Rigidbody))]
-
 public class Script_Spaceship : MonoBehaviour
 {
     [Header("=== Status Settings ===")]
@@ -58,15 +56,11 @@ public class Script_Spaceship : MonoBehaviour
 
     [Header("=== Shoot Settings ===")]
     [SerializeField]
-    private float ammo;
-    [SerializeField]
     public int damage;
     [SerializeField]
     private float fireCooldown;
     [SerializeField]
     private float fireRate;
-    [SerializeField]
-    private float maxAmmo;
     [SerializeField]
     private float pumPuming;
     [SerializeField]
@@ -74,11 +68,24 @@ public class Script_Spaceship : MonoBehaviour
     [SerializeField]
     private Transform shootingPoint;
 
+    [Header("=== Power Up Settings ===")]
+    [SerializeField]
+    public bool fastShooting;
+    [SerializeField]
+    public float fsCooldown;
+    [SerializeField]
+    float fsRate;
+    [SerializeField]
+    public bool doubleShooting;
+    [SerializeField]
+    public float dsCooldown;
+    [SerializeField]
+    float dsRate;
+
+
     [Header("=== Visual Settings ===")]
     [SerializeField]
-    VisualEffect vfx_Boost;
-    [SerializeField]
-    float fadeSpeed;
+    VisualEffect[] vfx_Boost;
 
     [Header("=== Inputs Settings ===")]
     [SerializeField]
@@ -94,12 +101,9 @@ public class Script_Spaceship : MonoBehaviour
     public delegate void HeatChanged(float currentHeat);
     public event HeatChanged OnHeatChanged;
 
-    public int vfxDuration;
-
     float glide, horizontalGlide = 0f;
 
     Rigidbody rb;
-
 
     //Input Values
     public Vector2 moveValue;
@@ -125,11 +129,11 @@ public class Script_Spaceship : MonoBehaviour
         currentBoost = maxBoostAmount;
 
         currentHealth = maxHealth;
-        ammo = maxAmmo;
 
-        vfxDuration = Shader.PropertyToID("Duration");
-
-        vfx_Boost.Stop();
+        for (int i = 0; i < vfx_Boost.Length; i++)
+        {
+            vfx_Boost[i].Stop();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -202,8 +206,25 @@ public class Script_Spaceship : MonoBehaviour
 
         if (fireCooldown <= 0 && pumPuming>0 && !overHeated)
         {
-            Shoot();
-            fireCooldown = fireRate;
+            if (fastShooting && fsCooldown > 0)
+            {
+                Shoot();
+                fireCooldown = fsRate;
+            }
+            else
+            {
+                if (doubleShooting && dsCooldown > 0)
+                {
+                    DoubleShoot();
+                    fireCooldown = fireRate;
+                }
+                else
+                {
+                    Shoot();
+                    fireCooldown = fireRate;
+                }
+            }
+
         }
         else
         {
@@ -215,6 +236,20 @@ public class Script_Spaceship : MonoBehaviour
             }
         }
 
+        #region Cooldown power ups
+        if (fsCooldown > 0)
+        {
+            fsCooldown -= Time.deltaTime;
+        }else fastShooting = false;
+
+        if (dsCooldown > 0)
+        {
+            dsCooldown -= Time.deltaTime;
+        }
+        else doubleShooting = false;
+        #endregion
+
+        #region boost and heat bar updates
         if (OnBoostChanged != null)
         {
             OnBoostChanged(currentBoost);
@@ -224,16 +259,7 @@ public class Script_Spaceship : MonoBehaviour
         {
             OnHeatChanged(currentHeat);
         }
-
-        if (currentHeat >= maxHeat)
-        {
-            overHeated = true;
-        }
-
-        if (currentHeat <= 0)
-        {
-            overHeated = false;
-        }
+        #endregion
 
         #region Mantener Health, fireCooldown y Heat en sus limites
 
@@ -243,6 +269,15 @@ public class Script_Spaceship : MonoBehaviour
         if (currentHealth < 0) currentHealth = 0;
         if (currentHeat < 0) currentHeat = 0;
         if (fireCooldown < 0) fireCooldown = 0;
+
+        if (currentHeat >= maxHeat)
+        {
+            overHeated = true;
+        }
+        if (currentHeat <= 0)
+        {
+            overHeated = false;
+        }
 
         #endregion
 
@@ -260,16 +295,32 @@ public class Script_Spaceship : MonoBehaviour
 
     void Shoot()
     {
-        if (ammo > 0)
-        {
-            ammo--;
-
-            currentHeat++;
+        if (!fastShooting) currentHeat++;
+        else currentHeat += 0.25f;
 
             GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {
                 bullet.transform.position = shootingPoint.position;
+                bullet.transform.rotation = shootingPoint.rotation;
+                bullet.SetActive(true);
+            }
+    }
+    void DoubleShoot()
+    {
+        if (!fastShooting)
+            currentHeat++;
+        else
+            currentHeat += 0.25f;
+
+        for (int i = 0; i < 2; i++)
+        {
+            GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
+            if (bullet != null)
+            {
+                //                       if                        else
+                Vector3 offset = (i == 0) ? new Vector3(-1, 0, 0) : new Vector3(1, 0, 0);
+                bullet.transform.position = shootingPoint.position + offset;
                 bullet.transform.rotation = shootingPoint.rotation;
                 bullet.SetActive(true);
             }
@@ -300,7 +351,10 @@ public class Script_Spaceship : MonoBehaviour
 
                 if (!isVFXBoost)
                 {
-                    vfx_Boost.Play();
+                    for (int i = 0; i < vfx_Boost.Length; i++)
+                    {
+                        vfx_Boost[i].Play();
+                    }
                     isVFXBoost = true;
                 }
             }
@@ -319,7 +373,10 @@ public class Script_Spaceship : MonoBehaviour
 
                 if (isVFXBoost)
                 {
-                    vfx_Boost.Stop();
+                    for (int i = 0; i < vfx_Boost.Length; i++)
+                    {
+                        vfx_Boost[i].Stop();
+                    }
                     isVFXBoost = false;
                 }
             }

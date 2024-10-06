@@ -834,6 +834,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780193613104266237, guid: 36a99ec6a107df647915bd35ea4209db,
         type: 3}
+      propertyPath: health
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780193613104266237, guid: 36a99ec6a107df647915bd35ea4209db,
+        type: 3}
       propertyPath: fireRate
       value: 5
       objectReference: {fileID: 0}
@@ -845,7 +850,7 @@ PrefabInstance:
     - target: {fileID: 7780193613104266237, guid: 36a99ec6a107df647915bd35ea4209db,
         type: 3}
       propertyPath: rotationSpeedTurret
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -28,20 +28,17 @@ public class Script_Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
-        // Inicia la corutina para desactivar el objeto después del tiempo
         StartCoroutine(DeactivateAfterTime());
     }
 
     IEnumerator DeactivateAfterTime()
     {
-        // Espera el tiempo antes de desactivar el objeto
         yield return new WaitForSeconds(timeToDeactivate);
         gameObject.SetActive(false);
     }
 
     void OnDisable()
     {
-        // Detener la corutina si el objeto se desactiva antes del tiempo
         StopAllCoroutines();
     }
 

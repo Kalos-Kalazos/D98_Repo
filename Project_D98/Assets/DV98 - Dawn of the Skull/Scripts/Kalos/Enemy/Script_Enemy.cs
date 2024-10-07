@@ -28,7 +28,7 @@ public class Script_Enemy : MonoBehaviour
     private float pivotCooldown = 0;
 
 
-   public Script_GameManager gameManager;
+    public Script_GameManager gameManager;
 
     public Transform shootingPoint;
 
@@ -87,23 +87,28 @@ public class Script_Enemy : MonoBehaviour
         AimAtPlayer();
     }
 
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("BB"))
-        {
-            gameObject.SetActive(false);
-            GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
-            if (explosion != null)
-            {
-                explosion.transform.position = collision.collider.transform.position;
-                explosion.transform.rotation = collision.collider.transform.rotation;
-                explosion.SetActive(true);
-            }
 
+        if (other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("BB"))
+        {
+            Hitted(other);
             Achieved();
         }
     }
+
+    public void Hitted(Collider other)
+    {
+        gameObject.SetActive(false);
+        GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
+        if (explosion != null)
+        {
+            explosion.transform.position = other.transform.position;
+            explosion.transform.rotation = other.transform.rotation;
+            explosion.SetActive(true);
+        }
+    }
+
     void Achieved()
     {
         if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))
@@ -116,6 +121,7 @@ public class Script_Enemy : MonoBehaviour
             gameManager.LvlCompleted();
         }
     }
+
     private void OnDisable()
     {
         if (player != null)

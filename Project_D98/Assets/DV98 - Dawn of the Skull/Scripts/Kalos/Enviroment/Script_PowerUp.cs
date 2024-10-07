@@ -18,7 +18,7 @@ public class Script_PowerUp : MonoBehaviour
 
     private void OnEnable()
     {
-        powerID = Random.Range(1, 3);
+        powerID = Random.Range(1, 4);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,6 +36,13 @@ public class Script_PowerUp : MonoBehaviour
                 case 2:
                     player.doubleShooting = true;
                     player.dsCooldown = 20;
+                    player.shootsNum++;
+                    gameObject.SetActive(false);
+                break;
+
+                case 3:
+                    player.areaShooting = true;
+                    player.asCooldown = 40;
                     gameObject.SetActive(false);
                 break;
             }

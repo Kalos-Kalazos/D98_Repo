@@ -69,18 +69,29 @@ public class Script_Spaceship : MonoBehaviour
     private Transform shootingPoint;
 
     [Header("=== Power Up Settings ===")]
+    // Fast shooting
     [SerializeField]
     public bool fastShooting;
     [SerializeField]
     public float fsCooldown;
     [SerializeField]
     float fsRate;
+    // Double Shooting
     [SerializeField]
     public bool doubleShooting;
     [SerializeField]
     public float dsCooldown;
     [SerializeField]
     float dsRate;
+    [SerializeField]
+    public int shootsNum;
+    // Area Shooting
+    [SerializeField]
+    public bool areaShooting;
+    [SerializeField]
+    public float asCooldown;
+    [SerializeField]
+    float asRate;
 
 
     [Header("=== Visual Settings ===")]
@@ -135,37 +146,35 @@ public class Script_Spaceship : MonoBehaviour
             vfx_Boost[i].Stop();
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         //Vfx desde una pool aparece con la colision de una bala
 
-        if (collision.collider.CompareTag("Bullet"))
+        if (other.CompareTag("Bullet"))
         {
             GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
             if (explosion != null)
             {
-                explosion.transform.position = collision.collider.transform.position;
-                explosion.transform.rotation = collision.collider.transform.rotation;
+                explosion.transform.position = other.transform.position;
+                explosion.transform.rotation = other.transform.rotation;
                 explosion.SetActive(true);
             }
 
             TakeDamage(2);
         }
 
-        if (collision.collider.CompareTag("BB"))
+        if (other.CompareTag("BB"))
         {
 
             GameObject explosionB = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
             if (explosionB != null)
             {
-                explosionB.transform.SetPositionAndRotation(collision.collider.transform.position, collision.collider.transform.rotation);
+                explosionB.transform.SetPositionAndRotation(other.transform.position, other.transform.rotation);
                 explosionB.SetActive(true);
             }
 
             TakeDamage(10);
         }
-
     }
     public void TakeDamage(int damage)
     {
@@ -208,8 +217,32 @@ public class Script_Spaceship : MonoBehaviour
         {
             if (fastShooting && fsCooldown > 0)
             {
-                Shoot();
-                fireCooldown = fsRate;
+                if (doubleShooting && dsCooldown > 0)
+                {
+                    if (areaShooting && asCooldown > 0)
+                    {
+                        AreaShoot();
+                        fireCooldown = fsRate;
+                    }
+                    else
+                    {
+                        DoubleShoot();
+                        fireCooldown = fsRate;
+                    }
+                }
+                else
+                {
+                    if (areaShooting && asCooldown > 0)
+                    {
+                        AreaShoot();
+                        fireCooldown = fsRate;
+                    }
+                    else
+                    {
+                        Shoot();
+                        fireCooldown = fsRate;
+                    }
+                }
             }
             else
             {
@@ -220,8 +253,16 @@ public class Script_Spaceship : MonoBehaviour
                 }
                 else
                 {
-                    Shoot();
-                    fireCooldown = fireRate;
+                    if (areaShooting && asCooldown > 0)
+                    {
+                        AreaShoot();
+                        fireCooldown = asRate;
+                    }
+                    else
+                    {
+                        Shoot();
+                        fireCooldown = fireRate;
+                    }
                 }
             }
 
@@ -246,7 +287,17 @@ public class Script_Spaceship : MonoBehaviour
         {
             dsCooldown -= Time.deltaTime;
         }
-        else doubleShooting = false;
+        else
+        {
+            shootsNum = 1;
+            doubleShooting = false;
+        }
+
+        if (asCooldown > 0)
+        {
+            asCooldown -= Time.deltaTime;
+        }
+        else areaShooting = false;
         #endregion
 
         #region boost and heat bar updates
@@ -313,19 +364,45 @@ public class Script_Spaceship : MonoBehaviour
         else
             currentHeat += 0.25f;
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < shootsNum; i++)
         {
             GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {
                 //                       if                        else
-                Vector3 offset = (i == 0) ? new Vector3(-1, 0, 0) : new Vector3(1, 0, 0);
+                Vector3 offset = (i == 0) ? new Vector3(i-1, 0, 0) : new Vector3(i+1, 0, 0);
                 bullet.transform.position = shootingPoint.position + offset;
                 bullet.transform.rotation = shootingPoint.rotation;
                 bullet.SetActive(true);
             }
         }
     }
+
+    void AreaShoot()
+    {
+        if (!fastShooting)
+            currentHeat+=2;
+        else
+            currentHeat++;
+
+        for (int i = 0; i < 1; i++)
+        {
+            GameObject missile = Script_ObjectPooling.SharedInstance.GetPooledMissile();
+            if (missile != null)
+            {
+                //  Vector3 offset = new Vector3(0, 0, 0);
+                //  if (i>0)
+                //  {
+                //                       if                        else
+                //      offset = (i % 2 == 0) ? new Vector3(i + 1, 0, 0) : new Vector3(i - 1, 0, 0);
+                // }
+                missile.transform.position = shootingPoint.position; //+ offset;
+                missile.transform.rotation = shootingPoint.rotation;
+                missile.SetActive(true);
+            }
+        }
+    }
+
 
     void Stabilize()
     {

@@ -168,17 +168,17 @@ public class Script_Turret : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet"))
         {
-            explosionPos = collision.transform.position;
+            explosionPos = other.transform.position;
             hit = true;
             health--;
             GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
             if (explosion != null)
             {
-                explosion.transform.SetPositionAndRotation(collision.collider.transform.position, collision.collider.transform.rotation);
+                explosion.transform.SetPositionAndRotation(other.transform.position, other.transform.rotation);
                 explosion.SetActive(true);
             }
         }

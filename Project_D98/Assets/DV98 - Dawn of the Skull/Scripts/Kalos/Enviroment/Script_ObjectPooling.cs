@@ -48,13 +48,21 @@ public class Script_ObjectPooling : MonoBehaviour
     [SerializeField]
     int amountToPoolBB;
 
-    //Power Up Fast Shooting "FS"
+    //Power Ups
     [SerializeField]
-    List<GameObject> pooledFS;
+    List<GameObject> pooledPU;
     [SerializeField]
-    GameObject fsToPool;
+    GameObject puToPool;
     [SerializeField]
-    int amountToPoolFS;
+    int amountToPoolPU;
+
+    //Power Up Missiles
+    [SerializeField]
+    List<GameObject> pooledMissile;
+    [SerializeField]
+    GameObject missileToPool;
+    [SerializeField]
+    int amountToPoolMissile;
 
     void Awake()
     {
@@ -71,7 +79,6 @@ public class Script_ObjectPooling : MonoBehaviour
             tmpB.SetActive(false);
             pooledBullets.Add(tmpB);
         }
-
 
         pooledExplosions = new List<GameObject>();
         GameObject tmpE;
@@ -109,13 +116,22 @@ public class Script_ObjectPooling : MonoBehaviour
             pooledBB.Add(tmpBB);
         }
 
-        pooledFS = new List<GameObject>();
-        GameObject tmpFS;
-        for (int i = 0; i < amountToPoolFS; i++)
+        pooledPU = new List<GameObject>();
+        GameObject tmpPU;
+        for (int i = 0; i < amountToPoolPU; i++)
         {
-            tmpFS = Instantiate(fsToPool);
-            tmpFS.SetActive(false);
-            pooledFS.Add(tmpFS);
+            tmpPU = Instantiate(puToPool);
+            tmpPU.SetActive(false);
+            pooledPU.Add(tmpPU);
+        }
+
+        pooledMissile = new List<GameObject>();
+        GameObject tmpMS;
+        for (int i = 0; i < amountToPoolMissile; i++)
+        {
+            tmpMS = Instantiate(missileToPool);
+            tmpMS.SetActive(false);
+            pooledMissile.Add(tmpMS);
         }
     }
 
@@ -176,11 +192,22 @@ public class Script_ObjectPooling : MonoBehaviour
     }
     public GameObject GetPooledFS()
     {
-        for (int i = 0; i < amountToPoolFS; i++)
+        for (int i = 0; i < amountToPoolPU; i++)
         {
-            if (!pooledFS[i].activeInHierarchy)
+            if (!pooledPU[i].activeInHierarchy)
             {
-                return pooledFS[i];
+                return pooledPU[i];
+            }
+        }
+        return null;
+    }
+    public GameObject GetPooledMissile()
+    {
+        for (int i = 0; i < amountToPoolMissile; i++)
+        {
+            if (!pooledMissile[i].activeInHierarchy)
+            {
+                return pooledMissile[i];
             }
         }
         return null;

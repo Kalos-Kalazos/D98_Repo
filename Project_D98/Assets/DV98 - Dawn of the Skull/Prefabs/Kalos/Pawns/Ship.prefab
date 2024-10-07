@@ -693,6 +693,10 @@ MonoBehaviour:
   doubleShooting: 0
   dsCooldown: 0
   dsRate: 0
+  shootsNum: 0
+  areaShooting: 0
+  asCooldown: 0
+  asRate: 1
   vfx_Boost:
   - {fileID: 2293451501903438165}
   - {fileID: 3565129493531604847}
@@ -1178,8 +1182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  lockOnRange: 100
-  maxLockDistance: 101
+  lockOnRange: 120
+  maxLockDistance: 121
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8

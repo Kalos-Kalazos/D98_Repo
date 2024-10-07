@@ -11,17 +11,12 @@ public class Script_Bullet : MonoBehaviour
     [SerializeField] float timeToDeactivate;
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             gameObject.SetActive(false);
         }
-
     }
 
     void OnEnable()

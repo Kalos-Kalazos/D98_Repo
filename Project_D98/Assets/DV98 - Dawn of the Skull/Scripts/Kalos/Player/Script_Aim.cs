@@ -127,7 +127,7 @@ public class Script_Aim : MonoBehaviour
 
     Transform GetClosestEnemy(Collider[] enemiesInRange)
     {
-        closeEnemy = 200;
+        closeEnemy = 800;
         Transform bestEnemy = null;
 
         foreach (Collider enemy in enemiesInRange)

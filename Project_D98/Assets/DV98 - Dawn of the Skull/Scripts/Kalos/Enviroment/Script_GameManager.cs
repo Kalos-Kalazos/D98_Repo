@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Script_GameManager : MonoBehaviour
 {
+    [Header ("=== Game Manager Settings ===")]
     public Slider healthSlider;           
     public Slider boostSlider;
     public Slider heatSlider;
@@ -13,10 +15,24 @@ public class Script_GameManager : MonoBehaviour
     private Script_Spaceship player;
     private Script_Boss bossControl;
     public Script_Spawn_enemy spawner;
-    
+    public int deadMinionCount;
+
+    public static Script_GameManager MainManager;
+
+    public static int actualScene;
+
     public void Restart()
     {
-        SceneManager.LoadScene("Scene_Tutorial");
+        if (actualScene == 1) SceneManager.LoadScene("Scene_Tutorial");
+
+        if (actualScene == 2) SceneManager.LoadScene("Scene_Level1");
+
+        if (actualScene == 3) SceneManager.LoadScene("Scene_LevelBoss");
+    }
+
+    public void Win()
+    {
+        if (actualScene == 3) SceneManager.LoadScene("Scene_Tutorial");
     }
 
     public void Quit()
@@ -29,26 +45,51 @@ public class Script_GameManager : MonoBehaviour
         spawner.startSpawn = true;
     }
 
+    public void NextLvl()
+    {
+        if (actualScene == 1) SceneManager.LoadScene("Scene_Level1");
+
+        if (actualScene == 2) SceneManager.LoadScene("Scene_LevelBoss");
+
+        if (actualScene == 3) SceneManager.LoadScene("Scene_Victory");
+    }
+
+    public void Achieved()
+    {
+        if (actualScene == 1 && deadMinionCount > 0) LvlCompleted();
+
+        if (actualScene == 2 && deadMinionCount >= 20) LvlCompleted();
+    }
+
     public void LvlCompleted()
+    {
+        ActualSceneID();
+        SceneManager.LoadScene("Scene_NextLvl");
+    }
+
+    void ActualSceneID()
     {
         if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))
         {
-            SceneManager.LoadScene("Scene_Level1");
+            actualScene = 1;
         }
 
         if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Level1")))
         {
-            SceneManager.LoadScene("Scene_LevelBoss");
+            actualScene = 2;
         }
 
         if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_LevelBoss")))
         {
-            SceneManager.LoadScene("Scene_Victory");
+            actualScene = 3;
         }
     }
 
     void Start()
     {
+        deadMinionCount = 0;
+
+        ActualSceneID();
         player = FindObjectOfType<Script_Spaceship>();
         spawner = FindObjectOfType<Script_Spawn_enemy>();
 
@@ -79,6 +120,12 @@ public class Script_GameManager : MonoBehaviour
             bossHealthSlider.value = bossControl.skullHealth;
             bossControl.OnBossHealthChanged += UpdateBossHealth;
         }
+    }
+
+    private void Awake()
+    {
+        MainManager = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()

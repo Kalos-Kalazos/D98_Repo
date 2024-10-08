@@ -631,7 +631,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 5
   m_Drag: 0.2
-  m_AngularDrag: 0.2
+  m_AngularDrag: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -667,16 +667,16 @@ MonoBehaviour:
   currentHeat: 0
   maxHeat: 8
   overHeated: 0
-  yawTorque: 1000
-  pitchTorque: 1000
-  thrust: 1250
+  yawTorque: 800
+  pitchTorque: 800
+  thrust: 1500
   strafeThrust: 1500
   thrustGlideReduction: 0.362
   leftRightGlideReduction: 0.233
   maxBoostAmount: 20
-  boostDeprecationRate: 0.1
-  boostRechargeRate: 0.15
-  boostMultiplier: 6
+  boostDeprecationRate: 0.2
+  boostRechargeRate: 0.1
+  boostMultiplier: 4
   boosting: 0
   resetBoost: 0
   isBoostActive: 0
@@ -1182,15 +1182,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  lockOnRange: 120
-  maxLockDistance: 121
+  lockOnRange: 250
+  maxLockDistance: 252
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
   rotationSpeed: 10
   locking: 0
   angleToTarget: 0
-  maxLockAngle: 45
+  maxLockAngle: 60
   control: {fileID: 4697636090080541407}
   closeEnemy: 0
   enemiesInRange: []

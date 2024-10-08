@@ -18,7 +18,7 @@ public class Script_PowerUp : MonoBehaviour
 
     private void OnEnable()
     {
-        powerID = Random.Range(1, 4);
+        powerID = Random.Range(1, 5);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,7 +42,13 @@ public class Script_PowerUp : MonoBehaviour
 
                 case 3:
                     player.areaShooting = true;
+                    player.damage = 4;
                     player.asCooldown = 40;
+                    gameObject.SetActive(false);
+                break;
+
+                case 4:
+                    player.Heal(25);
                     gameObject.SetActive(false);
                 break;
             }

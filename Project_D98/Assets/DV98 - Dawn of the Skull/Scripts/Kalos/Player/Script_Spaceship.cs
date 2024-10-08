@@ -297,7 +297,11 @@ public class Script_Spaceship : MonoBehaviour
         {
             asCooldown -= Time.deltaTime;
         }
-        else areaShooting = false;
+        else
+        {
+            damage = 1;
+            areaShooting = false;
+        }
         #endregion
 
         #region boost and heat bar updates
@@ -352,6 +356,7 @@ public class Script_Spaceship : MonoBehaviour
             GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {
+                bullet.GetComponent<Script_Bullet>().damageBullet = damage;
                 bullet.transform.position = shootingPoint.position;
                 bullet.transform.rotation = shootingPoint.rotation;
                 bullet.SetActive(true);
@@ -369,6 +374,7 @@ public class Script_Spaceship : MonoBehaviour
             GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {
+                bullet.GetComponent<Script_Bullet>().damageBullet = damage;
                 //                       if                        else
                 Vector3 offset = (i == 0) ? new Vector3(i-1, 0, 0) : new Vector3(i+1, 0, 0);
                 bullet.transform.position = shootingPoint.position + offset;
@@ -385,17 +391,13 @@ public class Script_Spaceship : MonoBehaviour
         else
             currentHeat++;
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < shootsNum; i++)
         {
             GameObject missile = Script_ObjectPooling.SharedInstance.GetPooledMissile();
             if (missile != null)
             {
-                //  Vector3 offset = new Vector3(0, 0, 0);
-                //  if (i>0)
-                //  {
-                //                       if                        else
-                //      offset = (i % 2 == 0) ? new Vector3(i + 1, 0, 0) : new Vector3(i - 1, 0, 0);
-                // }
+                missile.GetComponent<Script_Missile>().damageMissile = damage;
+                Vector3 offset = (i == 0) ? new Vector3(i + 1, 0, 0) : new Vector3(i - 1, 0, 0);
                 missile.transform.position = shootingPoint.position; //+ offset;
                 missile.transform.rotation = shootingPoint.rotation;
                 missile.SetActive(true);

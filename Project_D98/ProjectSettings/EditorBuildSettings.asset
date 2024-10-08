@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/DV98 - Dawn of the Skull/Scenes/Kalos/Scene_Victory.unity
     guid: d2bcf5cc8b508e545a0fee19572544f5
+  - enabled: 1
+    path: Assets/DV98 - Dawn of the Skull/Scenes/Kalos/Scene_NextLvl.unity
+    guid: 63f31748c38c98046bdaa11bb7887d52
   m_configObjects: {}

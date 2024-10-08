@@ -89,11 +89,10 @@ public class Script_Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("BB"))
         {
             Hitted(other);
-            Achieved();
+            gameManager.Achieved();
         }
     }
 
@@ -109,18 +108,6 @@ public class Script_Enemy : MonoBehaviour
         }
     }
 
-    void Achieved()
-    {
-        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))
-        {
-            gameManager.LvlCompleted();
-        }
-
-        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Level1")) && gameManager.spawner.spawnCount >= 40)
-        {
-            gameManager.LvlCompleted();
-        }
-    }
 
     private void OnDisable()
     {
@@ -130,6 +117,14 @@ public class Script_Enemy : MonoBehaviour
             {
                 player.GetComponentInChildren<Script_Aim>().currentTarget = null;
                 player.GetComponentInChildren<Script_Aim>().locking = false;
+            }
+        }
+
+        if (gameManager != null && gameManager.spawner != null)
+        {
+            if (gameManager.spawner.startSpawn)
+            {
+                gameManager.deadMinionCount++;
             }
         }
 

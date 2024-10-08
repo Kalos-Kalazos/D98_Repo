@@ -10,6 +10,8 @@ public class Script_Bullet : MonoBehaviour
 
     [SerializeField] float timeToDeactivate;
 
+    [SerializeField] public float damageBullet;
+
 
     private void OnTriggerEnter(Collider other)
     {

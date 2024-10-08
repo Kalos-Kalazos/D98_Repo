@@ -12,6 +12,7 @@ public class Script_Missile : MonoBehaviour
     [SerializeField] float timeToDeactivate;
     [SerializeField] float power;
     [SerializeField] float radius;
+    [SerializeField] public float damageMissile;
     [SerializeField] Collider[] entitiesPushed;
 
 
@@ -54,9 +55,18 @@ public class Script_Missile : MonoBehaviour
                 }
                 if (entitiesPushed[i].gameObject.CompareTag("Enemy"))
                 {
-                    entitiesPushed[i].TryGetComponent(out Script_Enemy enemy);
+                    if (entitiesPushed[i].gameObject.GetComponent<Script_Enemy>() != null)
+                    {
+                        entitiesPushed[i].TryGetComponent(out Script_Enemy enemy);
+                        enemy.Hitted(entitiesPushed[i]);
+                    }
 
-                    enemy.Hitted(entitiesPushed[i]);
+                    if (entitiesPushed[i].gameObject.GetComponent<Script_Turret>() != null)
+                    {
+                        entitiesPushed[i].TryGetComponent(out Script_Turret enemyTurret);
+                        enemyTurret.Hitted(entitiesPushed[i]);
+                    }
+
                 }
             }
         }

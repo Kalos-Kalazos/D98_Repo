@@ -12,10 +12,14 @@ public class Script_Bullet : MonoBehaviour
 
     [SerializeField] public float damageBullet;
 
+    private void Start()
+    {
+        
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Boss"))
         {
             gameObject.SetActive(false);
         }

@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 1
+  weight: 0.4
   sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
 --- !u!4 &832575519
 Transform:
@@ -1567,6 +1567,7 @@ MonoBehaviour:
   heatSlider: {fileID: 722019777}
   bossHealthSlider: {fileID: 0}
   spawner: {fileID: 0}
+  deadMinionCount: 0
 --- !u!4 &1159588508 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2077915093488218884, guid: 672db7e30cd3f9341873e4f0f29455fe,

@@ -17,8 +17,6 @@ public class Script_GameManager : MonoBehaviour
     public Script_Spawn_enemy spawner;
     public int deadMinionCount;
 
-    public static Script_GameManager MainManager;
-
     public static int actualScene;
 
     public void Restart()
@@ -120,12 +118,6 @@ public class Script_GameManager : MonoBehaviour
             bossHealthSlider.value = bossControl.skullHealth;
             bossControl.OnBossHealthChanged += UpdateBossHealth;
         }
-    }
-
-    private void Awake()
-    {
-        MainManager = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()

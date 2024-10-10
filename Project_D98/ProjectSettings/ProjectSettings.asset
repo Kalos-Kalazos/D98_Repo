@@ -68,7 +68,7 @@ PlayerSettings:
   disableDepthAndStencilBuffers: 0
   androidStartInFullscreen: 1
   androidRenderOutsideSafeArea: 1
-  androidUseSwappy: 0
+  androidUseSwappy: 1
   androidBlitType: 0
   androidResizableWindow: 0
   androidDefaultWindowWidth: 1920
@@ -156,7 +156,7 @@ PlayerSettings:
   hdrBitDepth: 0
   m_ColorGamuts: 00000000
   targetPixelDensity: 30
-  resolutionScalingMode: 0
+  resolutionScalingMode: 2
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
@@ -527,7 +527,7 @@ PlayerSettings:
   m_BuildTargetVRSettings: []
   m_DefaultShaderChunkSizeInMB: 16
   m_DefaultShaderChunkCount: 0
-  openGLRequireES31: 0
+  openGLRequireES31: 1
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
   m_TemplateCustomTags: {}
@@ -537,10 +537,10 @@ PlayerSettings:
     tvOS: 1
   m_BuildTargetGroupLightmapEncodingQuality:
   - m_BuildTarget: Android
-    m_EncodingQuality: 1
+    m_EncodingQuality: 0
   m_BuildTargetGroupHDRCubemapEncodingQuality:
   - m_BuildTarget: Android
-    m_EncodingQuality: 1
+    m_EncodingQuality: 0
   m_BuildTargetGroupLightmapSettings: []
   m_BuildTargetGroupLoadStoreDebugModeSettings: []
   m_BuildTargetNormalMapEncoding:

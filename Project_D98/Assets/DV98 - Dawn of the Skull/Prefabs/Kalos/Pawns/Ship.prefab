@@ -663,7 +663,7 @@ MonoBehaviour:
   currentHealth: 100
   maxHealth: 100
   currentBoost: 0
-  maxBoost: 20
+  maxBoost: 50
   currentHeat: 0
   maxHeat: 8
   overHeated: 0
@@ -673,7 +673,7 @@ MonoBehaviour:
   strafeThrust: 1500
   thrustGlideReduction: 0.362
   leftRightGlideReduction: 0.233
-  maxBoostAmount: 20
+  maxBoostAmount: 50
   boostDeprecationRate: 0.15
   boostRechargeRate: 0.1
   boostMultiplier: 4

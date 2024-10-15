@@ -35,6 +35,8 @@ public class Script_Spaceship : MonoBehaviour
     private float thrustGlideReduction = 0.999f;
     [SerializeField, Range(0.111f, 0.999f)]
     private float leftRightGlideReduction = 0.111f;
+    [SerializeField]
+    bool returning;
 
     [Header("=== Boost Settings ===")]
     [SerializeField]
@@ -116,6 +118,9 @@ public class Script_Spaceship : MonoBehaviour
 
     Rigidbody rb;
 
+    [SerializeField]
+    GameObject limitArea;
+
     //Input Values
     public Vector2 moveValue;
     private Vector2 rotateValue;
@@ -145,6 +150,8 @@ public class Script_Spaceship : MonoBehaviour
         {
             vfx_Boost[i].Stop();
         }
+
+        returning = false;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -174,6 +181,11 @@ public class Script_Spaceship : MonoBehaviour
             }
 
             TakeDamage(10);
+        }
+
+        if (other.CompareTag("Limit"))
+        {
+            Invoke(nameof(ResetReturning), 1);
         }
     }
     public void TakeDamage(int damage)
@@ -212,7 +224,7 @@ public class Script_Spaceship : MonoBehaviour
 
         #endregion
 
-
+        #region Shooting logic
         if (fireCooldown <= 0 && pumPuming>0 && !overHeated)
         {
             if (fastShooting && fsCooldown > 0)
@@ -276,6 +288,7 @@ public class Script_Spaceship : MonoBehaviour
                 fireCooldown -= Time.deltaTime;
             }
         }
+        #endregion
 
         #region Cooldown power ups
         if (fsCooldown > 0)
@@ -338,14 +351,38 @@ public class Script_Spaceship : MonoBehaviour
 
     }
 
-
     void FixedUpdate()
     {        
         Stabilize();
         
         Boosting();
-        
-        Movement();
+
+        if (returning) ReturnToArea();
+        else Movement();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Limit"))
+        {
+            returning = true;
+        }
+    }
+
+    void ResetReturning()
+    {
+        returning = false;
+    }
+
+    void ReturnToArea()
+    {
+        Vector3 directionToCenter = (transform.position - limitArea.transform.position).normalized;
+
+
+        rb.AddRelativeTorque(directionToCenter * yawTorque * Time.deltaTime);
+        rb.AddRelativeTorque(directionToCenter * pitchTorque * Time.deltaTime);
+
+        rb.AddForce(transform.forward * 20 * Time.deltaTime, ForceMode.VelocityChange);
     }
 
     void Shoot()
@@ -359,9 +396,12 @@ public class Script_Spaceship : MonoBehaviour
                 bullet.GetComponent<Script_Bullet>().damageBullet = damage;
                 bullet.transform.position = shootingPoint.position;
                 bullet.transform.rotation = shootingPoint.rotation;
+                Script_AudioManager.Instance.PlaySFX(0);
                 bullet.SetActive(true);
             }
+
     }
+
     void DoubleShoot()
     {
         if (!fastShooting)
@@ -379,10 +419,18 @@ public class Script_Spaceship : MonoBehaviour
                 Vector3 offset = (i == 0) ? new Vector3(i-1, 0, 0) : new Vector3(i+1, 0, 0);
                 bullet.transform.position = shootingPoint.position + offset;
                 bullet.transform.rotation = shootingPoint.rotation;
+                Script_AudioManager.Instance.PlaySFX(0);
+                Invoke(nameof(SoundDelayed), 0.1f);
                 bullet.SetActive(true);
             }
         }
     }
+
+    void SoundDelayed()
+    {
+        Script_AudioManager.Instance.PlaySFX(0);
+    }
+
 
     void AreaShoot()
     {
@@ -404,7 +452,6 @@ public class Script_Spaceship : MonoBehaviour
             }
         }
     }
-
 
     void Stabilize()
     {

@@ -11,12 +11,12 @@ public class Script_MeshCombiner : MonoBehaviour
 
     void Start()
     {
+        CombineMesh();
 
     }
 
     void Update()
     {
-        CombineMesh();
     }
 
     void CombineMesh()

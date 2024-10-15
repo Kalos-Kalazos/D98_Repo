@@ -38,7 +38,7 @@ public class Script_MeshCombiner : MonoBehaviour
         var meshFilter = transform.GetComponent<MeshFilter>();
         meshFilter.mesh = new Mesh();
         meshFilter.mesh.CombineMeshes(combine);
-        transform.GetComponent<MeshCollider>().sharedMesh = transform.GetComponent<MeshFilter>().mesh;
+        transform.GetComponent<MeshFilter>().sharedMesh = transform.GetComponent<MeshFilter>().mesh;
         GetComponent<MeshFilter>().sharedMesh = meshFilter.mesh;
         transform.gameObject.SetActive(true);
 

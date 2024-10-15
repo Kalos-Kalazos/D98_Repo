@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Script_Asteroid : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag("Bullet") || collision.collider.CompareTag("BB"))
+
+        if (other.CompareTag("Bullet") || other.CompareTag("BB"))
         {
             GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
             if (explosion != null)
@@ -14,6 +15,7 @@ public class Script_Asteroid : MonoBehaviour
                 explosion.transform.position = transform.position;
                 explosion.transform.rotation = transform.rotation;
                 explosion.SetActive(true);
+                other.gameObject.SetActive(false);
                 Destroy(gameObject);
             }
 

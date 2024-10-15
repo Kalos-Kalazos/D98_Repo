@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/DV98 - Dawn of the Skull/Scenes/Kalos/Kalos_Scene.unity
-    guid: a55f3dad8b99f7843847a6f4cfd1337b
   - enabled: 1
     path: Assets/DV98 - Dawn of the Skull/Scenes/MenuScene.unity
     guid: 5e9fecca6821b414aae95bbb99d78e62

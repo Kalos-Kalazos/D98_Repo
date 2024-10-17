@@ -78,18 +78,10 @@ public class Script_Boss : MonoBehaviour
         PursuePlayer();
 
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag("Bullet") && noTurrets)
+        if (other.CompareTag("Bullet") && noTurrets)
         {
-            GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
-            if (explosion != null)
-            {
-                explosion.transform.position = collision.collider.transform.position;
-                explosion.transform.rotation = collision.collider.transform.rotation;
-                explosion.SetActive(true);
-            }
-
             TakeDamage(playerControl.damage);
         }
     }

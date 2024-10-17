@@ -173,12 +173,6 @@ public class Script_Turret : MonoBehaviour
         explosionPos = other.transform.position;
         hit = true;
         health-=player.gameObject.GetComponent<Script_Spaceship>().damage;
-        GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
-        if (explosion != null)
-        {
-            explosion.transform.SetPositionAndRotation(other.transform.position, other.transform.rotation);
-            explosion.SetActive(true);
-        }
     }
 
     private void OnTriggerEnter(Collider other)

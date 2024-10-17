@@ -157,30 +157,12 @@ public class Script_Spaceship : MonoBehaviour
     {
         //Vfx desde una pool aparece con la colision de una bala
 
-        if (other.CompareTag("Bullet"))
+        if (other.CompareTag("Bullet") || other.CompareTag("BB"))
         {
-            GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
-            if (explosion != null)
-            {
-                explosion.transform.position = other.transform.position;
-                explosion.transform.rotation = other.transform.rotation;
-                explosion.SetActive(true);
-            }
+            if (other.CompareTag("Bullet")) TakeDamage(2);
+            
+            else TakeDamage(10);
 
-            TakeDamage(2);
-        }
-
-        if (other.CompareTag("BB"))
-        {
-
-            GameObject explosionB = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
-            if (explosionB != null)
-            {
-                explosionB.transform.SetPositionAndRotation(other.transform.position, other.transform.rotation);
-                explosionB.SetActive(true);
-            }
-
-            TakeDamage(10);
         }
 
         if (other.CompareTag("Limit"))

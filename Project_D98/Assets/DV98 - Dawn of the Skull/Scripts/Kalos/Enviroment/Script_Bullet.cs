@@ -17,10 +17,18 @@ public class Script_Bullet : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Boss"))
+        if (collision.collider.gameObject.CompareTag("Player") || collision.collider.gameObject.CompareTag("Enemy") || collision.collider.gameObject.CompareTag("Boss"))
         {
+            GameObject hitted = Script_ObjectPooling.SharedInstance.GetPooledHitVFX();
+            if (hitted != null)
+            {
+                ContactPoint contact = collision.GetContact(0);
+                hitted.transform.SetPositionAndRotation(contact.point, Quaternion.FromToRotation(Vector3.up, contact.normal));
+                hitted.SetActive(true);
+            }
+
             gameObject.SetActive(false);
         }
     }

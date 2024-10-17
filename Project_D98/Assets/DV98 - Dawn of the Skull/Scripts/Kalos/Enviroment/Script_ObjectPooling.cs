@@ -64,6 +64,14 @@ public class Script_ObjectPooling : MonoBehaviour
     [SerializeField]
     int amountToPoolMissile;
 
+    //Hitted Effect VFX
+    [SerializeField]
+    List<GameObject> pooledHitted;
+    [SerializeField]
+    GameObject hittedToPool;
+    [SerializeField]
+    int amountToPoolHitted;
+
     void Awake()
     {
         SharedInstance = this;
@@ -133,6 +141,16 @@ public class Script_ObjectPooling : MonoBehaviour
             tmpMS.SetActive(false);
             pooledMissile.Add(tmpMS);
         }
+
+        pooledHitted = new List<GameObject>();
+        GameObject tmpHE;
+        for (int i = 0; i < amountToPoolHitted; i++)
+        {
+            tmpHE = Instantiate(hittedToPool);
+            tmpHE.SetActive(false);
+            pooledHitted.Add(tmpHE);
+        }
+
     }
 
     public GameObject GetPooledBullet()
@@ -212,5 +230,15 @@ public class Script_ObjectPooling : MonoBehaviour
         }
         return null;
     }
-
+    public GameObject GetPooledHitVFX()
+    {
+        for (int i = 0; i < amountToPoolHitted; i++)
+        {
+            if (!pooledHitted[i].activeInHierarchy)
+            {
+                return pooledHitted[i];
+            }
+        }
+        return null;
+    }
 }

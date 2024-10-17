@@ -98,7 +98,6 @@ public class Script_Enemy : MonoBehaviour
 
     public void Hitted(Collider other)
     {
-        gameObject.SetActive(false);
         GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledExplosion();
         if (explosion != null)
         {
@@ -106,6 +105,7 @@ public class Script_Enemy : MonoBehaviour
             explosion.transform.rotation = other.transform.rotation;
             explosion.SetActive(true);
         }
+        gameObject.SetActive(false);
     }
 
 

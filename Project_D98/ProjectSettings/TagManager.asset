@@ -9,6 +9,7 @@ TagManager:
   - BB
   - Boss
   - Limit
+  - PlayerCamera
   layers:
   - Default
   - TransparentFX

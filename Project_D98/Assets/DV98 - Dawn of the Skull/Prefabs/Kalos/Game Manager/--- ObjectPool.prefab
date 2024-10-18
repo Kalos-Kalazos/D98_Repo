@@ -71,3 +71,7 @@ MonoBehaviour:
   missileToPool: {fileID: 3460499120284510103, guid: 6c07962e18701d340be2790ea1f20a07,
     type: 3}
   amountToPoolMissile: 8
+  pooledHitted: []
+  hittedToPool: {fileID: 5114689578097756030, guid: fcd3131b05ea7e34d9040a219eeccc95,
+    type: 3}
+  amountToPoolHitted: 10

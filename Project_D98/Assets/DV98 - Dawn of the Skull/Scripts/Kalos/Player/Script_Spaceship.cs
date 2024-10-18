@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -120,6 +121,8 @@ public class Script_Spaceship : MonoBehaviour
 
     [SerializeField]
     GameObject limitArea;
+    [SerializeField]
+    CinemachineVirtualCamera cameraPlayer;
 
     //Input Values
     public Vector2 moveValue;
@@ -463,7 +466,9 @@ public class Script_Spaceship : MonoBehaviour
                     {
                         vfx_Boost[i].Play();
                     }
+
                     isVFXBoost = true;
+                    cameraPlayer.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 3;
                 }
             }
         }
@@ -485,7 +490,9 @@ public class Script_Spaceship : MonoBehaviour
                     {
                         vfx_Boost[i].Stop();
                     }
+
                     isVFXBoost = false;
+                    cameraPlayer.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0.5f;
                 }
             }
         }

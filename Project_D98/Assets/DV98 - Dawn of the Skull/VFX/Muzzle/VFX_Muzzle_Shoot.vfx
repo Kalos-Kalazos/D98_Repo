@@ -27,16 +27,7 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614555}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 8926484042661614611}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 8926484042661614558}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614615}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614580}
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614660}
@@ -46,21 +37,6 @@ MonoBehaviour:
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614606}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614621}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614650}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614627}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614636}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614679}
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614674}
@@ -102,10 +78,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 251
+    x: 250
     y: 89
-    width: 2695
-    height: 2017
+    width: 2697
+    height: 2026
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,7 +125,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":1.5849056243896485,"g":0.0,"b":0.18464890122413636,"a":0.0}'
+      m_SerializableObject: '{"r":2.511756420135498,"g":0.5252702236175537,"b":0.11835494637489319,"a":0.0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -1066,7 +1042,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"f4efccbcc00042141b8f7f63392439b5","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"83c21186a6897ef47bfdcaae1e2491ba","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: mainTexture
@@ -1644,7 +1620,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":1.5849056243896485,"g":0.0,"b":0.18464890122413636,"a":0.0}'
+      m_SerializableObject: '{"r":2.511756420135498,"g":0.5252702236175537,"b":0.11835494637489319,"a":0.0}'
     m_Space: 2147483647
   m_Property:
     name: o
@@ -2011,7 +1987,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: -20
+      m_SerializableObject: -50
     m_Space: 2147483647
   m_Property:
     name: A
@@ -2045,7 +2021,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: -18
+      m_SerializableObject: -45
     m_Space: 2147483647
   m_Property:
     name: B

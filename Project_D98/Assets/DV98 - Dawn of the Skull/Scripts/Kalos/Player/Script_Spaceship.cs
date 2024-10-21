@@ -124,6 +124,8 @@ public class Script_Spaceship : MonoBehaviour
     [SerializeField]
     CinemachineVirtualCamera cameraPlayer;
 
+    Transform fixedShootingPoint;
+
     //Input Values
     public Vector2 moveValue;
     private Vector2 rotateValue;
@@ -381,6 +383,13 @@ public class Script_Spaceship : MonoBehaviour
                 bullet.GetComponent<Script_Bullet>().damageBullet = damage;
                 bullet.transform.position = shootingPoint.position;
                 bullet.transform.rotation = shootingPoint.rotation;
+                    GameObject muzzle = Script_ObjectPooling.SharedInstance.GetPooledMuzzleVFX();
+                    if (muzzle != null)
+                    {
+                        muzzle.transform.position = shootingPoint.position;
+                        muzzle.transform.rotation = shootingPoint.rotation;
+                        muzzle.SetActive(true);
+                    }
                 Script_AudioManager.Instance.PlaySFX(0);
                 bullet.SetActive(true);
             }

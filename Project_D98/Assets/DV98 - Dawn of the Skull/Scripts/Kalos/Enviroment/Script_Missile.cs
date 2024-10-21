@@ -36,14 +36,26 @@ public class Script_Missile : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        Explode();
+        if (!collision.collider.CompareTag("Player"))
+        {
+            Explode();
+        }
     }
 
     void Explode()
     {
         entitiesPushed = Physics.OverlapSphere(transform.position, radius);
+
+        GameObject missileVFX = Script_ObjectPooling.SharedInstance.GetPooledMissileVFX();
+        if (missileVFX != null)
+        {
+            missileVFX.transform.position = transform.position;
+            missileVFX.transform.rotation = transform.rotation;
+            missileVFX.SetActive(true);
+        }
+
 
         if (entitiesPushed.Length > 0)
         {

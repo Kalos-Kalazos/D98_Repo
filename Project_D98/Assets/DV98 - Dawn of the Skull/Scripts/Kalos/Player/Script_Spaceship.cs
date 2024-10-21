@@ -38,6 +38,8 @@ public class Script_Spaceship : MonoBehaviour
     private float leftRightGlideReduction = 0.111f;
     [SerializeField]
     bool returning;
+    [SerializeField]
+    float currenThrust;
 
     [Header("=== Boost Settings ===")]
     [SerializeField]
@@ -126,6 +128,9 @@ public class Script_Spaceship : MonoBehaviour
 
     Transform fixedShootingPoint;
 
+    Vector3 directionToCenter;
+
+
     //Input Values
     public Vector2 moveValue;
     private Vector2 rotateValue;
@@ -160,21 +165,32 @@ public class Script_Spaceship : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        //Vfx desde una pool aparece con la colision de una bala
-
-        if (other.CompareTag("Bullet") || other.CompareTag("BB"))
+        if (other.CompareTag("Limit"))
         {
-            if (other.CompareTag("Bullet")) TakeDamage(2);
-            
+            Invoke(nameof(ResetReturning), 0.5f);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Limit"))
+        {
+            returning = true;
+
+            directionToCenter = (transform.position - limitArea.transform.position).normalized;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.collider.CompareTag("Bullet") || collision.collider.CompareTag("BB"))
+        {
+            if (collision.collider.CompareTag("Bullet")) TakeDamage(2);
+
             else TakeDamage(10);
 
         }
-
-        if (other.CompareTag("Limit"))
-        {
-            Invoke(nameof(ResetReturning), 1);
-        }
     }
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -344,16 +360,8 @@ public class Script_Spaceship : MonoBehaviour
         
         Boosting();
 
-        if (returning) ReturnToArea();
+        if (returning) ReturnToAreaAim();
         else Movement();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Limit"))
-        {
-            returning = true;
-        }
     }
 
     void ResetReturning()
@@ -361,15 +369,17 @@ public class Script_Spaceship : MonoBehaviour
         returning = false;
     }
 
-    void ReturnToArea()
+    void ReturnToAreaAim()
     {
-        Vector3 directionToCenter = (transform.position - limitArea.transform.position).normalized;
+        Vector3 direction = directionToCenter - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 1);
 
-
-        rb.AddRelativeTorque(directionToCenter * yawTorque * Time.deltaTime);
-        rb.AddRelativeTorque(directionToCenter * pitchTorque * Time.deltaTime);
-
-        rb.AddForce(transform.forward * 20 * Time.deltaTime, ForceMode.VelocityChange);
+        Invoke(nameof(ReturnToAreaMove), 0.5f);
+    }
+    void ReturnToAreaMove()
+    {
+        rb.AddRelativeForce(Vector3.forward * currenThrust*2 * Time.deltaTime);
     }
 
     void Shoot()
@@ -517,8 +527,6 @@ public class Script_Spaceship : MonoBehaviour
         //Thrust
         if(moveValue.y > 0.1f || moveValue.y < -0.1f)
         {
-            float currenThrust;
-
             if (boosting>0)
             {
                 currenThrust = thrust * boostMultiplier;

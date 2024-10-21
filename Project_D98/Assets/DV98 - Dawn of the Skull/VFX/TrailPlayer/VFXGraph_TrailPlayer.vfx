@@ -19,8 +19,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 941
     y: -303
-    width: 2463
-    height: 2769
+    width: 2295
+    height: 3030
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1195,7 +1195,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"174c387556600f84ea649d1cac14856c","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"c26c20446ef87bf49a6eec1cba7dc402","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: _Mask
@@ -2706,7 +2706,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"174c387556600f84ea649d1cac14856c","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"c26c20446ef87bf49a6eec1cba7dc402","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: _Mask

@@ -440,7 +440,7 @@ public class Script_Spaceship : MonoBehaviour
             {
                 missile.GetComponent<Script_Missile>().damageMissile = damage;
                 Vector3 offset = (i == 0) ? new Vector3(i + 1, 0, 0) : new Vector3(i - 1, 0, 0);
-                missile.transform.position = shootingPoint.position; //+ offset;
+                missile.transform.position = shootingPoint.position + new Vector3(0, 0, 2); //+ offset; 
                 missile.transform.rotation = shootingPoint.rotation;
                 missile.SetActive(true);
             }

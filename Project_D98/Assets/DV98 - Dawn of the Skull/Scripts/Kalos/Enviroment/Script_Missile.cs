@@ -63,7 +63,11 @@ public class Script_Missile : MonoBehaviour
             {
                 if (entitiesPushed[i].TryGetComponent(out Rigidbody rb))
                 {
-                    rb.AddExplosionForce(power, transform.position, radius, 3);
+                    if (entitiesPushed[i].gameObject.GetComponent<Script_Turret>() != null)
+                    {
+                        if (entitiesPushed[i].gameObject.GetComponent<Script_Turret>().health <= 10) rb.AddExplosionForce(power, transform.position, radius, 3);
+                    }
+                    else rb.AddExplosionForce(power, transform.position, radius, 3);
                 }
                 if (entitiesPushed[i].gameObject.CompareTag("Enemy"))
                 {

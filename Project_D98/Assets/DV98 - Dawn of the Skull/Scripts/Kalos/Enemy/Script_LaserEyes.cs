@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Script_Turret : MonoBehaviour
+public class Script_LaserEyes : MonoBehaviour
 {
-    public Transform player, pivot;
+    public Transform player, pivotPoint;
     public GameObject bulletPrefab;
     public Transform padre;
 
@@ -23,7 +23,7 @@ public class Script_Turret : MonoBehaviour
     [SerializeField]
     public float health;
     [SerializeField]
-    private bool shooting, empty, cantShoot;
+    private bool shooting, empty, cantShoot, locked;
     [SerializeField]
     private float fireCooldown;
     [SerializeField]
@@ -31,30 +31,24 @@ public class Script_Turret : MonoBehaviour
     [SerializeField]
     private float rotationSpeedTurret;
     [SerializeField]
-    private float power = 50;
-    [SerializeField]
     private float angleToTarget;
     [SerializeField]
     private float maxLockAngle = 60;
     [SerializeField]
-    GameObject muzzleVFX;
+    private float charge;
+    [SerializeField]
+    private RaycastHit rayCastHit;
+    [SerializeField]
+    GameObject laserVFX;
+    [SerializeField]
+    GameObject flashVFX;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player").transform;
-
-        gameManager = FindObjectOfType<Script_GameManager>();
-
-        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_LevelBoss")))
-        {
-            padreControl = FindObjectOfType<Script_Boss>();
-        }
-
-        rb = GetComponent<Rigidbody>();
-
-        dead = false;
-        muzzleVFX.SetActive(false);
+        padreControl = padre.GetComponent<Script_Boss>();
     }
 
     // Update is called once per frame
@@ -64,7 +58,7 @@ public class Script_Turret : MonoBehaviour
         {
             ShootPlayer();
             fireCooldown = fireRate;
-            muzzleVFX.SetActive(true);
+            laserVFX.SetActive(true);
         }
         else
         {
@@ -75,9 +69,6 @@ public class Script_Turret : MonoBehaviour
         {
             rb.constraints = RigidbodyConstraints.None;
             player.GetComponentInChildren<Script_Aim>().locking = false;
-
-            //                  power     pos      radius and modifier
-            rb.AddExplosionForce(power, explosionPos, 5,      3);
 
             GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledBE();
             if (explosion != null)
@@ -96,19 +87,13 @@ public class Script_Turret : MonoBehaviour
                 }
             }
 
-            if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))
-            {
-                gameManager.StartSpawn();
-            }
-
-            if (padreControl!=null)
+            if (padreControl != null)
             {
                 padreControl.health--;
             }
 
             dead = true;
         }
-
     }
 
     private void FixedUpdate()
@@ -123,8 +108,17 @@ public class Script_Turret : MonoBehaviour
     {
         //Calculo la direccion del jugador y hago el shootingPoint mirar hacia alli con velocidad configurable
 
-        if (player != null)
+        if (player != null && !locked)
         {
+            if (charge <= 0)
+            {
+                flashVFX.SetActive(true);
+            }
+            else
+            {
+                charge -= Time.deltaTime;
+            }
+
             Vector3 directionToPlayer = player.position - transform.position;
 
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
@@ -143,28 +137,20 @@ public class Script_Turret : MonoBehaviour
             Debug.DrawLine(transform.position, player.position, Color.cyan);
         }
     }
-
     private void ShootPlayer()
     {
         //Si aun hay municion resto uno, cojo un objeto de la pool y este orientado al shootingPoint
 
-        if (!dead)
+        if (!dead && locked)
         {
-            GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBB();
-            if (bullet != null)
-            {
-                bullet.transform.position = pivot.transform.position;
-                bullet.transform.rotation = pivot.transform.rotation;
-                bullet.SetActive(true);
-            }
+            
         }
     }
-
     public void Hitted(Collider other)
     {
         explosionPos = other.transform.position;
         hit = true;
-        health-=player.gameObject.GetComponent<Script_Spaceship>().damage;
+        health -= player.gameObject.GetComponent<Script_Spaceship>().damage;
     }
 
     private void OnCollisionEnter(Collision collision)

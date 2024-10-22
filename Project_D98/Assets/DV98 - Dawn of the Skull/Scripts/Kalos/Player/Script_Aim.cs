@@ -45,6 +45,8 @@ public class Script_Aim : MonoBehaviour
     [SerializeField]
     GameObject bottomRightSprite;
     [SerializeField]
+    GameObject centerSprite;
+    [SerializeField]
     float spriteMoveSpeed = 2;
     [SerializeField]
     bool stayOnTarget;
@@ -52,6 +54,7 @@ public class Script_Aim : MonoBehaviour
     float spriteScale;
 
     Vector3 initialOffsetTL, initialOffsetTR, initialOffsetBR, initialOffsetBL;
+    Vector3 offsetTL, offsetTR, offsetBR, offsetBL;
 
     Quaternion forwardLook;
 
@@ -215,6 +218,7 @@ public class Script_Aim : MonoBehaviour
         topRightSprite.SetActive(active);
         bottomLeftSprite.SetActive(active);
         bottomRightSprite.SetActive(active);
+        centerSprite.SetActive(active);
     }
     void SpriteInitialPositions(Vector3 targetPos)
     {
@@ -227,6 +231,7 @@ public class Script_Aim : MonoBehaviour
         topRightSprite.transform.position = halfwayPoint + initialOffsetTR + Quaternion.Euler(0, -45, 0) * direction * 2;
         bottomLeftSprite.transform.position = halfwayPoint + initialOffsetBL + Quaternion.Euler(0, 135, 0) * direction * 2;
         bottomRightSprite.transform.position = halfwayPoint + initialOffsetBR + Quaternion.Euler(0, -135, 0) * direction * 2;
+        centerSprite.transform.position = halfwayPoint + direction;
 
         stayOnTarget = true;
     }
@@ -245,11 +250,13 @@ public class Script_Aim : MonoBehaviour
         topRightSprite.transform.position = Vector3.Lerp(topRightSprite.transform.position, halfwayPoint + Quaternion.Euler(0, -45, 0) * direction * 2, step);
         bottomLeftSprite.transform.position = Vector3.Lerp(bottomLeftSprite.transform.position, halfwayPoint + Quaternion.Euler(0, 135, 0) * direction * 2, step);
         bottomRightSprite.transform.position = Vector3.Lerp(bottomRightSprite.transform.position, halfwayPoint + Quaternion.Euler(0, -135, 0) * direction * 2, step);
+        centerSprite.transform.position = Vector3.Lerp(centerSprite.transform.position, halfwayPoint + direction, step);
 
         topLeftSprite.transform.LookAt(cameraTransform);
         topRightSprite.transform.LookAt(cameraTransform);
         bottomLeftSprite.transform.LookAt(cameraTransform);
         bottomRightSprite.transform.LookAt(cameraTransform);
+        centerSprite.transform.LookAt(cameraTransform);
     }
 
 }

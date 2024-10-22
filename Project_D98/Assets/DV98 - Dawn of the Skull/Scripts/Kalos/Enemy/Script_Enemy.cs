@@ -15,10 +15,6 @@ public class Script_Enemy : MonoBehaviour
     [SerializeField]
     private float linearDrag = 0.1f; 
     [SerializeField]
-    private float ammo;
-    [SerializeField]
-    private float maxAmmo = 2;
-    [SerializeField]
     private bool shooting, empty;
     [SerializeField]
     private float fireCooldown = 0;
@@ -51,8 +47,6 @@ public class Script_Enemy : MonoBehaviour
         gameManager = FindObjectOfType<Script_GameManager>();
 
         playerPivot = player.transform.GetChild(Random.Range(2, 5));
-
-        ammo = maxAmmo;
 
         rb.angularDrag = angularDrag;
         rb.drag = linearDrag;
@@ -151,9 +145,8 @@ public class Script_Enemy : MonoBehaviour
     {
         //Si aun hay municion resto uno, cojo un objeto de la pool y este orientado al shootingPoint
 
-        if (ammo > 0 && !empty)
+        if (!empty)
         {
-            ammo -= 1; 
             GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {

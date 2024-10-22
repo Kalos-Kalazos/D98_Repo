@@ -40,6 +40,8 @@ public class Script_Turret : MonoBehaviour
     private float angleToTarget;
     [SerializeField]
     private float maxLockAngle = 60;
+    [SerializeField]
+    GameObject muzzleVFX;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +60,7 @@ public class Script_Turret : MonoBehaviour
         ammo = maxAmmo;
 
         dead = false;
+        muzzleVFX.SetActive(false);
     }
 
     // Update is called once per frame
@@ -67,6 +70,7 @@ public class Script_Turret : MonoBehaviour
         {
             ShootPlayer();
             fireCooldown = fireRate;
+            muzzleVFX.SetActive(true);
         }
         else
         {
@@ -78,7 +82,7 @@ public class Script_Turret : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
             player.GetComponentInChildren<Script_Aim>().locking = false;
 
-            //                  power     pos  radius and modifier
+            //                  power     pos      radius and modifier
             rb.AddExplosionForce(power, explosionPos, 5,      3);
 
             GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledBE();

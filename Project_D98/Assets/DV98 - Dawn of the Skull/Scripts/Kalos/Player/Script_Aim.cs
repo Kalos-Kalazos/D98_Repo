@@ -35,8 +35,27 @@ public class Script_Aim : MonoBehaviour
     [SerializeField]
     bool isLocked;
 
+    [Header("=== Sprite Settings ===")]
+    [SerializeField]
+    GameObject topLeftSprite;
+    [SerializeField]
+    GameObject topRightSprite;
+    [SerializeField]
+    GameObject bottomLeftSprite;
+    [SerializeField]
+    GameObject bottomRightSprite;
+    [SerializeField]
+    float spriteMoveSpeed = 2;
+    [SerializeField]
+    bool stayOnTarget;
+    [SerializeField]
+    float spriteScale;
+
+    Vector3 initialOffsetTL, initialOffsetTR, initialOffsetBR, initialOffsetBL;
+
     Quaternion forwardLook;
 
+    Transform cameraTransform;
 
     void Start()
     {
@@ -44,6 +63,19 @@ public class Script_Aim : MonoBehaviour
         {
             control = GetComponentInParent<Script_Spaceship>();
         }
+
+        #region Sprite initial ofssets
+        initialOffsetTL = new Vector3(-8, 8, 0);
+        initialOffsetTR = new Vector3(8, 8, 0);
+        initialOffsetBR = new Vector3(-8, -8, 0);
+        initialOffsetBL = new Vector3(8, -8, 0);
+        #endregion
+
+        SetSpritesActive(false);
+
+        stayOnTarget = false;
+
+        cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
 
@@ -83,6 +115,9 @@ public class Script_Aim : MonoBehaviour
         {
             AimAtTarget();
 
+            if(!stayOnTarget) SpriteInitialPositions(currentTarget.position);
+            else SpritePositions(currentTarget.position);
+
             // Si el objetivo se aleja demasiado, recalcular
             if (Vector3.Distance(transform.position, currentTarget.position) > maxLockDistance)
             {
@@ -94,6 +129,7 @@ public class Script_Aim : MonoBehaviour
     {
         currentTarget = null;
         locking = false;
+        SetSpritesActive(false);
     }
 
     void LockOnTarget()
@@ -110,24 +146,33 @@ public class Script_Aim : MonoBehaviour
             Transform closestEnemy = GetClosestEnemy(enemiesInRange); 
             if (closestEnemy != null)
             {
-                currentTarget = closestEnemy; 
+                if (currentTarget != closestEnemy)
+                {
+                    stayOnTarget = false;
+                }
+                currentTarget = closestEnemy;
+                SetSpritesActive(true);
             }
             else
             {
                 currentTarget = null; 
                 locking = false;
+                SetSpritesActive(false);
+                stayOnTarget = false;
             }
         }
         else
         {
             currentTarget = null; // Si no hay enemigos cercanos, el objetivo se resetea
             locking = false;
+            SetSpritesActive(false);
+            stayOnTarget = false;
         }
     }
 
     Transform GetClosestEnemy(Collider[] enemiesInRange)
     {
-        closeEnemy = 800;
+        closeEnemy = 10000;
         Transform bestEnemy = null;
 
         foreach (Collider enemy in enemiesInRange)
@@ -144,6 +189,7 @@ public class Script_Aim : MonoBehaviour
                 bestEnemy = enemy.transform;
             }
         }
+
 
         Debug.Log("Enemigo seleccionado");
         return bestEnemy;
@@ -162,4 +208,48 @@ public class Script_Aim : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
+
+    void SetSpritesActive(bool active)
+    {
+        topLeftSprite.SetActive(active);
+        topRightSprite.SetActive(active);
+        bottomLeftSprite.SetActive(active);
+        bottomRightSprite.SetActive(active);
+    }
+    void SpriteInitialPositions(Vector3 targetPos)
+    {
+        if (topLeftSprite == null || topRightSprite == null || bottomLeftSprite == null || bottomRightSprite == null) return;
+
+        Vector3 halfwayPoint = (targetPos + control.transform.position) / 2;
+        Vector3 direction = (targetPos - control.transform.position).normalized;
+
+        topLeftSprite.transform.position = halfwayPoint + initialOffsetTL + Quaternion.Euler(0, 45, 0) * direction * 2;
+        topRightSprite.transform.position = halfwayPoint + initialOffsetTR + Quaternion.Euler(0, -45, 0) * direction * 2;
+        bottomLeftSprite.transform.position = halfwayPoint + initialOffsetBL + Quaternion.Euler(0, 135, 0) * direction * 2;
+        bottomRightSprite.transform.position = halfwayPoint + initialOffsetBR + Quaternion.Euler(0, -135, 0) * direction * 2;
+
+        stayOnTarget = true;
+    }
+
+    void SpritePositions(Vector3 targetPos)
+    {
+        if (currentTarget == null || topLeftSprite == null || topRightSprite == null || bottomLeftSprite == null || bottomRightSprite == null) return;
+
+        float step = spriteMoveSpeed * Time.deltaTime;
+
+        Vector3 halfwayPoint = (targetPos + control.transform.position) / 2;
+
+        Vector3 direction = (targetPos - control.transform.position).normalized;
+
+        topLeftSprite.transform.position = Vector3.Lerp(topLeftSprite.transform.position, halfwayPoint + Quaternion.Euler(0, 45, 0) * direction * 2, step);
+        topRightSprite.transform.position = Vector3.Lerp(topRightSprite.transform.position, halfwayPoint + Quaternion.Euler(0, -45, 0) * direction * 2, step);
+        bottomLeftSprite.transform.position = Vector3.Lerp(bottomLeftSprite.transform.position, halfwayPoint + Quaternion.Euler(0, 135, 0) * direction * 2, step);
+        bottomRightSprite.transform.position = Vector3.Lerp(bottomRightSprite.transform.position, halfwayPoint + Quaternion.Euler(0, -135, 0) * direction * 2, step);
+
+        topLeftSprite.transform.LookAt(cameraTransform);
+        topRightSprite.transform.LookAt(cameraTransform);
+        bottomLeftSprite.transform.LookAt(cameraTransform);
+        bottomRightSprite.transform.LookAt(cameraTransform);
+    }
+
 }

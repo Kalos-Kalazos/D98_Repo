@@ -26,11 +26,21 @@ public class Script_Bullet : MonoBehaviour
             {
                 ContactPoint contact = collision.GetContact(0);
                 hitted.transform.SetPositionAndRotation(contact.point, Quaternion.FromToRotation(Vector3.up, contact.normal));
+                SetParentDecal(collision, hitted);
                 hitted.SetActive(true);
             }
 
             gameObject.SetActive(false);
         }
+    }
+
+    void SetParentDecal(Collision collision, GameObject hitted)
+    {
+        hitted.transform.SetParent(collision.transform);
+    }
+    void ResetParentDecal(GameObject hitted)
+    {
+        hitted.transform.SetParent(null);
     }
 
     void OnEnable()

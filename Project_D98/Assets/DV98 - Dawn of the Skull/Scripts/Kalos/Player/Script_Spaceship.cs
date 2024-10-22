@@ -130,6 +130,8 @@ public class Script_Spaceship : MonoBehaviour
 
     Vector3 directionToCenter;
 
+    [SerializeField]
+    GameObject muzzleVFX;
 
     //Input Values
     public Vector2 moveValue;
@@ -162,6 +164,8 @@ public class Script_Spaceship : MonoBehaviour
         }
 
         returning = false;
+
+        muzzleVFX.SetActive(false);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -238,6 +242,7 @@ public class Script_Spaceship : MonoBehaviour
                     {
                         AreaShoot();
                         fireCooldown = fsRate;
+                        muzzleVFX.SetActive(true);
                     }
                     else
                     {
@@ -251,11 +256,13 @@ public class Script_Spaceship : MonoBehaviour
                     {
                         AreaShoot();
                         fireCooldown = fsRate;
+                        muzzleVFX.SetActive(true);
                     }
                     else
                     {
                         Shoot();
                         fireCooldown = fsRate;
+                        muzzleVFX.SetActive(true);
                     }
                 }
             }
@@ -272,11 +279,13 @@ public class Script_Spaceship : MonoBehaviour
                     {
                         AreaShoot();
                         fireCooldown = asRate;
+                        muzzleVFX.SetActive(true);
                     }
                     else
                     {
                         Shoot();
                         fireCooldown = fireRate;
+                        muzzleVFX.SetActive(true);
                     }
                 }
             }
@@ -393,13 +402,7 @@ public class Script_Spaceship : MonoBehaviour
                 bullet.GetComponent<Script_Bullet>().damageBullet = damage;
                 bullet.transform.position = shootingPoint.position;
                 bullet.transform.rotation = shootingPoint.rotation;
-                    GameObject muzzle = Script_ObjectPooling.SharedInstance.GetPooledMuzzleVFX();
-                    if (muzzle != null)
-                    {
-                        muzzle.transform.position = shootingPoint.position;
-                        muzzle.transform.rotation = shootingPoint.rotation;
-                        muzzle.SetActive(true);
-                    }
+
                 Script_AudioManager.Instance.PlaySFX(0);
                 bullet.SetActive(true);
             }
@@ -422,6 +425,8 @@ public class Script_Spaceship : MonoBehaviour
                 //                       if                        else
                 Vector3 offset = (i == 0) ? new Vector3(i-1, 0, 0) : new Vector3(i+1, 0, 0);
                 bullet.transform.position = shootingPoint.position + offset;
+                muzzleVFX.transform.position += offset;
+                muzzleVFX.SetActive(true);
                 bullet.transform.rotation = shootingPoint.rotation;
                 Script_AudioManager.Instance.PlaySFX(0);
                 Invoke(nameof(SoundDelayed), 0.1f);

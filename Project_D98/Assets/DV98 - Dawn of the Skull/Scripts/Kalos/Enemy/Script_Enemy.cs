@@ -28,6 +28,9 @@ public class Script_Enemy : MonoBehaviour
     private float pivotCooldown = 0;
 
 
+    [SerializeField]
+    GameObject muzzleVFX;
+
     public Script_GameManager gameManager;
 
     public Transform shootingPoint;
@@ -53,6 +56,8 @@ public class Script_Enemy : MonoBehaviour
 
         rb.angularDrag = angularDrag;
         rb.drag = linearDrag;
+
+        muzzleVFX.SetActive(false);
     }
 
     private void Update()
@@ -87,11 +92,11 @@ public class Script_Enemy : MonoBehaviour
         AimAtPlayer();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Bullet") || other.gameObject.CompareTag("BB"))
+        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("BB"))
         {
-            Hitted(other);
+            Hitted(collision.collider);
             gameManager.Achieved();
         }
     }
@@ -152,6 +157,7 @@ public class Script_Enemy : MonoBehaviour
             GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {
+                muzzleVFX.SetActive(true);
                 bullet.transform.position = shootingPoint.transform.position;
                 bullet.transform.rotation = shootingPoint.transform.rotation;
                 bullet.SetActive(true);

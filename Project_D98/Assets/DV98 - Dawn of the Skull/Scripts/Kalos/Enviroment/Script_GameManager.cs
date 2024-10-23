@@ -12,6 +12,7 @@ public class Script_GameManager : MonoBehaviour
     public Slider boostSlider;
     public Slider heatSlider;
     public Slider bossHealthSlider;
+    public GameObject UI_Control_L, UI_Control_R, UI_Control_RB, UI_Control_LB;
     private Script_Spaceship player;
     private Script_Boss bossControl;
     public Script_Spawn_enemy spawner;
@@ -82,6 +83,27 @@ public class Script_GameManager : MonoBehaviour
             actualScene = 3;
         }
     }
+
+    public void SpriteChangeR()
+    {
+        UI_Control_RB.SetActive(true);
+        UI_Control_R.SetActive(false);
+    }
+    public void SpriteResetR()
+    {
+        UI_Control_R.SetActive(true);
+        UI_Control_RB.SetActive(false);
+            }
+    public void SpriteChangeL()
+    {
+        UI_Control_LB.SetActive(true);
+        UI_Control_L.SetActive(false);
+            }
+    public void SpriteResetL()
+    {
+        UI_Control_L.SetActive(true);
+        UI_Control_LB.SetActive(false);
+            }
 
     void Start()
     {

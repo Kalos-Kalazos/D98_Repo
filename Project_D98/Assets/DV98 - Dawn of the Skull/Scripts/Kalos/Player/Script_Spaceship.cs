@@ -122,6 +122,9 @@ public class Script_Spaceship : MonoBehaviour
     Rigidbody rb;
 
     [SerializeField]
+    Script_GameManager gm;
+
+    [SerializeField]
     GameObject limitArea;
     [SerializeField]
     CinemachineVirtualCamera cameraPlayer;
@@ -154,6 +157,7 @@ public class Script_Spaceship : MonoBehaviour
         #endregion
 
         rb = GetComponent<Rigidbody>();
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Script_GameManager>();
         currentBoost = maxBoostAmount;
 
         currentHealth = maxHealth;
@@ -166,6 +170,8 @@ public class Script_Spaceship : MonoBehaviour
         returning = false;
 
         muzzleVFX.SetActive(false);
+
+        Script_AudioManager.Instance.PlayMusic(1);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -525,13 +531,25 @@ public class Script_Spaceship : MonoBehaviour
     void Movement()
     {
         //Pitch
-        rb.AddRelativeTorque(Vector3.up * rotateValue.x * pitchTorque * Time.deltaTime);
+        if (rotateValue.x != 0)
+        {
+            gm.SpriteChangeR();
+            rb.AddRelativeTorque(Vector3.up * rotateValue.x * pitchTorque * Time.deltaTime);
+        }
+        else if(rotateValue.y == 0) gm.SpriteResetR();
         //Yaw
-        rb.AddRelativeTorque(Vector3.right * -rotateValue.y * yawTorque * Time.deltaTime);
+        if (rotateValue.y != 0)
+        {
+            gm.SpriteChangeR();
+            rb.AddRelativeTorque(Vector3.right * -rotateValue.y * yawTorque * Time.deltaTime);
+        }
+        else if (rotateValue.x == 0) gm.SpriteResetR();
 
         //Thrust
-        if(moveValue.y > 0.1f || moveValue.y < -0.1f)
+        if (moveValue.y != 0)
         {
+            gm.SpriteChangeL();
+
             if (boosting>0)
             {
                 currenThrust = thrust * boostMultiplier;
@@ -546,19 +564,21 @@ public class Script_Spaceship : MonoBehaviour
         }
         else
         {
+            if (moveValue.x == 0) gm.SpriteResetL();
             rb.AddRelativeForce(Vector3.forward * glide * Time.deltaTime);
             glide *= thrustGlideReduction;
         }
 
         //Strafing
-        if (moveValue.x > 0.1f || moveValue.x < -0.1f)
+        if (moveValue.x != 0)
         {
-
+            gm.SpriteChangeL();
             rb.AddRelativeForce(Vector3.right * moveValue.x * strafeThrust * Time.fixedDeltaTime);
             horizontalGlide = thrust;
         }
         else
         {
+            if (moveValue.y == 0) gm.SpriteResetL();
             rb.AddRelativeForce(Vector3.right * horizontalGlide * Time.fixedDeltaTime);
             horizontalGlide *= leftRightGlideReduction;
         }

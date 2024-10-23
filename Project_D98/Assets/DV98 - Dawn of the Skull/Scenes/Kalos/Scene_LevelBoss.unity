@@ -165,7 +165,7 @@ Camera:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -630,17 +630,17 @@ PrefabInstance:
     - target: {fileID: 8569116595131209330, guid: 535749dc64691ea4e8a60be573495c75,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8569116595131209330, guid: 535749dc64691ea4e8a60be573495c75,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 44.9
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8569116595131209330, guid: 535749dc64691ea4e8a60be573495c75,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 727
+      value: 641
       objectReference: {fileID: 0}
     - target: {fileID: 8569116595131209330, guid: 535749dc64691ea4e8a60be573495c75,
         type: 3}
@@ -694,7 +694,7 @@ GameObject:
   - component: {fileID: 1049698408}
   m_Layer: 0
   m_Name: --- GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -732,6 +732,10 @@ MonoBehaviour:
   boostSlider: {fileID: 1183589081}
   heatSlider: {fileID: 1660863012}
   bossHealthSlider: {fileID: 341174717}
+  UI_Control_L: {fileID: 1752527672}
+  UI_Control_R: {fileID: 1752527673}
+  UI_Control_RB: {fileID: 1752527671}
+  UI_Control_LB: {fileID: 1752527670}
   spawner: {fileID: 0}
   deadMinionCount: 0
 --- !u!114 &1183589081 stripped
@@ -1019,6 +1023,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9814aee744b04e24f89a94fcf91168f2, type: 3}
+--- !u!1 &1752527670 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9180266879929435383, guid: 9814aee744b04e24f89a94fcf91168f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1752527669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1752527671 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7807995025280482621, guid: 9814aee744b04e24f89a94fcf91168f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1752527669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1752527672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1505339392566555468, guid: 9814aee744b04e24f89a94fcf91168f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1752527669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1752527673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4244040021401615910, guid: 9814aee744b04e24f89a94fcf91168f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1752527669}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1768023197
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ TagManager:
   - Boss
   - Limit
   - PlayerCamera
+  - GameManager
   layers:
   - Default
   - TransparentFX

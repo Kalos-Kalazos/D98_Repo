@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6673968592484363527}
   - component: {fileID: 5493429594479940039}
   - component: {fileID: 3157142336109409187}
-  - component: {fileID: 303598491008067776}
+  - component: {fileID: 1176989542609163194}
   m_Layer: 0
-  m_Name: Asteroid 2
+  m_Name: Asteroid 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2385991859037509192}
-  m_Mesh: {fileID: -5811835731472152339, guid: 7e8d9913e29fe494387970d11bb55a59, type: 3}
+  m_Mesh: {fileID: 4988824251503893495, guid: 4f292023c99e2c24f9127f467a665fb8, type: 3}
 --- !u!23 &6673968592484363527
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327efb597388f884aa2eea8ef6d5d034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &303598491008067776
+--- !u!65 &1176989542609163194
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,5 +144,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4751263, y: 1.3866235, z: 2.3209298}
-  m_Center: {x: 0.13259068, y: 0.23181695, z: 0.0713197}
+  m_Size: {x: 1.9081758, y: 1.0636826, z: 2.5339935}
+  m_Center: {x: -0.30661196, y: 0.2712289, z: 0.14141977}

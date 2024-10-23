@@ -1188,8 +1188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  lockOnRange: 250
-  maxLockDistance: 252
+  lockOnRange: 300
+  maxLockDistance: 301
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1206,6 +1206,7 @@ MonoBehaviour:
   topRightSprite: {fileID: 0}
   bottomLeftSprite: {fileID: 0}
   bottomRightSprite: {fileID: 0}
+  centerSprite: {fileID: 0}
   spriteMoveSpeed: 5
   stayOnTarget: 0
   spriteScale: 0.1

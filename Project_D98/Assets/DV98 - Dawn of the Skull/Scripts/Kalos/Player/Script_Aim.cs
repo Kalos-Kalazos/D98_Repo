@@ -54,7 +54,6 @@ public class Script_Aim : MonoBehaviour
     float spriteScale;
 
     Vector3 initialOffsetTL, initialOffsetTR, initialOffsetBR, initialOffsetBL;
-    Vector3 offsetTL, offsetTR, offsetBR, offsetBL;
 
     Quaternion forwardLook;
 

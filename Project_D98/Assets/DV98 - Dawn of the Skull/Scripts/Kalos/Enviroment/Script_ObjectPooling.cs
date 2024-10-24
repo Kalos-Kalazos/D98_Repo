@@ -80,6 +80,14 @@ public class Script_ObjectPooling : MonoBehaviour
     [SerializeField]
     int amountToPoolMissEx;
 
+    //Muzzle VFX
+    [SerializeField]
+    List<GameObject> pooledMuzzle;
+    [SerializeField]
+    GameObject muzzleToPool;
+    [SerializeField]
+    int amountToPoolMuzzle;
+
     void Awake()
     {
         SharedInstance = this;
@@ -168,6 +176,15 @@ public class Script_ObjectPooling : MonoBehaviour
             pooledMissEx.Add(tmpMissEx);
         }
 
+        pooledMuzzle = new List<GameObject>();
+        GameObject tmpMuzzle;
+        for (int i = 0; i < amountToPoolMuzzle; i++)
+        {
+            tmpMuzzle = Instantiate(muzzleToPool);
+            tmpMuzzle.SetActive(false);
+            pooledMuzzle.Add(tmpMuzzle);
+        }
+
     }
 
     public GameObject GetPooledBullet()
@@ -225,7 +242,7 @@ public class Script_ObjectPooling : MonoBehaviour
         }
         return null;
     }
-    public GameObject GetPooledFS()
+    public GameObject GetPooledPU()
     {
         for (int i = 0; i < amountToPoolPU; i++)
         {
@@ -265,6 +282,17 @@ public class Script_ObjectPooling : MonoBehaviour
             if (!pooledMissEx[i].activeInHierarchy)
             {
                 return pooledMissEx[i];
+            }
+        }
+        return null;
+    }
+    public GameObject GetPooledMuzzleVFX()
+    {
+        for (int i = 0; i < amountToPoolMuzzle; i++)
+        {
+            if (!pooledMuzzle[i].activeInHierarchy)
+            {
+                return pooledMuzzle[i];
             }
         }
         return null;

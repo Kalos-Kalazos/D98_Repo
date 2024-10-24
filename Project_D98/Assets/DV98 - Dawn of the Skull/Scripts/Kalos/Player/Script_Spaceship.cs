@@ -431,14 +431,27 @@ public class Script_Spaceship : MonoBehaviour
                 //                       if                        else
                 Vector3 offset = (i == 0) ? new Vector3(i-1, 0, 0) : new Vector3(i+1, 0, 0);
                 bullet.transform.position = shootingPoint.position + offset;
-                muzzleVFX.transform.position += offset;
-                muzzleVFX.SetActive(true);
                 bullet.transform.rotation = shootingPoint.rotation;
+
+                //muzzleVFX.transform.position = shootingPoint.position + offset;
+                //muzzleVFX.transform.rotation = shootingPoint.rotation;
+                //muzzleVFX.SetActive(true);
+
+                GameObject muzzle = Script_ObjectPooling.SharedInstance.GetPooledMuzzleVFX();
+                if (muzzle != null)
+                {
+                    muzzle.transform.SetParent(shootingPoint);
+                    muzzle.transform.position = shootingPoint.position + offset;
+                    muzzle.transform.rotation = shootingPoint.rotation;
+                    muzzle.SetActive(true);
+                }
+
                 Script_AudioManager.Instance.PlaySFX(0);
                 Invoke(nameof(SoundDelayed), 0.1f);
                 bullet.SetActive(true);
             }
         }
+
     }
 
     void SoundDelayed()

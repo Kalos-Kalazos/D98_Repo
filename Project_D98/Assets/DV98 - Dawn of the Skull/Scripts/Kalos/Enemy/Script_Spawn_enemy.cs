@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Script_Spawn_enemy : MonoBehaviour
 {
-    [Header("=== Enemy Spawn Settings ===")]
+    [Header("=== Spawn Settings ===")]
     [SerializeField]
     private float spawnCooldown;
     [SerializeField]
@@ -40,7 +40,9 @@ public class Script_Spawn_enemy : MonoBehaviour
 
         if (spawnCooldown <= 0 && startSpawn)
         {
-            Spawn();
+            if (CompareTag("SpawnEnemy")) SpawnEnemy();
+            else SpawnPowerUp();
+
             if (overLoad)
             {
                 spawnCooldown = 0.2f;
@@ -59,7 +61,7 @@ public class Script_Spawn_enemy : MonoBehaviour
         }
     }
 
-    public void Spawn()
+    public void SpawnEnemy()
     {
         spawnCount++;
 
@@ -69,6 +71,16 @@ public class Script_Spawn_enemy : MonoBehaviour
             enemy.transform.position = gameObject.transform.position;
             enemy.transform.rotation = gameObject.transform.rotation;
             enemy.SetActive(true);
+        }
+    }
+    public void SpawnPowerUp()
+    {
+        GameObject powerUp = Script_ObjectPooling.SharedInstance.GetPooledPU();
+        if (powerUp != null)
+        {
+            powerUp.transform.position = gameObject.transform.position;
+            powerUp.transform.rotation = gameObject.transform.rotation;
+            powerUp.SetActive(true);
         }
     }
 }

@@ -147,8 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80be8e31764f9b740acee7a238b65614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
-  timeToDeactivate: 5
+  speed: 400
+  timeToDeactivate: 8
   damageBullet: 0
 --- !u!1001 &1602670788413069516
 PrefabInstance:

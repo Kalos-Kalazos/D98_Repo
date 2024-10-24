@@ -30,8 +30,8 @@ public class Script_Bullet : MonoBehaviour
                 hitted.SetActive(true);
             }
 
-            gameObject.SetActive(false);
         }
+        gameObject.SetActive(false);
     }
 
     void SetParentDecal(Collision collision, GameObject hitted)

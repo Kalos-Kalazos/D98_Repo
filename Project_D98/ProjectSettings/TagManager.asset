@@ -11,6 +11,7 @@ TagManager:
   - Limit
   - PlayerCamera
   - GameManager
+  - SpawnEnemy
   layers:
   - Default
   - TransparentFX

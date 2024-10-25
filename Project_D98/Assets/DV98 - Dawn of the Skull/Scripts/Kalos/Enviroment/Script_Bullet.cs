@@ -12,6 +12,8 @@ public class Script_Bullet : MonoBehaviour
 
     [SerializeField] public float damageBullet;
 
+    public string parentTag;
+
     private void Start()
     {
         
@@ -19,15 +21,18 @@ public class Script_Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.CompareTag("Player") || collision.collider.gameObject.CompareTag("Enemy") || collision.collider.gameObject.CompareTag("Boss"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Boss"))
         {
-            GameObject hitted = Script_ObjectPooling.SharedInstance.GetPooledHitVFX();
-            if (hitted != null)
+            if (parentTag != collision.gameObject.tag)
             {
-                ContactPoint contact = collision.GetContact(0);
-                hitted.transform.SetPositionAndRotation(contact.point, Quaternion.FromToRotation(Vector3.up, contact.normal));
-                SetParentDecal(collision, hitted);
-                hitted.SetActive(true);
+                GameObject hitted = Script_ObjectPooling.SharedInstance.GetPooledHitVFX();
+                if (hitted != null)
+                {
+                    ContactPoint contact = collision.GetContact(0);
+                    hitted.transform.SetPositionAndRotation(contact.point, Quaternion.FromToRotation(Vector3.up, contact.normal));
+                    SetParentDecal(collision, hitted);
+                    hitted.SetActive(true);
+                }
             }
 
         }

@@ -153,6 +153,7 @@ public class Script_Enemy : MonoBehaviour
                 muzzleVFX.SetActive(true);
                 bullet.transform.position = shootingPoint.transform.position;
                 bullet.transform.rotation = shootingPoint.transform.rotation;
+                bullet.GetComponent<Script_Bullet>().parentTag = gameObject.tag;
                 bullet.SetActive(true);
             }
         }

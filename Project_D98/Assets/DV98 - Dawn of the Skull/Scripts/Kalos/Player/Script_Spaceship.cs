@@ -408,7 +408,7 @@ public class Script_Spaceship : MonoBehaviour
                 bullet.GetComponent<Script_Bullet>().damageBullet = damage;
                 bullet.transform.position = shootingPoint.position;
                 bullet.transform.rotation = shootingPoint.rotation;
-
+                bullet.GetComponent<Script_Bullet>().parentTag = gameObject.tag;
                 Script_AudioManager.Instance.PlaySFX(0);
                 bullet.SetActive(true);
             }
@@ -432,6 +432,7 @@ public class Script_Spaceship : MonoBehaviour
                 Vector3 offset = (i == 0) ? new Vector3(i-1, 0, 0) : new Vector3(i+1, 0, 0);
                 bullet.transform.position = shootingPoint.position + offset;
                 bullet.transform.rotation = shootingPoint.rotation;
+                bullet.GetComponent<Script_Bullet>().parentTag = gameObject.tag;
 
                 //muzzleVFX.transform.position = shootingPoint.position + offset;
                 //muzzleVFX.transform.rotation = shootingPoint.rotation;

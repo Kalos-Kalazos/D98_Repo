@@ -681,17 +681,17 @@ PrefabInstance:
     - target: {fileID: 750785368141041466, guid: 3f12e0dfd3e0daf4881000bca7fcced9,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8751673
+      value: 1.1458565
       objectReference: {fileID: 0}
     - target: {fileID: 750785368141041466, guid: 3f12e0dfd3e0daf4881000bca7fcced9,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8751673
+      value: 1.1458565
       objectReference: {fileID: 0}
     - target: {fileID: 750785368141041466, guid: 3f12e0dfd3e0daf4881000bca7fcced9,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.8751673
+      value: 1.1458565
       objectReference: {fileID: 0}
     - target: {fileID: 750785368141041466, guid: 3f12e0dfd3e0daf4881000bca7fcced9,
         type: 3}
@@ -790,25 +790,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2004688615}
     m_Modifications:
-    - target: {fileID: 802222351391679063, guid: e7c348780255aa84391148cc37941a13,
-        type: 3}
-      propertyPath: health
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 809219203560149911, guid: e7c348780255aa84391148cc37941a13,
         type: 3}
       propertyPath: m_Name
       value: Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 832042707255721569, guid: e7c348780255aa84391148cc37941a13,
-        type: 3}
-      propertyPath: health
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551003070809159771, guid: e7c348780255aa84391148cc37941a13,
-        type: 3}
-      propertyPath: health
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6252174396402524056, guid: e7c348780255aa84391148cc37941a13,
         type: 3}
@@ -860,11 +845,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6917914067798884344, guid: e7c348780255aa84391148cc37941a13,
-        type: 3}
-      propertyPath: health
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -898,12 +878,12 @@ PrefabInstance:
     - target: {fileID: 1494180568847684280, guid: efe6b5e95dd198d4f8502a84b2482ae3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -33.489113
+      value: -11.049113
       objectReference: {fileID: 0}
     - target: {fileID: 1494180568847684280, guid: efe6b5e95dd198d4f8502a84b2482ae3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -192.91652
+      value: -236.80652
       objectReference: {fileID: 0}
     - target: {fileID: 1494180568847684280, guid: efe6b5e95dd198d4f8502a84b2482ae3,
         type: 3}
@@ -953,7 +933,7 @@ PrefabInstance:
     - target: {fileID: 2529263854913874423, guid: efe6b5e95dd198d4f8502a84b2482ae3,
         type: 3}
       propertyPath: far clip plane
-      value: 2000
+      value: 2500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -971,17 +951,17 @@ PrefabInstance:
     - target: {fileID: 2667482546438566512, guid: 72abe3d908c0b7c459cc3725a30a66dc,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.85891986
+      value: 1.1245837
       objectReference: {fileID: 0}
     - target: {fileID: 2667482546438566512, guid: 72abe3d908c0b7c459cc3725a30a66dc,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.85891986
+      value: 1.1245837
       objectReference: {fileID: 0}
     - target: {fileID: 2667482546438566512, guid: 72abe3d908c0b7c459cc3725a30a66dc,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.85891986
+      value: 1.1245837
       objectReference: {fileID: 0}
     - target: {fileID: 2667482546438566512, guid: 72abe3d908c0b7c459cc3725a30a66dc,
         type: 3}
@@ -1467,35 +1447,10 @@ PrefabInstance:
       propertyPath: cameraPlayer
       value: 
       objectReference: {fileID: 2038025501}
-    - target: {fileID: 5975160994570823099, guid: 499637772d8e65f44a3dc1d6dc68acca,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.08
-      objectReference: {fileID: 0}
     - target: {fileID: 6156221317409554344, guid: 499637772d8e65f44a3dc1d6dc68acca,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191760249644222105, guid: 499637772d8e65f44a3dc1d6dc68acca,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.323094
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191760249644222105, guid: 499637772d8e65f44a3dc1d6dc68acca,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.323094
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191760249644222105, guid: 499637772d8e65f44a3dc1d6dc68acca,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.323094
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191760249644222105, guid: 499637772d8e65f44a3dc1d6dc68acca,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.95
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1677,12 +1632,12 @@ PrefabInstance:
     - target: {fileID: 2004326762181971417, guid: 3eead07fe9349af40a3b3fb22492a90a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.861399
+      value: -1.4213992
       objectReference: {fileID: 0}
     - target: {fileID: 2004326762181971417, guid: 3eead07fe9349af40a3b3fb22492a90a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -171.69159
+      value: -215.58159
       objectReference: {fileID: 0}
     - target: {fileID: 2004326762181971417, guid: 3eead07fe9349af40a3b3fb22492a90a,
         type: 3}
@@ -1737,7 +1692,7 @@ PrefabInstance:
     - target: {fileID: 3631170344708443119, guid: 3eead07fe9349af40a3b3fb22492a90a,
         type: 3}
       propertyPath: m_Lens.FarClipPlane
-      value: 2000
+      value: 2500
       objectReference: {fileID: 0}
     - target: {fileID: 7885739495061876110, guid: 3eead07fe9349af40a3b3fb22492a90a,
         type: 3}

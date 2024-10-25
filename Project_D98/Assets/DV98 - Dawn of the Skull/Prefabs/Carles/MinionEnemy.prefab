@@ -1131,8 +1131,6 @@ MonoBehaviour:
   rotationSpeed: 5
   angularDrag: 0.2
   linearDrag: 0.2
-  ammo: 100
-  maxAmmo: 100
   shooting: 0
   empty: 0
   fireCooldown: 0
@@ -1142,7 +1140,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   shootingPoint: {fileID: 2700749940698732204}
   player: {fileID: 0}
-  bulletPrefab: {fileID: 555203903054649178, guid: 87ade854e02eba84a9b0520df562e801,
+  bulletPrefab: {fileID: 555203903054649178, guid: a2294185fe5c3e241904b9097cf10dc2,
     type: 3}
   playerPivot: {fileID: 0}
 --- !u!54 &2584137677431492131
@@ -1536,13 +1534,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2432776475937168541, guid: f594cd19de662dc429312b4cd4baeffa,
         type: 3}
+      propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432776475937168541, guid: f594cd19de662dc429312b4cd4baeffa,
+        type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2432776475937168541, guid: f594cd19de662dc429312b4cd4baeffa,
         type: 3}
+      propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[0].m_Name
+      value: ConeSize
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432776475937168541, guid: f594cd19de662dc429312b4cd4baeffa,
+        type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Name
       value: Color
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432776475937168541, guid: f594cd19de662dc429312b4cd4baeffa,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[0].m_Value.x
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432776475937168541, guid: f594cd19de662dc429312b4cd4baeffa,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[0].m_Value.y
+      value: -38
       objectReference: {fileID: 0}
     - target: {fileID: 2432776475937168541, guid: f594cd19de662dc429312b4cd4baeffa,
         type: 3}
@@ -1558,6 +1576,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
       value: 0.21401332
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432776475937168541, guid: f594cd19de662dc429312b4cd4baeffa,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Vector2f.m_Array.Array.data[0].m_Overridden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2432776475937168541, guid: f594cd19de662dc429312b4cd4baeffa,
         type: 3}

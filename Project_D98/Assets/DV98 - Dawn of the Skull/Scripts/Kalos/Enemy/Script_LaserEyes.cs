@@ -37,6 +37,12 @@ public class Script_LaserEyes : MonoBehaviour
     [SerializeField]
     private float charge;
     [SerializeField]
+    private float distanceRay;
+    [SerializeField]
+    private Transform laserOrigin;
+    [SerializeField]
+    private Transform laserTarget;
+    [SerializeField]
     private RaycastHit rayCastHit;
     [SerializeField]
     GameObject laserVFX;
@@ -113,10 +119,12 @@ public class Script_LaserEyes : MonoBehaviour
             if (charge <= 0)
             {
                 flashVFX.SetActive(true);
+                cantShoot = false;
             }
             else
             {
-                charge -= Time.deltaTime;
+                charge -= Time.deltaTime; 
+                cantShoot = true;
             }
 
             Vector3 directionToPlayer = player.position - transform.position;
@@ -133,16 +141,17 @@ public class Script_LaserEyes : MonoBehaviour
             }
             else cantShoot = true;
 
-
             Debug.DrawLine(transform.position, player.position, Color.cyan);
         }
     }
     private void ShootPlayer()
     {
-        //Si aun hay municion resto uno, cojo un objeto de la pool y este orientado al shootingPoint
-
-        if (!dead && locked)
+        if (!dead && locked && !cantShoot)
         {
+            var ray = new Ray(laserOrigin.transform.position, laserTarget.transform.position);
+
+            var hit = new RaycastHit();
+
             
         }
     }

@@ -14,7 +14,7 @@ public class Script_LaserEyes : MonoBehaviour
 
     Rigidbody rb;
 
-    public bool hit, dead;
+    public bool hit;
 
     Vector3 explosionPos;
 
@@ -67,7 +67,7 @@ public class Script_LaserEyes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (fireCooldown <= 0 && !dead && !cantShoot)
+        if (fireCooldown <= 0 && !cantShoot)
         {
             if (CompareTag("LaserBall") && padreControl.health < 2)
             {
@@ -78,36 +78,6 @@ public class Script_LaserEyes : MonoBehaviour
         else
         {
             fireCooldown -= Time.deltaTime;
-        }
-
-        if (health <= 0 && !dead)
-        {
-            rb.constraints = RigidbodyConstraints.None;
-            player.GetComponentInChildren<Script_Aim>().locking = false;
-
-            GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledBE();
-            if (explosion != null)
-            {
-                explosion.transform.position = transform.position;
-                explosion.transform.rotation = transform.rotation;
-                explosion.SetActive(true);
-            }
-
-            if (player != null)
-            {
-                if (player.GetComponentInChildren<Script_Aim>().currentTarget == gameObject.transform)
-                {
-                    player.GetComponentInChildren<Script_Aim>().currentTarget = null;
-                    player.GetComponentInChildren<Script_Aim>().locking = false;
-                }
-            }
-
-            if (padreControl != null)
-            {
-                padreControl.health--;
-            }
-
-            dead = true;
         }
     }
 
@@ -155,7 +125,7 @@ public class Script_LaserEyes : MonoBehaviour
     }
     private void ShootPlayer()
     {
-        if (!dead && !cantShoot)
+        if (!cantShoot)
         {
             Vector3 direction = transform.forward;
             if (Physics.SphereCast(transform.position, radiusRay, direction, out rayHit, distanceRay))

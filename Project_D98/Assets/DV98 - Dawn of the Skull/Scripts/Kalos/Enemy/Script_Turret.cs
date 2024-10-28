@@ -85,6 +85,7 @@ public class Script_Turret : MonoBehaviour
             {
                 explosion.transform.position = transform.position;
                 explosion.transform.rotation = transform.rotation;
+                explosion.transform.SetParent(transform);
                 explosion.SetActive(true);
             }
 

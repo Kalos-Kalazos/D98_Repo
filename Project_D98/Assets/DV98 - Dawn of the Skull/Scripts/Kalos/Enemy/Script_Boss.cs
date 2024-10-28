@@ -117,8 +117,8 @@ public class Script_Boss : MonoBehaviour
         maskL.GetComponent<MeshCollider>().enabled = true;
         maskR.GetComponent<MeshCollider>().enabled = true;
 
-        eyeLaserL.GetComponentInParent<GameObject>().SetActive(false);
-        eyeLaserR.GetComponentInParent<GameObject>().SetActive(false);
+        eyeLaserL.GetComponentInParent<Transform>().gameObject.SetActive(false);
+        eyeLaserR.GetComponentInParent<Transform>().gameObject.SetActive(false);
 
         maskL.transform.SetParent(null);
         maskR.transform.SetParent(null);

@@ -9,9 +9,9 @@ public class Script_Spaceship : MonoBehaviour
 {
     [Header("=== Status Settings ===")]
     [SerializeField]
-    public int currentHealth;
+    public float currentHealth;
     [SerializeField]
-    public int maxHealth;
+    public float maxHealth;
     [SerializeField]
     public float currentBoost;
     [SerializeField]
@@ -108,7 +108,7 @@ public class Script_Spaceship : MonoBehaviour
     private InputAction onMove, onRotate, onStabilize, onShoot, onBoost, onLockIn, onStart, onQuit;
 
 
-    public delegate void HealthChanged(int currentHealth);
+    public delegate void HealthChanged(float currentHealth);
     public event HealthChanged OnHealthChanged;
 
     public delegate void BoostChanged(float currentBoost);
@@ -201,7 +201,7 @@ public class Script_Spaceship : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -212,7 +212,7 @@ public class Script_Spaceship : MonoBehaviour
         }
     }
 
-    public void Heal(int healAmount)
+    public void Heal(float healAmount)
     {
         currentHealth += healAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);

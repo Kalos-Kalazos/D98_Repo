@@ -16,6 +16,14 @@ public class Script_ObjectPooling : MonoBehaviour
     [SerializeField]
     int amountToPoolB;
 
+    //Bullet enemy
+    [SerializeField]
+    List<GameObject> pooledBE;
+    [SerializeField]
+    GameObject beToPool;
+    [SerializeField]
+    int amountToPoolBE;
+
     //Explosions
     [SerializeField]
     List<GameObject> pooledExplosions;
@@ -32,13 +40,13 @@ public class Script_ObjectPooling : MonoBehaviour
     [SerializeField]
     int amountToPoolX;
 
-    //Big Explosions "BE"
+    //Big Explosions "BEX"
     [SerializeField]
-    List<GameObject> pooledBE;
+    List<GameObject> pooledBEX;
     [SerializeField]
-    GameObject beToPool;
+    GameObject bexToPool;
     [SerializeField]
-    int amountToPoolBE;
+    int amountToPoolBEX;
 
     //Big Bullets "BB"
     [SerializeField]
@@ -104,6 +112,15 @@ public class Script_ObjectPooling : MonoBehaviour
             pooledBullets.Add(tmpB);
         }
 
+        pooledBE = new List<GameObject>();
+        GameObject tmpBE;
+        for (int i = 0; i < amountToPoolBE; i++)
+        {
+            tmpBE = Instantiate(beToPool);
+            tmpBE.SetActive(false);
+            pooledBE.Add(tmpBE);
+        }
+
         pooledExplosions = new List<GameObject>();
         GameObject tmpE;
         for (int i = 0; i < amountToPoolE; i++)
@@ -122,13 +139,13 @@ public class Script_ObjectPooling : MonoBehaviour
             pooledEnemy.Add(tmpX);
         }
 
-        pooledBE = new List<GameObject>();
+        pooledBEX = new List<GameObject>();
         GameObject tmpXL;
-        for (int i = 0; i < amountToPoolBE; i++)
+        for (int i = 0; i < amountToPoolBEX; i++)
         {
             tmpXL = Instantiate(beToPool);
             tmpXL.SetActive(false);
-            pooledBE.Add(tmpXL);
+            pooledBEX.Add(tmpXL);
         }
 
         pooledBB = new List<GameObject>();
@@ -187,6 +204,7 @@ public class Script_ObjectPooling : MonoBehaviour
 
     }
 
+    #region Bullets
     public GameObject GetPooledBullet()
     {
         for (int i = 0; i < amountToPoolB; i++)
@@ -209,17 +227,6 @@ public class Script_ObjectPooling : MonoBehaviour
         }
         return null;
     }
-    public GameObject GetPooledExplosion()
-    {
-        for (int i = 0; i < amountToPoolE; i++)
-        {
-            if (!pooledExplosions[i].activeInHierarchy)
-            {
-                return pooledExplosions[i];
-            }
-        }
-        return null;
-    }
     public GameObject GetPooledBE()
     {
         for (int i = 0; i < amountToPoolBE; i++)
@@ -231,6 +238,44 @@ public class Script_ObjectPooling : MonoBehaviour
         }
         return null;
     }
+    public GameObject GetPooledMissile()
+    {
+        for (int i = 0; i < amountToPoolMissile; i++)
+        {
+            if (!pooledMissile[i].activeInHierarchy)
+            {
+                return pooledMissile[i];
+            }
+        }
+        return null;
+    }
+    #endregion
+
+    #region Explosions
+    public GameObject GetPooledExplosion()
+    {
+        for (int i = 0; i < amountToPoolE; i++)
+        {
+            if (!pooledExplosions[i].activeInHierarchy)
+            {
+                return pooledExplosions[i];
+            }
+        }
+        return null;
+    }
+    public GameObject GetPooledBEX()
+    {
+        for (int i = 0; i < amountToPoolBEX; i++)
+        {
+            if (!pooledBEX[i].activeInHierarchy)
+            {
+                return pooledBEX[i];
+            }
+        }
+        return null;
+    }
+    #endregion
+
     public GameObject GetPooledEnemy()
     {
         for (int i = 0; i < amountToPoolX; i++)
@@ -253,17 +298,8 @@ public class Script_ObjectPooling : MonoBehaviour
         }
         return null;
     }
-    public GameObject GetPooledMissile()
-    {
-        for (int i = 0; i < amountToPoolMissile; i++)
-        {
-            if (!pooledMissile[i].activeInHierarchy)
-            {
-                return pooledMissile[i];
-            }
-        }
-        return null;
-    }
+
+    #region VFX
     public GameObject GetPooledHitVFX()
     {
         for (int i = 0; i < amountToPoolHitted; i++)
@@ -297,4 +333,5 @@ public class Script_ObjectPooling : MonoBehaviour
         }
         return null;
     }
+    #endregion
 }

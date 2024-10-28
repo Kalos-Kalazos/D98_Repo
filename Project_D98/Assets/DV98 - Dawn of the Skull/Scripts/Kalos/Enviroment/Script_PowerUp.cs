@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Script_PowerUp : MonoBehaviour
@@ -7,9 +8,13 @@ public class Script_PowerUp : MonoBehaviour
 
     private Script_Spaceship player;
 
+    private Script_Spawn_enemy spawn;
+
     [Header("=== Power Up Settings ===")]
     [SerializeField]
     float powerID;
+    [SerializeField]
+    int count;
 
     void Start()
     {
@@ -19,6 +24,8 @@ public class Script_PowerUp : MonoBehaviour
     private void OnEnable()
     {
         powerID = Random.Range(1, 5);
+
+        spawn = GetComponentInParent<Script_Spawn_enemy>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,13 +36,13 @@ public class Script_PowerUp : MonoBehaviour
             {
                 case 1:
                     player.fastShooting = true;
-                    player.fsCooldown = 20;
+                    player.fsCooldown = 15;
                     gameObject.SetActive(false);
                 break;
 
                 case 2:
                     player.doubleShooting = true;
-                    player.dsCooldown = 20;
+                    player.dsCooldown = 15;
                     player.shootsNum++;
                     gameObject.SetActive(false);
                 break;
@@ -43,7 +50,7 @@ public class Script_PowerUp : MonoBehaviour
                 case 3:
                     player.areaShooting = true;
                     player.damage = 4;
-                    player.asCooldown = 40;
+                    player.asCooldown = 25;
                     gameObject.SetActive(false);
                 break;
 
@@ -55,8 +62,11 @@ public class Script_PowerUp : MonoBehaviour
         }
     }
 
-    void Update()
+    private void OnDisable()
     {
-        
+        if(spawn != null)
+        {
+            spawn.DisableSpawn();
+        }
     }
 }

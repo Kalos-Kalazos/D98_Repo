@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class Script_Boss : MonoBehaviour
@@ -28,6 +29,19 @@ public class Script_Boss : MonoBehaviour
     public Transform player, shootPointFront, pivot;
     [SerializeField]
     public GameObject bulletPrefab;
+    [SerializeField]
+    GameObject maskL;
+    [SerializeField]
+    GameObject maskR;
+    [SerializeField]
+    GameObject bigLaser;
+    [SerializeField]
+    GameObject eyeLaserR;
+    [SerializeField]
+    GameObject eyeLaserL;
+
+    [SerializeField]
+    PlayableDirector timeLine;
 
     Script_Spaceship playerControl;
 
@@ -49,7 +63,7 @@ public class Script_Boss : MonoBehaviour
         rb.angularDrag = angularDrag;
         rb.drag = linearDrag;
 
-        health = 5;
+        health = 3;
 
         skullHealth = maxSkullHealth;
     }
@@ -60,6 +74,7 @@ public class Script_Boss : MonoBehaviour
         if (health==1 && !noTurrets)
         {
             noTurrets = true;
+            AnimatorActivate();
         }
 
         if (skullHealth <= 0)
@@ -78,9 +93,10 @@ public class Script_Boss : MonoBehaviour
         PursuePlayer();
 
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Bullet") && noTurrets)
+        if (collision.transform.CompareTag("Bullet") && noTurrets)
         {
             TakeDamage(playerControl.damage);
         }
@@ -96,10 +112,27 @@ public class Script_Boss : MonoBehaviour
             OnBossHealthChanged(skullHealth);
         }
     }
+    public void ChangeMask()
+    {
+        maskL.GetComponent<MeshCollider>().enabled = true;
+        maskR.GetComponent<MeshCollider>().enabled = true;
+
+        eyeLaserL.GetComponentInParent<GameObject>().SetActive(false);
+        eyeLaserR.GetComponentInParent<GameObject>().SetActive(false);
+
+        maskL.transform.SetParent(null);
+        maskR.transform.SetParent(null);
+    }
 
     public void AnimatorDeactivate()
     {
         gameObject.GetComponent<Animator>().enabled = false;
+        timeLine.Pause();
+    }
+    public void AnimatorActivate()
+    {
+        gameObject.GetComponent<Animator>().enabled = true;
+        timeLine.Resume();
     }
 
     private void PursuePlayer()

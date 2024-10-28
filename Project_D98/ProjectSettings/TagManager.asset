@@ -12,6 +12,7 @@ TagManager:
   - PlayerCamera
   - GameManager
   - SpawnEnemy
+  - LaserBall
   layers:
   - Default
   - TransparentFX

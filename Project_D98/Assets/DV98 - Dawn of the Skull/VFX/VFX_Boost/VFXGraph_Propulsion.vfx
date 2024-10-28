@@ -725,7 +725,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.6000000238418579,"y":1.25,"z":1.0}'
+      m_SerializableObject: '{"x":0.800000011920929,"y":1.5,"z":1.0}'
     m_Space: 2147483647
   m_Property:
     name: Scale
@@ -2917,7 +2917,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.728
+      m_SerializableObject: 0.672
     m_Space: 2147483647
   m_Property:
     name: _AlphaClip
@@ -3546,7 +3546,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.6000000238418579,"y":1.25,"z":1.0}'
+      m_SerializableObject: '{"x":0.800000011920929,"y":1.25,"z":1.0}'
     m_Space: 2147483647
   m_Property:
     name: Scale
@@ -4828,7 +4828,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.75,"y":1.25,"z":1.0}'
+      m_SerializableObject: '{"x":0.800000011920929,"y":1.5,"z":1.0}'
     m_Space: 2147483647
   m_Property:
     name: Scale

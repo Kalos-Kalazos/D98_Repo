@@ -15,7 +15,7 @@ public class Script_GameManager : MonoBehaviour
     public GameObject UI_Control_L, UI_Control_R, UI_Control_RB, UI_Control_LB;
     private Script_Spaceship player;
     private Script_Boss bossControl;
-    public Script_Spawn_enemy spawner;
+    public Script_Spawn_enemy[] spawner;
     public int deadMinionCount;
 
     public static int actualScene;
@@ -41,7 +41,10 @@ public class Script_GameManager : MonoBehaviour
 
     public void StartSpawn()
     {
-        spawner.startSpawn = true;
+        for (int i = 0; i < spawner.Length; i++)
+        {
+            spawner[i].startSpawn = true;
+        }
     }
 
     public void NextLvl()
@@ -111,7 +114,7 @@ public class Script_GameManager : MonoBehaviour
 
         ActualSceneID();
         player = FindObjectOfType<Script_Spaceship>();
-        spawner = FindObjectOfType<Script_Spawn_enemy>();
+        spawner = FindObjectsOfType<Script_Spawn_enemy>();
 
         if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_LevelBoss")))
         {
@@ -156,11 +159,11 @@ public class Script_GameManager : MonoBehaviour
     #region Cambios de Slider de Vida, Boost y Heat
 
     //Health bar update
-    public void UpdateHealthBar(int currentHealth)
+    public void UpdateHealthBar(float currentHealth)
     {
         StartCoroutine(HealthChange(currentHealth));
     }
-    IEnumerator HealthChange(int targetHealth)
+    IEnumerator HealthChange(float targetHealth)
     {
         float elapsedTime = 0f;
         float duration = 0.5f; 

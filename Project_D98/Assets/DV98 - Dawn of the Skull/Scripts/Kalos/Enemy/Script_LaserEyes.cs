@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Script_LaserEyes : MonoBehaviour
 {
-    public Transform player, pivotPoint;
-    public GameObject bulletPrefab;
+    public Transform player;
     public Transform padre;
 
     Script_Boss padreControl;
@@ -23,7 +22,7 @@ public class Script_LaserEyes : MonoBehaviour
     [SerializeField]
     public float health;
     [SerializeField]
-    private bool shooting, empty, cantShoot, locked;
+    private bool shooting, empty, cantShoot, locked, reseted;
     [SerializeField]
     private float fireCooldown;
     [SerializeField]
@@ -39,22 +38,30 @@ public class Script_LaserEyes : MonoBehaviour
     [SerializeField]
     private float distanceRay;
     [SerializeField]
-    private Transform laserOrigin;
-    [SerializeField]
-    private Transform laserTarget;
+    private float radiusRay;
     [SerializeField]
     private RaycastHit rayCastHit;
+    [SerializeField]
+    private float damageLaser;
     [SerializeField]
     GameObject laserVFX;
     [SerializeField]
     GameObject flashVFX;
 
+    RaycastHit rayHit;
 
+    Vector3 directionToPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
         padreControl = padre.GetComponent<Script_Boss>();
+        player = GameObject.FindWithTag("Player").transform;
+        rb = GetComponent<Rigidbody>();
+        
+        laserVFX.SetActive(false);
+        flashVFX.SetActive(false);
+        reseted = false;
     }
 
     // Update is called once per frame
@@ -62,9 +69,11 @@ public class Script_LaserEyes : MonoBehaviour
     {
         if (fireCooldown <= 0 && !dead && !cantShoot)
         {
-            ShootPlayer();
-            fireCooldown = fireRate;
-            laserVFX.SetActive(true);
+            if (CompareTag("LaserBall") && padreControl.health < 2)
+            {
+                ShootPlayer();
+            }
+            else if (!CompareTag("LaserBall")) ShootPlayer();
         }
         else
         {
@@ -104,30 +113,21 @@ public class Script_LaserEyes : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (health > 0)
+        if (health > 0 && fireCooldown <= 0)
         {
-            AimAtPlayer();
+            if (CompareTag("LaserBall") && padreControl.health < 2) AimAtPlayer(); 
+            else if(!CompareTag("LaserBall")) AimAtPlayer();
         }
+
     }
 
     private void AimAtPlayer()
     {
         //Calculo la direccion del jugador y hago el shootingPoint mirar hacia alli con velocidad configurable
 
-        if (player != null && !locked)
+        if (player != null)
         {
-            if (charge <= 0)
-            {
-                flashVFX.SetActive(true);
-                cantShoot = false;
-            }
-            else
-            {
-                charge -= Time.deltaTime; 
-                cantShoot = true;
-            }
-
-            Vector3 directionToPlayer = player.position - transform.position;
+            directionToPlayer = player.position - transform.position;
 
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
 
@@ -137,24 +137,60 @@ public class Script_LaserEyes : MonoBehaviour
             {
                 //Roto el punto de disparo dentro de un rango
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeedTurret);
-                cantShoot = false;
-            }
-            else cantShoot = true;
 
-            Debug.DrawLine(transform.position, player.position, Color.cyan);
+                if (charge <= 0)
+                {
+                    cantShoot = false;
+                }
+                else
+                {
+                    charge -= Time.deltaTime;
+                    cantShoot = true;
+                    flashVFX.SetActive(true);
+                }
+            }
+
+           // Debug.DrawLine(transform.position, player.position, Color.cyan);
         }
     }
     private void ShootPlayer()
     {
-        if (!dead && locked && !cantShoot)
+        if (!dead && !cantShoot)
         {
-            var ray = new Ray(laserOrigin.transform.position, laserTarget.transform.position);
+            Vector3 direction = transform.forward;
+            if (Physics.SphereCast(transform.position, radiusRay, direction, out rayHit, distanceRay))
+            {
+                if (rayHit.rigidbody != null) rayHit.rigidbody.AddForce(direction.normalized, ForceMode.Impulse); 
 
-            var hit = new RaycastHit();
+                laserVFX.SetActive(true);
+                flashVFX.SetActive(true);
 
-            
+                if(!reseted) Invoke(nameof(ResetShoot), 7);
+
+                Script_Spaceship targetShip = rayHit.collider.gameObject.GetComponent<Script_Spaceship>();
+                if (targetShip != null)
+                {
+                    targetShip.TakeDamage(damageLaser);
+                }
+                
+            }
+
         }
     }
+
+    void ResetShoot()
+    {
+        charge = 20;
+        fireCooldown = fireRate;
+        reseted = true;
+        Invoke(nameof(ResetReset),1);
+    }
+
+    void ResetReset()
+    {
+        reseted = false;
+    }
+
     public void Hitted(Collider other)
     {
         explosionPos = other.transform.position;

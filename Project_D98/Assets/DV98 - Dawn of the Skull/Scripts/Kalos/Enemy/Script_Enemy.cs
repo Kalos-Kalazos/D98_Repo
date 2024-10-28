@@ -121,9 +121,12 @@ public class Script_Enemy : MonoBehaviour
 
         if (gameManager != null && gameManager.spawner != null)
         {
-            if (gameManager.spawner.startSpawn)
+            for (int i = 0; i < gameManager.spawner.Length; i++)
             {
-                gameManager.deadMinionCount++;
+                if (gameManager.spawner[i].startSpawn)
+                {
+                    gameManager.deadMinionCount++;
+                }
             }
         }
 
@@ -147,7 +150,7 @@ public class Script_Enemy : MonoBehaviour
 
         if (!empty)
         {
-            GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
+            GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBE();
             if (bullet != null)
             {
                 muzzleVFX.SetActive(true);

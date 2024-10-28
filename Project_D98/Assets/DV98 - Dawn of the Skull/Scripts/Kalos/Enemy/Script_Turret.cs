@@ -74,12 +74,13 @@ public class Script_Turret : MonoBehaviour
         if (health <= 0 && !dead)
         {
             rb.constraints = RigidbodyConstraints.None;
+            gameObject.transform.SetParent(null);
             player.GetComponentInChildren<Script_Aim>().locking = false;
 
             //                  power     pos      radius and modifier
             rb.AddExplosionForce(power, explosionPos, 5,      3);
 
-            GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledBE();
+            GameObject explosion = Script_ObjectPooling.SharedInstance.GetPooledBEX();
             if (explosion != null)
             {
                 explosion.transform.position = transform.position;

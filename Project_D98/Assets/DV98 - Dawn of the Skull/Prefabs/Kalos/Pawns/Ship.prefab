@@ -273,7 +273,6 @@ GameObject:
   - component: {fileID: 7102126635004968461}
   - component: {fileID: 5163979549665837445}
   - component: {fileID: 4697636090080541407}
-  - component: {fileID: 1680639295779702030}
   - component: {fileID: 7182293695793329449}
   - component: {fileID: 29129549226990439}
   - component: {fileID: 1157372507740513195}
@@ -367,8 +366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd7204eeccd14343acf3a44aa64604b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
+  currentHealth: 200
+  maxHealth: 200
   currentBoost: 0
   maxBoost: 50
   currentHeat: 0
@@ -376,8 +375,8 @@ MonoBehaviour:
   overHeated: 0
   yawTorque: 8000
   pitchTorque: 8000
-  thrust: 3000
-  strafeThrust: 3000
+  thrust: 4000
+  strafeThrust: 4000
   thrustGlideReduction: 0.362
   leftRightGlideReduction: 0.233
   returning: 0
@@ -716,109 +715,6 @@ MonoBehaviour:
   cameraPlayer: {fileID: 0}
   muzzleVFX: {fileID: 8281286084501306432}
   moveValue: {x: 0, y: 0}
---- !u!114 &1680639295779702030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6156221317409554344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2c49beb78e02a7247b55eb2f48e8ee6d,
-    type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4697636090080541407}
-        m_TargetAssemblyTypeName: Spaceship_Control, Assembly-CSharp
-        m_MethodName: Stabilize
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 92d7a73a-584c-485f-a347-d88bf161304e
-    m_ActionName: Ship Controls/Stabilize[/Keyboard/f]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4697636090080541407}
-        m_TargetAssemblyTypeName: Spaceship_Control, Assembly-CSharp
-        m_MethodName: Boost
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a9fd58fa-982b-4966-b788-bc96b32a4972
-    m_ActionName: Ship Controls/Boost[/Keyboard/leftShift]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4697636090080541407}
-        m_TargetAssemblyTypeName: Spaceship_Control, Assembly-CSharp
-        m_MethodName: PumPum
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 06ed0af8-5a4b-4676-9b05-36b086342386
-    m_ActionName: Ship Controls/PumPum[/Keyboard/j]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4697636090080541407}
-        m_TargetAssemblyTypeName: Spaceship_Control, Assembly-CSharp
-        m_MethodName: LockIn
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 721f5f13-2b08-4226-bc3f-b88c75172e56
-    m_ActionName: Ship Controls/LockIn[/Keyboard/l]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4f5df619-6f57-4586-a8c4-283580da77f5
-    m_ActionName: Ship Controls/Move
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f5209363-e13f-4b87-bf09-55dfcf6804fc
-    m_ActionName: Ship Controls/Rotate
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Ship Controls
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!65 &7182293695793329449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -960,8 +856,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTarget: {fileID: 0}
-  lockOnRange: 300
-  maxLockDistance: 301
+  lockOnRange: 500
+  maxLockDistance: 501
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -981,7 +877,7 @@ MonoBehaviour:
   centerSprite: {fileID: 0}
   spriteMoveSpeed: 5
   stayOnTarget: 0
-  spriteScale: 0.1
+  spriteScale: 0.004
 --- !u!1 &8188864543971828301
 GameObject:
   m_ObjectHideFlags: 0

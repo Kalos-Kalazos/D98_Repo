@@ -120,6 +120,8 @@ public class Script_Aim : MonoBehaviour
             if(!stayOnTarget) SpriteInitialPositions(currentTarget.position);
             else SpritePositions(currentTarget.position);
 
+            ScaleSprites(currentTarget.position);
+
             // Si el objetivo se aleja demasiado, recalcular
             if (Vector3.Distance(transform.position, currentTarget.position) > maxLockDistance)
             {
@@ -219,18 +221,26 @@ public class Script_Aim : MonoBehaviour
         bottomRightSprite.SetActive(active);
         centerSprite.SetActive(active);
     }
+    void ScaleSprites(Vector3 targetPos)
+    {
+        topLeftSprite.transform.localScale = Vector3.one * ((cameraTransform.position-targetPos).magnitude * spriteScale);
+        topRightSprite.transform.localScale = Vector3.one * ((cameraTransform.position-targetPos).magnitude * spriteScale);
+        bottomLeftSprite.transform.localScale = Vector3.one * ((cameraTransform.position-targetPos).magnitude * spriteScale);
+        bottomRightSprite.transform.localScale = Vector3.one * ((cameraTransform.position-targetPos).magnitude * spriteScale);
+        centerSprite.transform.localScale = Vector3.one * ((cameraTransform.position - targetPos).magnitude * spriteScale);
+    }
     void SpriteInitialPositions(Vector3 targetPos)
     {
         if (topLeftSprite == null || topRightSprite == null || bottomLeftSprite == null || bottomRightSprite == null) return;
 
-        Vector3 halfwayPoint = (targetPos + control.transform.position) / 2;
+        //Vector3 halfwayPoint = (targetPos + control.transform.position) / 2;
         Vector3 direction = (targetPos - control.transform.position).normalized;
 
-        topLeftSprite.transform.position = halfwayPoint + initialOffsetTL + Quaternion.Euler(0, 45, 0) * direction * 2;
-        topRightSprite.transform.position = halfwayPoint + initialOffsetTR + Quaternion.Euler(0, -45, 0) * direction * 2;
-        bottomLeftSprite.transform.position = halfwayPoint + initialOffsetBL + Quaternion.Euler(0, 135, 0) * direction * 2;
-        bottomRightSprite.transform.position = halfwayPoint + initialOffsetBR + Quaternion.Euler(0, -135, 0) * direction * 2;
-        centerSprite.transform.position = halfwayPoint + direction;
+        topLeftSprite.transform.position = targetPos + initialOffsetTL + Quaternion.Euler(0, 45, 0) * direction * 2;
+        topRightSprite.transform.position = targetPos + initialOffsetTR + Quaternion.Euler(0, -45, 0) * direction * 2;
+        bottomLeftSprite.transform.position = targetPos + initialOffsetBL + Quaternion.Euler(0, 135, 0) * direction * 2;
+        bottomRightSprite.transform.position = targetPos + initialOffsetBR + Quaternion.Euler(0, -135, 0) * direction * 2;
+        centerSprite.transform.position = targetPos + direction;
 
         stayOnTarget = true;
     }
@@ -241,15 +251,15 @@ public class Script_Aim : MonoBehaviour
 
         float step = spriteMoveSpeed * Time.deltaTime;
 
-        Vector3 halfwayPoint = (targetPos + control.transform.position) / 2;
+        //Vector3 halfwayPoint = (targetPos + control.transform.position) / 2;
 
         Vector3 direction = (targetPos - control.transform.position).normalized;
 
-        topLeftSprite.transform.position = Vector3.Lerp(topLeftSprite.transform.position, halfwayPoint + Quaternion.Euler(0, 45, 0) * direction * 2, step);
-        topRightSprite.transform.position = Vector3.Lerp(topRightSprite.transform.position, halfwayPoint + Quaternion.Euler(0, -45, 0) * direction * 2, step);
-        bottomLeftSprite.transform.position = Vector3.Lerp(bottomLeftSprite.transform.position, halfwayPoint + Quaternion.Euler(0, 135, 0) * direction * 2, step);
-        bottomRightSprite.transform.position = Vector3.Lerp(bottomRightSprite.transform.position, halfwayPoint + Quaternion.Euler(0, -135, 0) * direction * 2, step);
-        centerSprite.transform.position = Vector3.Lerp(centerSprite.transform.position, halfwayPoint + direction, step);
+        topLeftSprite.transform.position = Vector3.Lerp(topLeftSprite.transform.position, targetPos + Quaternion.Euler(0, 45, 0) * direction * 2, step);
+        topRightSprite.transform.position = Vector3.Lerp(topRightSprite.transform.position, targetPos + Quaternion.Euler(0, -45, 0) * direction * 2, step);
+        bottomLeftSprite.transform.position = Vector3.Lerp(bottomLeftSprite.transform.position, targetPos + Quaternion.Euler(0, 135, 0) * direction * 2, step);
+        bottomRightSprite.transform.position = Vector3.Lerp(bottomRightSprite.transform.position, targetPos + Quaternion.Euler(0, -135, 0) * direction * 2, step);
+        centerSprite.transform.position = Vector3.Lerp(centerSprite.transform.position, targetPos + direction, step);
 
         topLeftSprite.transform.LookAt(cameraTransform);
         topRightSprite.transform.LookAt(cameraTransform);

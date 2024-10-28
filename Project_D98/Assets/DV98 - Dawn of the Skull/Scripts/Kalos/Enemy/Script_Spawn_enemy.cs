@@ -20,6 +20,8 @@ public class Script_Spawn_enemy : MonoBehaviour
     public float spawnCount=0;
     [SerializeField]
     private float maxSpawnCount;
+    [SerializeField]
+    public bool puSpawned;
 
     // Start is called before the first frame update
     void Start()
@@ -38,10 +40,11 @@ public class Script_Spawn_enemy : MonoBehaviour
             spawnCount = 0;
         }
 
-        if (spawnCooldown <= 0 && startSpawn)
+
+        if (spawnCooldown <= 0)
         {
-            if (CompareTag("SpawnEnemy")) SpawnEnemy();
-            else SpawnPowerUp();
+            if (CompareTag("SpawnEnemy") && startSpawn) SpawnEnemy();
+            if (!puSpawned && !CompareTag("SpawnEnemy")) SpawnPowerUp();
 
             if (overLoad)
             {
@@ -54,7 +57,7 @@ public class Script_Spawn_enemy : MonoBehaviour
         }
         else
         {
-            if (spawnCooldown > 0)
+            if (spawnCooldown > 0 && !puSpawned)
             {
                 spawnCooldown -= Time.deltaTime;
             }
@@ -80,7 +83,14 @@ public class Script_Spawn_enemy : MonoBehaviour
         {
             powerUp.transform.position = gameObject.transform.position;
             powerUp.transform.rotation = gameObject.transform.rotation;
+            powerUp.transform.SetParent(gameObject.transform);
             powerUp.SetActive(true);
+            puSpawned = true;
         }
+    }
+
+    public void DisableSpawn()
+    {
+        puSpawned = false;
     }
 }

@@ -378,8 +378,8 @@ MonoBehaviour:
   overHeated: 0
   yawTorque: 8000
   pitchTorque: 8000
-  thrust: 4000
-  strafeThrust: 4000
+  thrust: 5000
+  strafeThrust: 5000
   thrustGlideReduction: 0.362
   leftRightGlideReduction: 0.233
   returning: 0
@@ -387,7 +387,7 @@ MonoBehaviour:
   maxBoostAmount: 50
   boostDeprecationRate: 0.15
   boostRechargeRate: 0.1
-  boostMultiplier: 5
+  boostMultiplier: 4
   boosting: 0
   resetBoost: 0
   isBoostActive: 0

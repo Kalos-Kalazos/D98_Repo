@@ -12,9 +12,11 @@ public class Script_PowerUp : MonoBehaviour
 
     [Header("=== Power Up Settings ===")]
     [SerializeField]
-    float powerID;
+    int powerID;
     [SerializeField]
     int count;
+    [SerializeField]
+    Material[] puMaterial;
 
     void Start()
     {
@@ -32,30 +34,32 @@ public class Script_PowerUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GetComponent<MeshRenderer>().material = puMaterial[powerID + 1];
+
             switch (powerID)
             {
                 case 1:
                     player.fastShooting = true;
-                    player.fsCooldown = 15;
+                    player.fsCooldown = 30;
                     gameObject.SetActive(false);
                 break;
 
                 case 2:
                     player.doubleShooting = true;
-                    player.dsCooldown = 15;
+                    player.dsCooldown = 30;
                     player.shootsNum++;
                     gameObject.SetActive(false);
                 break;
 
                 case 3:
                     player.areaShooting = true;
-                    player.damage = 4;
-                    player.asCooldown = 25;
+                    player.damage = 6;
+                    player.asCooldown = 40;
                     gameObject.SetActive(false);
                 break;
 
                 case 4:
-                    player.Heal(25);
+                    player.Heal(50);
                     gameObject.SetActive(false);
                 break;
             }

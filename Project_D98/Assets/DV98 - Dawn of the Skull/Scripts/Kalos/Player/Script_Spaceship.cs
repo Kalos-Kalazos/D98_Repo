@@ -434,18 +434,9 @@ public class Script_Spaceship : MonoBehaviour
                 bullet.transform.rotation = shootingPoint.rotation;
                 bullet.GetComponent<Script_Bullet>().parentTag = gameObject.tag;
 
-                //muzzleVFX.transform.position = shootingPoint.position + offset;
-                //muzzleVFX.transform.rotation = shootingPoint.rotation;
-                //muzzleVFX.SetActive(true);
-
-                GameObject muzzle = Script_ObjectPooling.SharedInstance.GetPooledMuzzleVFX();
-                if (muzzle != null)
-                {
-                    muzzle.transform.SetParent(shootingPoint);
-                    muzzle.transform.position = shootingPoint.position + offset;
-                    muzzle.transform.rotation = shootingPoint.rotation;
-                    muzzle.SetActive(true);
-                }
+                muzzleVFX.transform.position = shootingPoint.position;
+                muzzleVFX.transform.rotation = shootingPoint.rotation;
+                muzzleVFX.SetActive(true);
 
                 Script_AudioManager.Instance.PlaySFX(0);
                 Invoke(nameof(SoundDelayed), 0.1f);
@@ -477,6 +468,11 @@ public class Script_Spaceship : MonoBehaviour
                 Vector3 offset = (i == 0) ? new Vector3(i + 1, 0, 0) : new Vector3(i - 1, 0, 0);
                 missile.transform.position = shootingPoint.position + new Vector3(0, 0, 2); //+ offset; 
                 missile.transform.rotation = shootingPoint.rotation;
+                muzzleVFX.transform.position = shootingPoint.position;
+                muzzleVFX.transform.rotation = shootingPoint.rotation;
+                muzzleVFX.SetActive(true);
+
+                Script_AudioManager.Instance.PlaySFX(0);
                 missile.SetActive(true);
             }
         }

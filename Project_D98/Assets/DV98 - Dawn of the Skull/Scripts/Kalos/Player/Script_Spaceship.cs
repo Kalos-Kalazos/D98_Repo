@@ -492,6 +492,8 @@ public class Script_Spaceship : MonoBehaviour
         }
     }
 
+    bool boostSFX;
+
     void Boosting() 
     {
         if (boosting>0 && currentBoost > 0f && !resetBoost)
@@ -508,9 +510,14 @@ public class Script_Spaceship : MonoBehaviour
                     {
                         vfx_Boost[i].Play();
                     }
-
+                    if (!boostSFX)
+                    {
+                        Script_AudioManager.Instance.PlaySFX(5);
+                        Script_AudioManager.Instance.PlaySFXLoop(6);
+                        boostSFX = true;
+                    }
                     isVFXBoost = true;
-                    cameraPlayer.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 3;
+                    cameraPlayer.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 2.5f;
                 }
             }
         }
@@ -532,7 +539,11 @@ public class Script_Spaceship : MonoBehaviour
                     {
                         vfx_Boost[i].Stop();
                     }
-
+                    if (boostSFX)
+                    {
+                        Script_AudioManager.Instance.StopSFXLoop(6);
+                        boostSFX = false;
+                    }
                     isVFXBoost = false;
                     cameraPlayer.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = 0.5f;
                 }

@@ -62,7 +62,23 @@ public class Script_AudioManager : MonoBehaviour
 
     public void PlaySFX(int sfxToPlay)
     {
+        sfxSource.loop = false;
         sfxSource.PlayOneShot(sfxArray[sfxToPlay]);
+    }
+
+    public void PlaySFXLoop(int sfxToPlay)
+    {
+        sfxSource.clip = sfxArray[sfxToPlay];
+        sfxSource.loop = true;
+        sfxSource.Play();
+
+        //sfxSource.PlayOneShot(sfxArray[sfxToPlay]);
+    }
+    public void StopSFXLoop(int sfxToPlay)
+    {
+        sfxSource.clip = sfxArray[sfxToPlay];
+        sfxSource.loop = false;
+        sfxSource.Stop();
     }
 
     #endregion

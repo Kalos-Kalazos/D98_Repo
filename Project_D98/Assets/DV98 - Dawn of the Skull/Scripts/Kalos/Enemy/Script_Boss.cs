@@ -66,6 +66,8 @@ public class Script_Boss : MonoBehaviour
         health = 3;
 
         skullHealth = maxSkullHealth;
+
+        Script_AudioManager.Instance.PlayMusic(2);
     }
 
     // Update is called once per frame

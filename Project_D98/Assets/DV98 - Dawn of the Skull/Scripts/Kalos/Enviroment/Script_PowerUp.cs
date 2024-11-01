@@ -25,40 +25,43 @@ public class Script_PowerUp : MonoBehaviour
 
     private void OnEnable()
     {
-        powerID = Random.Range(1, 5);
+        powerID = Random.Range(0, 4);
 
         spawn = GetComponentInParent<Script_Spawn_enemy>();
+
+        GetComponent<MeshRenderer>().material = puMaterial[powerID];
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            GetComponent<MeshRenderer>().material = puMaterial[powerID + 1];
+            Script_AudioManager.Instance.PlaySFX(4);
 
             switch (powerID)
             {
-                case 1:
+                case 0:
                     player.fastShooting = true;
                     player.fsCooldown = 30;
                     gameObject.SetActive(false);
+
                 break;
 
-                case 2:
+                case 1:
                     player.doubleShooting = true;
                     player.dsCooldown = 30;
                     player.shootsNum++;
                     gameObject.SetActive(false);
                 break;
 
-                case 3:
+                case 2:
                     player.areaShooting = true;
                     player.damage = 6;
                     player.asCooldown = 40;
                     gameObject.SetActive(false);
                 break;
 
-                case 4:
+                case 3:
                     player.Heal(50);
                     gameObject.SetActive(false);
                 break;

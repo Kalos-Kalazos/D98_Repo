@@ -307,8 +307,12 @@ MonoBehaviour:
   musicArray:
   - {fileID: 8300000, guid: a8994bbdf0f094d488c01bcf6ef716c5, type: 3}
   - {fileID: 8300000, guid: 2be32f11ef272204c8e9bbb7cc09bed3, type: 3}
+  - {fileID: 8300000, guid: 595dd07091ca23b4998dc1d14d903218, type: 3}
   sfxArray:
   - {fileID: 8300000, guid: 32a1e511c8bdb1e459f813adf2c0e49a, type: 3}
   - {fileID: 8300000, guid: 9ce127ed2ed2b4643b0a533d199aeba0, type: 3}
   - {fileID: 8300000, guid: 2fbf23feee77fed448e0e20d05cbbf4e, type: 3}
   - {fileID: 8300000, guid: e70d4a046cf9f4142b9c9bded6686ece, type: 3}
+  - {fileID: 8300000, guid: 18839c94bd8065c4693831de0fbf9bed, type: 3}
+  - {fileID: 8300000, guid: 1f3ec7630131cc54a8c2091b5dc40aaf, type: 3}
+  - {fileID: 8300000, guid: 8398df20969938c4a9cbbcc24d27d3ac, type: 3}

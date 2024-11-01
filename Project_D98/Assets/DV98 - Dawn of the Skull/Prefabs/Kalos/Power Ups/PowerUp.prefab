@@ -105,7 +105,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 18c1f4cd5451fe743b96834c867b9f0e, type: 2}
   - {fileID: 2100000, guid: d05212a359b485f4f8d0d861de6d5310, type: 2}
   - {fileID: 2100000, guid: 48bcaa6c35228e146a93492ed43ab12d, type: 2}
-  actualMaterial: {fileID: 2100000, guid: b6d58177b63eea64b8c6b329c74dc715, type: 2}
 --- !u!54 &8163124904309843284
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -148,7 +147,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -180,8 +179,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9.8894, y: 9.8894, z: 9.8894}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5841856709085218442}
   m_Father: {fileID: 0}

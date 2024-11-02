@@ -47,6 +47,8 @@ public class Script_LaserEyes : MonoBehaviour
     GameObject laserVFX;
     [SerializeField]
     GameObject flashVFX;
+    [SerializeField]
+    bool laserSFX;
 
     RaycastHit rayHit;
 
@@ -111,12 +113,18 @@ public class Script_LaserEyes : MonoBehaviour
                 if (charge <= 0)
                 {
                     cantShoot = false;
+                    laserSFX = false;
                 }
                 else
                 {
                     charge -= Time.deltaTime;
                     cantShoot = true;
                     flashVFX.SetActive(true);
+                    if (!laserSFX)
+                    {
+                        Script_AudioManager.Instance.PlaySFX(7);
+                        laserSFX = true;
+                    }
                 }
             }
 
@@ -135,7 +143,13 @@ public class Script_LaserEyes : MonoBehaviour
                 laserVFX.SetActive(true);
                 flashVFX.SetActive(true);
 
-                if(!reseted) Invoke(nameof(ResetShoot), 7);
+                if (!laserSFX)
+                {
+                    Script_AudioManager.Instance.PlaySFXLoop(8);
+                    laserSFX = true;
+                }
+
+                if (!reseted) Invoke(nameof(ResetShoot), 7);
 
                 Script_Spaceship targetShip = rayHit.collider.gameObject.GetComponent<Script_Spaceship>();
                 if (targetShip != null)
@@ -154,6 +168,11 @@ public class Script_LaserEyes : MonoBehaviour
         fireCooldown = fireRate;
         reseted = true;
         Invoke(nameof(ResetReset),1);
+        if (laserSFX)
+        {
+            Script_AudioManager.Instance.StopSFXLoop(8);
+            laserSFX = false;
+        }
     }
 
     void ResetReset()

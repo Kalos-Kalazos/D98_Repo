@@ -31,7 +31,7 @@ public class Script_GameManager : MonoBehaviour
 
     public void Win()
     {
-        if (actualScene == 3) SceneManager.LoadScene("Scene_Tutorial");
+        if (actualScene == 3) SceneManager.LoadScene("Scene_Victory");
     }
 
     public void Quit()

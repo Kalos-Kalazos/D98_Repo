@@ -55,6 +55,10 @@ public class Script_GameManager : MonoBehaviour
 
         if (actualScene == 3) SceneManager.LoadScene("Scene_Victory");
     }
+    public void SkipCutScene()
+    {
+        SceneManager.LoadScene("Scene_Tutorial");
+    }
 
     public void Achieved()
     {
@@ -68,7 +72,7 @@ public class Script_GameManager : MonoBehaviour
         ActualSceneID();
         SceneManager.LoadScene("Scene_NextLvl");
     }
-
+      
     void ActualSceneID()
     {
         if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))
@@ -86,7 +90,6 @@ public class Script_GameManager : MonoBehaviour
             actualScene = 3;
         }
     }
-
     public void SpriteChangeR()
     {
         UI_Control_RB.SetActive(true);
@@ -96,17 +99,18 @@ public class Script_GameManager : MonoBehaviour
     {
         UI_Control_R.SetActive(true);
         UI_Control_RB.SetActive(false);
-            }
+    }
     public void SpriteChangeL()
     {
         UI_Control_LB.SetActive(true);
         UI_Control_L.SetActive(false);
-            }
+    }
     public void SpriteResetL()
     {
         UI_Control_L.SetActive(true);
         UI_Control_LB.SetActive(false);
-            }
+    }
+
 
     void Start()
     {

@@ -24,7 +24,7 @@ public class Script_Boss : MonoBehaviour
     [SerializeField]
     public float maxSkullHealth;
     [SerializeField]
-    private bool noTurrets;
+    private bool noTurrets, gomitao;
     [SerializeField]
     public Transform player, shootPointFront, pivot;
     [SerializeField]
@@ -39,6 +39,8 @@ public class Script_Boss : MonoBehaviour
     GameObject eyeLaserR;
     [SerializeField]
     GameObject eyeLaserL;
+    [SerializeField]
+    GameObject[] minionsMouth;
 
     [SerializeField]
     PlayableDirector timeLine;
@@ -67,6 +69,8 @@ public class Script_Boss : MonoBehaviour
 
         skullHealth = maxSkullHealth;
 
+        NoGomitoMas();
+
         //Script_AudioManager.Instance.PlayMusic(2);
     }
 
@@ -82,6 +86,12 @@ public class Script_Boss : MonoBehaviour
         if (skullHealth <= 0)
         {
             health = 0;
+        }
+
+        if (skullHealth < 200 && health == 1 && noTurrets && !gomitao)
+        {
+            gomitao = true;
+            AnimatorActivate();
         }
 
         if (health <= 0)
@@ -124,6 +134,21 @@ public class Script_Boss : MonoBehaviour
 
         maskL.transform.SetParent(null);
         maskR.transform.SetParent(null);
+    }
+    public void GomitoMinions()
+    {
+        for (int i = 0; i < minionsMouth.Length; i++)
+        {
+            minionsMouth[i].SetActive(true);
+        }
+    }
+
+    public void NoGomitoMas()
+    {
+        for (int i = 0; i < minionsMouth.Length; i++)
+        {
+            minionsMouth[i].SetActive(false);
+        }
     }
 
     public void AnimatorDeactivate()

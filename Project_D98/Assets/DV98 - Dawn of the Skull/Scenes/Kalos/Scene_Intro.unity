@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 1137486852}
   - component: {fileID: 1137486855}
   - component: {fileID: 1137486854}
+  - component: {fileID: 1137486856}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -338,6 +339,36 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!114 &1137486856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137486850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 817c228360c29694db82adff8db71e57, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1137486854}
+          m_TargetAssemblyTypeName: Script_GameManager, Assembly-CSharp
+          m_MethodName: SkipCutScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1163954178 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8997720628042803274, guid: 9a39b8dfac1d97941b316450d1ac4b8c,
@@ -574,6 +605,8 @@ PlayableDirector:
     value: {fileID: 1343612608}
   - key: {fileID: -3375839891226519081, guid: 6f447f2aafce2bb4daf04adc8264f7a4, type: 2}
     value: {fileID: 1163954178}
+  - key: {fileID: 2799034615416521561, guid: 6f447f2aafce2bb4daf04adc8264f7a4, type: 2}
+    value: {fileID: 1137486856}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1988765538
@@ -706,6 +739,11 @@ PrefabInstance:
       propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1137486854}
+    - target: {fileID: 2924092302778945316, guid: 9a39b8dfac1d97941b316450d1ac4b8c,
+        type: 3}
+      propertyPath: m_Events.m_Events.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SkipCutScene
+      objectReference: {fileID: 0}
     - target: {fileID: 7947489591835090919, guid: 9a39b8dfac1d97941b316450d1ac4b8c,
         type: 3}
       propertyPath: m_Pivot.x

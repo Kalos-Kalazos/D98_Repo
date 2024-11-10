@@ -145,7 +145,7 @@ public class Script_LaserEyes : MonoBehaviour
 
                 if (!laserSFX)
                 {
-                    Script_AudioManager.Instance.PlaySFXLoop(8);
+                    Script_AudioManager.Instance.PlaySFX(8);
                     laserSFX = true;
                 }
 
@@ -168,11 +168,6 @@ public class Script_LaserEyes : MonoBehaviour
         fireCooldown = fireRate;
         reseted = true;
         Invoke(nameof(ResetReset),1);
-        if (laserSFX)
-        {
-            Script_AudioManager.Instance.StopSFXLoop(8);
-            laserSFX = false;
-        }
     }
 
     void ResetReset()

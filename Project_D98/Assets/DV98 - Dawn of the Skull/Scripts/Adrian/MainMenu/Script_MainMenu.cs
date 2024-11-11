@@ -17,7 +17,7 @@ public class Script_MainMenu : MonoBehaviour
 
     public void OptionsGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        SceneManager.LoadScene("OptionsGame");
     }
 
     public void Quit()

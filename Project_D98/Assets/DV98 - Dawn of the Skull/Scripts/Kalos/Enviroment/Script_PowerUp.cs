@@ -31,6 +31,8 @@ public class Script_PowerUp : MonoBehaviour
         spawn = GetComponentInParent<Script_Spawn_enemy>();
 
         GetComponent<MeshRenderer>().material = puMaterial[powerID];
+
+
     }
 
     private void OnTriggerEnter(Collider other)

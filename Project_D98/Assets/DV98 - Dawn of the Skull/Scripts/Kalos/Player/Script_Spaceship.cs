@@ -483,7 +483,7 @@ public class Script_Spaceship : MonoBehaviour
         if (stabilize > 0)
         {
             rb.angularDrag = 2f;
-            rb.drag = 5f;
+            rb.drag = 1.5f;
         }
         else
         {

@@ -13,6 +13,7 @@ TagManager:
   - GameManager
   - SpawnEnemy
   - LaserBall
+  - PowerUI
   layers:
   - Default
   - TransparentFX

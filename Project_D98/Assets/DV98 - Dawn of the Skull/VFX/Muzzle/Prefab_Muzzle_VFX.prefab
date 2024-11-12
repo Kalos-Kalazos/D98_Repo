@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3363832597470038371}
   - component: {fileID: 1469727153903477424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prefab_Muzzle_VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 652060644226701856}
   - component: {fileID: 2432776475937168541}
   - component: {fileID: 3451420218399003552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VFX_Muzzle_Shoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

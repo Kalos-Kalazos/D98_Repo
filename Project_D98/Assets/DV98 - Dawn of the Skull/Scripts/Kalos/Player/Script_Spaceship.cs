@@ -438,7 +438,7 @@ public class Script_Spaceship : MonoBehaviour
     void Shoot()
     {
         if (!fastShooting) currentHeat++;
-        else currentHeat += 0.25f;
+        else currentHeat += 0.5f;
 
             GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
@@ -458,7 +458,7 @@ public class Script_Spaceship : MonoBehaviour
         if (!fastShooting)
             currentHeat++;
         else
-            currentHeat += 0.25f;
+            currentHeat += 0.5f;
 
         int half = (shootsNum - 1) / 2;
 

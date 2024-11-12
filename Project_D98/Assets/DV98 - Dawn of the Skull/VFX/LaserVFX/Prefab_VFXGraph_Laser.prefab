@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6796730792757221639}
   - component: {fileID: 6326755343233629322}
   - component: {fileID: 5503051393150361550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prefab_VFXGraph_Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}

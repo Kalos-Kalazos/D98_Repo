@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3624164386088597265}
   - component: {fileID: 4311192365199053468}
   - component: {fileID: 2325982756944507352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VFXGraph_Propulsion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8569116595131209330}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VFX_Boost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 8208402151957280080}
   - component: {fileID: 1548803975973864614}
   - component: {fileID: 5746870917372324355}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VFXGraph_JetEngine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

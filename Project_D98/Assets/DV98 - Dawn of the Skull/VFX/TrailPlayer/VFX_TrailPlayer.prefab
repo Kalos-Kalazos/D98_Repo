@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3207369777545278957}
   - component: {fileID: 5588980608096875828}
   - component: {fileID: 7999507621836061866}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VFX_TrailPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

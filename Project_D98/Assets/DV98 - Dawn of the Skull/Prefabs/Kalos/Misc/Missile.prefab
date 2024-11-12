@@ -180,9 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845cf3919a28f5847ae126d6635fdca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
-  timeToDeactivate: 2
-  power: 800
-  radius: 40
+  speed: 420
+  timeToDeactivate: 1
+  power: 600
+  radius: 50
   damageMissile: 0
   entitiesPushed: []

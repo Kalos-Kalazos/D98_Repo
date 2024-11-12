@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Script_MainMenu : MonoBehaviour
 {
+    [SerializeField]
+    GameObject powersMenu;
     private void Start()
     {
         Script_AudioManager.Instance.PlayMusic(0);
@@ -23,6 +25,14 @@ public class Script_MainMenu : MonoBehaviour
     public void OptionsGame()
     {
         SceneManager.LoadScene("OptionsScene");
+    }
+    public void ActiveOptions()
+    {
+        powersMenu.SetActive(true);
+    }
+    public void DeactiveOptions()
+    {
+        powersMenu.SetActive(false);
     }
 
     public void Quit()

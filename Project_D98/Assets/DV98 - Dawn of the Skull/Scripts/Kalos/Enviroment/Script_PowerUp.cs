@@ -17,8 +17,6 @@ public class Script_PowerUp : MonoBehaviour
     int count;
     [SerializeField]
     Material[] puMaterial;
-    [SerializeField]
-    GameObject[] UI_Image;
     void Start()
     {
         player = FindObjectOfType<Script_Spaceship>();
@@ -31,8 +29,6 @@ public class Script_PowerUp : MonoBehaviour
         spawn = GetComponentInParent<Script_Spawn_enemy>();
 
         GetComponent<MeshRenderer>().material = puMaterial[powerID];
-
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,7 +43,6 @@ public class Script_PowerUp : MonoBehaviour
                     player.fastShooting = true;
                     player.fsCooldown = 30;
                     gameObject.SetActive(false);
-                    UI_Image[powerID].SetActive(true);
 
                     break;
 
@@ -56,7 +51,6 @@ public class Script_PowerUp : MonoBehaviour
                     player.dsCooldown = 30;
                     player.shootsNum++;
                     gameObject.SetActive(false);
-                    UI_Image[powerID].SetActive(true);
                     break;
 
                 case 2:
@@ -64,13 +58,11 @@ public class Script_PowerUp : MonoBehaviour
                     player.damage = 6;
                     player.asCooldown = 40;
                     gameObject.SetActive(false);
-                    UI_Image[powerID].SetActive(true);
                     break;
 
                 case 3:
                     player.Heal(50);
                     gameObject.SetActive(false);
-                    UI_Image[powerID].SetActive(true);
                     break;
             }
         }

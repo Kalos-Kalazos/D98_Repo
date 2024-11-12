@@ -105,11 +105,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 18c1f4cd5451fe743b96834c867b9f0e, type: 2}
   - {fileID: 2100000, guid: d05212a359b485f4f8d0d861de6d5310, type: 2}
   - {fileID: 2100000, guid: 48bcaa6c35228e146a93492ed43ab12d, type: 2}
-  UI_Image:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!54 &8163124904309843284
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -133,9 +128,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!135 &1590366536133862548
 SphereCollider:

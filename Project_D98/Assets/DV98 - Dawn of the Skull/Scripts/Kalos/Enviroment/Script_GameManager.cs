@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class Script_GameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Script_GameManager : MonoBehaviour
     private Script_Boss bossControl;
     public Script_Spawn_enemy[] spawner;
     public int deadMinionCount;
+    LevelUI levelUI;
 
     public static int actualScene;
 
@@ -114,6 +116,15 @@ public class Script_GameManager : MonoBehaviour
 
     void Start()
     {
+        levelUI = GetComponent<LevelUI>();
+
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Tutorial")))  
+            levelUI.CompleteLevel(0);
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_Level1")))
+            levelUI.CompleteLevel(1); 
+        if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_LevelBoss")))
+            levelUI.CompleteLevel(2);
+
         deadMinionCount = 0;
 
         ActualSceneID();

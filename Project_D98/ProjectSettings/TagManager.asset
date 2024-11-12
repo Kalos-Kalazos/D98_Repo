@@ -22,7 +22,7 @@ TagManager:
   - Water
   - UI
   - LockInVision
-  - 
+  - SunVision
   - 
   - 
   - 
@@ -50,4 +50,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: SunVision
+    uniqueID: 2065907381
+    locked: 0
+  - name: LockInVision
+    uniqueID: 1707706269
     locked: 0

@@ -98,6 +98,10 @@ public class Script_Spaceship : MonoBehaviour
     [SerializeField]
     float asRate;
 
+    // UI Icons
+    [SerializeField]
+    GameObject[] UI_Image;
+
 
     [Header("=== Visual Settings ===")]
     [SerializeField]
@@ -220,11 +224,26 @@ public class Script_Spaceship : MonoBehaviour
         if (OnHealthChanged != null)
         {
             OnHealthChanged(currentHealth);
+
+            UI_Image[3].SetActive(true);
+            Invoke(nameof(DeactivatePUHealSprites), 1);
         }
+    }
+    void SetPUSprites()
+    {
+        UI_Image[0].SetActive(fastShooting);
+        UI_Image[1].SetActive(doubleShooting);
+        UI_Image[2].SetActive(areaShooting);
+    }
+
+    void DeactivatePUHealSprites()
+    {
+        UI_Image[3].SetActive(false);
     }
 
     private void Update()
     {
+        SetPUSprites();
 
         #region Read Inputs
 
@@ -247,13 +266,14 @@ public class Script_Spaceship : MonoBehaviour
                     if (areaShooting && asCooldown > 0)
                     {
                         AreaShoot();
-                        fireCooldown = fsRate;
+                        fireCooldown = asRate - fsRate*2;
                         muzzleVFX.SetActive(true);
                     }
                     else
                     {
                         DoubleShoot();
                         fireCooldown = fsRate;
+                        muzzleVFX.SetActive(true);
                     }
                 }
                 else
@@ -276,8 +296,18 @@ public class Script_Spaceship : MonoBehaviour
             {
                 if (doubleShooting && dsCooldown > 0)
                 {
-                    DoubleShoot();
-                    fireCooldown = fireRate;
+                    if (areaShooting && asCooldown > 0)
+                    {
+                        AreaShoot();
+                        fireCooldown = asRate;
+                        muzzleVFX.SetActive(true);
+                    }
+                    else
+                    {
+                        DoubleShoot();
+                        fireCooldown = fireRate;
+                        muzzleVFX.SetActive(true);
+                    }
                 }
                 else
                 {
@@ -312,7 +342,13 @@ public class Script_Spaceship : MonoBehaviour
         if (fsCooldown > 0)
         {
             fsCooldown -= Time.deltaTime;
-        }else fastShooting = false;
+        }
+        else
+        {
+            fastShooting = false;
+            UI_Image[0].SetActive(false);
+
+        }
 
         if (dsCooldown > 0)
         {
@@ -322,6 +358,7 @@ public class Script_Spaceship : MonoBehaviour
         {
             shootsNum = 1;
             doubleShooting = false;
+            UI_Image[1].SetActive(false);
         }
 
         if (asCooldown > 0)
@@ -332,6 +369,7 @@ public class Script_Spaceship : MonoBehaviour
         {
             damage = 1;
             areaShooting = false;
+            UI_Image[2].SetActive(false);
         }
         #endregion
 
@@ -422,25 +460,36 @@ public class Script_Spaceship : MonoBehaviour
         else
             currentHeat += 0.25f;
 
+        int half = (shootsNum - 1) / 2;
+
+
         for (int i = 0; i < shootsNum; i++)
         {
             GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {
+                Debug.Log($"Activando bala {i + 1} de {shootsNum}");
                 bullet.GetComponent<Script_Bullet>().damageBullet = damage;
-                //                       if                        else
-                Vector3 offset = (i == 0) ? new Vector3(i-1, 0, 0) : new Vector3(i+1, 0, 0);
-                bullet.transform.position = shootingPoint.position + offset;
+
+                float offsetDistance = 2f; 
+                float offsetX = (i - half) * offsetDistance;  // i - half para distribuir a la izquierda y derecha
+
                 bullet.transform.rotation = shootingPoint.rotation;
+                // Posicionar la bala
+                bullet.transform.position = shootingPoint.position + new Vector3(offsetX, 0, 3);
+
                 bullet.GetComponent<Script_Bullet>().parentTag = gameObject.tag;
+                bullet.SetActive(true);
 
                 muzzleVFX.transform.position = shootingPoint.position;
                 muzzleVFX.transform.rotation = shootingPoint.rotation;
                 muzzleVFX.SetActive(true);
 
-                Script_AudioManager.Instance.PlaySFX(0);
-                Invoke(nameof(SoundDelayed), 0.1f);
-                bullet.SetActive(true);
+                if (i == 0)
+                {
+                    Script_AudioManager.Instance.PlaySFX(0);
+                    Invoke(nameof(SoundDelayed), 0.5f);
+                }
             }
         }
 
@@ -455,9 +504,9 @@ public class Script_Spaceship : MonoBehaviour
     void AreaShoot()
     {
         if (!fastShooting)
-            currentHeat+=2;
+            currentHeat+=1.5f;
         else
-            currentHeat++;
+            currentHeat+=0.8f;
 
         for (int i = 0; i < shootsNum; i++)
         {
@@ -466,14 +515,14 @@ public class Script_Spaceship : MonoBehaviour
             {
                 missile.GetComponent<Script_Missile>().damageMissile = damage;
                 Vector3 offset = (i == 0) ? new Vector3(i + 1, 0, 0) : new Vector3(i - 1, 0, 0);
-                missile.transform.position = shootingPoint.position + new Vector3(0, 0, 2); //+ offset; 
+                missile.transform.position = shootingPoint.position + new Vector3(0, 0, 3) + offset; 
                 missile.transform.rotation = shootingPoint.rotation;
                 muzzleVFX.transform.position = shootingPoint.position;
                 muzzleVFX.transform.rotation = shootingPoint.rotation;
+                missile.SetActive(true);
                 muzzleVFX.SetActive(true);
 
                 Script_AudioManager.Instance.PlaySFX(0);
-                missile.SetActive(true);
             }
         }
     }

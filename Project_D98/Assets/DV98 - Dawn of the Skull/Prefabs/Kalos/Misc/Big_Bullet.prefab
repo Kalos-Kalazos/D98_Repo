@@ -150,6 +150,7 @@ MonoBehaviour:
   speed: 400
   timeToDeactivate: 8
   damageBullet: 0
+  parentTag: 
 --- !u!1001 &1602670788413069516
 PrefabInstance:
   m_ObjectHideFlags: 0

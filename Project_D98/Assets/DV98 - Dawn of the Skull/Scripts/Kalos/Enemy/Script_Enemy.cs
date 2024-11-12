@@ -121,13 +121,8 @@ public class Script_Enemy : MonoBehaviour
 
         if (gameManager != null && gameManager.spawner != null)
         {
-            for (int i = 0; i < gameManager.spawner.Length; i++)
-            {
-                if (gameManager.spawner[i].startSpawn)
-                {
-                    gameManager.deadMinionCount++;
-                }
-            }
+            gameManager.deadMinionCount++;
+
         }
 
     }

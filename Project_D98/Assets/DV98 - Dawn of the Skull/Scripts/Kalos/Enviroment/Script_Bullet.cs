@@ -36,7 +36,10 @@ public class Script_Bullet : MonoBehaviour
             }
 
         }
-        gameObject.SetActive(false);
+        if (!collision.collider.CompareTag("Bullet"))
+        {
+            gameObject.SetActive(false);            
+        }
     }
 
     void SetParentDecal(Collision collision, GameObject hitted)

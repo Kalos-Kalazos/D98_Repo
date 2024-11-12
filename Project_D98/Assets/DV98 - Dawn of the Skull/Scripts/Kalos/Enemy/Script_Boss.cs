@@ -83,14 +83,14 @@ public class Script_Boss : MonoBehaviour
             AnimatorActivate();
         }
 
-        if (skullHealth <= 0)
-        {
-            health = 0;
-        }
-
         if (skullHealth < 200 && health == 1 && noTurrets && !gomitao)
         {
             gomitao = true;
+            AnimatorActivate();
+        }
+
+        if (skullHealth <= 0 && health == 1 && noTurrets && gomitao)
+        {
             AnimatorActivate();
         }
 
@@ -142,13 +142,17 @@ public class Script_Boss : MonoBehaviour
             minionsMouth[i].SetActive(true);
         }
     }
-
     public void NoGomitoMas()
     {
         for (int i = 0; i < minionsMouth.Length; i++)
         {
             minionsMouth[i].SetActive(false);
         }
+    }
+
+    public void BossDied()
+    {
+        health = 0;
     }
 
     public void AnimatorDeactivate()

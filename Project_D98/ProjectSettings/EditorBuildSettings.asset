@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/DV98 - Dawn of the Skull/Scenes/OptionsScene.unity
     guid: f68f10ba0979b8e4e870fd697c306588
   - enabled: 1
-    path: Assets/DV98 - Dawn of the Skull/Scenes/Kalos/Scene_Intro.unity
-    guid: 8793e6b59eba84c4d8f33870e43bc02c
-  - enabled: 1
     path: Assets/DV98 - Dawn of the Skull/Scenes/Kalos/Scene_Tutorial.unity
     guid: 28fcd4e56a0a54d40b0c2c25fcf1ec9d
   - enabled: 1

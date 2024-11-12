@@ -824,10 +824,10 @@ MonoBehaviour:
   currentHeat: 0
   maxHeat: 8
   overHeated: 0
-  yawTorque: 8500
-  pitchTorque: 8500
-  thrust: 5500
-  strafeThrust: 5500
+  yawTorque: 9000
+  pitchTorque: 9000
+  thrust: 6000
+  strafeThrust: 6000
   thrustGlideReduction: 0.362
   leftRightGlideReduction: 0.233
   returning: 0
@@ -848,7 +848,7 @@ MonoBehaviour:
   shootingPoint: {fileID: 9134196651137091157}
   fastShooting: 0
   fsCooldown: 0
-  fsRate: 0.1
+  fsRate: 0.2
   doubleShooting: 0
   dsCooldown: 0
   dsRate: 0
@@ -856,6 +856,11 @@ MonoBehaviour:
   areaShooting: 0
   asCooldown: 0
   asRate: 1
+  UI_Image:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   vfx_Boost:
   - {fileID: 2293451501903438165}
   - {fileID: 3565129493531604847}

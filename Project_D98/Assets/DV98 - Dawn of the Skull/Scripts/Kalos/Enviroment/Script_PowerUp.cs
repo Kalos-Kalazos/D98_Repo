@@ -35,7 +35,7 @@ public class Script_PowerUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Script_AudioManager.Instance.PlaySFX(4);
+            Script_AudioManager.Instance.PlaySFX(4, 1f);
 
             switch (powerID)
             {

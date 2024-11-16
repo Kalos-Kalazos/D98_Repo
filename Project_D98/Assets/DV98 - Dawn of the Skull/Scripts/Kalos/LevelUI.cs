@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class LevelUI : MonoBehaviour
 {
     public GameObject[] endLevelUI;
+    [SerializeField]
     Script_GameManager gameManager;
 
     void Start()
     {
-        gameManager.GetComponent<Script_GameManager>();
 
         for (int i = 0; i < endLevelUI.Length; i++)
         {

@@ -447,7 +447,7 @@ public class Script_Spaceship : MonoBehaviour
                 bullet.transform.position = shootingPoint.position;
                 bullet.transform.rotation = shootingPoint.rotation;
                 bullet.GetComponent<Script_Bullet>().parentTag = gameObject.tag;
-                Script_AudioManager.Instance.PlaySFX(0);
+                Script_AudioManager.Instance.PlaySFX(0, 0.8f);
                 bullet.SetActive(true);
             }
 
@@ -487,7 +487,7 @@ public class Script_Spaceship : MonoBehaviour
 
                 if (i == 0)
                 {
-                    Script_AudioManager.Instance.PlaySFX(0);
+                    Script_AudioManager.Instance.PlaySFX(0, 0.8f);
                     Invoke(nameof(SoundDelayed), 0.5f);
                 }
             }
@@ -497,7 +497,7 @@ public class Script_Spaceship : MonoBehaviour
 
     void SoundDelayed()
     {
-        Script_AudioManager.Instance.PlaySFX(0);
+        Script_AudioManager.Instance.PlaySFX(0, 0.6f);
     }
 
 
@@ -522,7 +522,7 @@ public class Script_Spaceship : MonoBehaviour
                 missile.SetActive(true);
                 muzzleVFX.SetActive(true);
 
-                Script_AudioManager.Instance.PlaySFX(0);
+                Script_AudioManager.Instance.PlaySFX(0, 0.8f);
             }
         }
     }
@@ -561,8 +561,8 @@ public class Script_Spaceship : MonoBehaviour
                     }
                     if (!boostSFX)
                     {
-                        Script_AudioManager.Instance.PlaySFX(5);
-                        Script_AudioManager.Instance.PlaySFXLoop(6);
+                        Script_AudioManager.Instance.PlaySFX(5, 0.6f);
+                        Script_AudioManager.Instance.PlaySFXLoop(6, 0.8f);
                         boostSFX = true;
                     }
                     isVFXBoost = true;

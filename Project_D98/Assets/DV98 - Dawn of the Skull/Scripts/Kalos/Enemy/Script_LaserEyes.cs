@@ -122,7 +122,7 @@ public class Script_LaserEyes : MonoBehaviour
                     flashVFX.SetActive(true);
                     if (!laserSFX)
                     {
-                        Script_AudioManager.Instance.PlaySFX(7);
+                        Script_AudioManager.Instance.PlaySFX(7, 0.8f);
                         laserSFX = true;
                     }
                 }
@@ -143,9 +143,10 @@ public class Script_LaserEyes : MonoBehaviour
                 laserVFX.SetActive(true);
                 flashVFX.SetActive(true);
 
+
                 if (!laserSFX)
                 {
-                    Script_AudioManager.Instance.PlaySFX(8);
+                    Script_AudioManager.Instance.PlaySFX(8, 0.8f);
                     laserSFX = true;
                 }
 

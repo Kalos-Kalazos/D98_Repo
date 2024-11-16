@@ -157,7 +157,7 @@ public class Script_Turret : MonoBehaviour
             {
                 bullet.transform.position = pivot.transform.position;
                 bullet.transform.rotation = pivot.transform.rotation;
-                Script_AudioManager.Instance.PlaySFX(1);
+                Script_AudioManager.Instance.PlaySFX(1, 0.5f);
                 bullet.SetActive(true);
             }
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Script_AudioManager : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class Script_AudioManager : MonoBehaviour
     public AudioClip[] musicArray;
     public AudioClip[] sfxArray;
 
+    [Range(0f, 1f)] public float globalSFXVolume = 1.0f;
+
 
     private void Awake()
     {
@@ -60,15 +63,16 @@ public class Script_AudioManager : MonoBehaviour
 
     #region SFX Methods
 
-    public void PlaySFX(int sfxToPlay)
+    public void PlaySFX(int sfxToPlay, float volume)
     {
         sfxSource.loop = false;
         sfxSource.PlayOneShot(sfxArray[sfxToPlay]);
     }
 
-    public void PlaySFXLoop(int sfxToPlay)
+    public void PlaySFXLoop(int sfxToPlay, float volume)
     {
         sfxSource.clip = sfxArray[sfxToPlay];
+        sfxSource.volume = Mathf.Clamp01(volume * globalSFXVolume);
         sfxSource.loop = true;
         sfxSource.Play();
 

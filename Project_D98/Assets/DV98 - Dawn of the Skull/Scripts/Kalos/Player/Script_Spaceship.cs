@@ -267,7 +267,7 @@ public class Script_Spaceship : MonoBehaviour
                     if (areaShooting && asCooldown > 0)
                     {
                         AreaShoot();
-                        fireCooldown = asRate - fsRate*2;
+                        fireCooldown = fsRate;
                         muzzleVFX.SetActive(true);
                     }
                     else
@@ -487,7 +487,7 @@ public class Script_Spaceship : MonoBehaviour
                 if (i == 0)
                 {
                     Script_AudioManager.Instance.PlaySFX(0, 0.8f);
-                    Invoke(nameof(SoundDelayed), 0.5f);
+                    Invoke(nameof(SoundDelayed), 0.3f);
                 }
             }
         }

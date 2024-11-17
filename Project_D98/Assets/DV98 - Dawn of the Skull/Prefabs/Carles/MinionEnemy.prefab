@@ -169,14 +169,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162ddea7a1a8c954580fffc016aa16a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
-  rotationSpeed: 5
+  moveSpeed: 10
+  rotationSpeed: 6
   angularDrag: 0.2
   linearDrag: 0.2
   shooting: 0
   empty: 0
   fireCooldown: 0
-  fireRate: 3
+  fireRate: 2
   pivotCooldown: 0
   muzzleVFX: {fileID: 7365417731330025555}
   gameManager: {fileID: 0}

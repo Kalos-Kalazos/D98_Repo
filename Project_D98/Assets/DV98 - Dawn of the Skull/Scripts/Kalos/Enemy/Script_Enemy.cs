@@ -155,7 +155,7 @@ public class Script_Enemy : MonoBehaviour
                 bullet.transform.position = shootingPoint.transform.position;
                 bullet.transform.rotation = shootingPoint.transform.rotation;
                 bullet.GetComponent<Script_Bullet>().parentTag = gameObject.tag;
-                Script_AudioManager.Instance.PlaySFX(9, 0.5f);
+                Script_AudioManager.Instance.PlaySFX(9, 0.25f);
                 bullet.SetActive(true);
             }
         }

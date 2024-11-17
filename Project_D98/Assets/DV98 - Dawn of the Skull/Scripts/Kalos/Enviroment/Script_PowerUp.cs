@@ -17,6 +17,8 @@ public class Script_PowerUp : MonoBehaviour
     int count;
     [SerializeField]
     Material[] puMaterial;
+    [SerializeField]
+    Transform padre;
     void Start()
     {
         player = FindObjectOfType<Script_Spaceship>();
@@ -42,7 +44,7 @@ public class Script_PowerUp : MonoBehaviour
                 case 0:
                     player.fastShooting = true;
                     player.fsCooldown = 30;
-                    gameObject.SetActive(false);
+                    padre.gameObject.SetActive(false);
 
                     break;
 
@@ -50,19 +52,19 @@ public class Script_PowerUp : MonoBehaviour
                     player.doubleShooting = true;
                     player.dsCooldown = 30;
                     player.shootsNum++;
-                    gameObject.SetActive(false);
+                    padre.gameObject.SetActive(false);
                     break;
 
                 case 2:
                     player.areaShooting = true;
-                    player.damage = 6;
+                    player.damage = 8;
                     player.asCooldown = 40;
-                    gameObject.SetActive(false);
+                    padre.gameObject.SetActive(false);
                     break;
 
                 case 3:
                     player.Heal(50);
-                    gameObject.SetActive(false);
+                    padre.gameObject.SetActive(false);
                     break;
             }
         }

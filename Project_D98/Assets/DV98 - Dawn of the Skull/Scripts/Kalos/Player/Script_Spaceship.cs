@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
@@ -196,9 +197,9 @@ public class Script_Spaceship : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.collider.CompareTag("Bullet") || collision.collider.CompareTag("BB"))
+        if (collision.collider.CompareTag("BulletEnemy") || collision.collider.CompareTag("BB"))
         {
-            if (collision.collider.CompareTag("Bullet")) TakeDamage(2);
+            if (collision.collider.CompareTag("BulletEnemy")) TakeDamage(2);
 
             else TakeDamage(10);
 
@@ -468,15 +469,13 @@ public class Script_Spaceship : MonoBehaviour
             GameObject bullet = Script_ObjectPooling.SharedInstance.GetPooledBullet();
             if (bullet != null)
             {
-                Debug.Log($"Activando bala {i + 1} de {shootsNum}");
                 bullet.GetComponent<Script_Bullet>().damageBullet = damage;
 
-                float offsetDistance = 2f; 
+                float offsetDistance = 4f; 
                 float offsetX = (i - half) * offsetDistance;  // i - half para distribuir a la izquierda y derecha
-
-                bullet.transform.rotation = shootingPoint.rotation;
-                // Posicionar la bala
+                
                 bullet.transform.position = shootingPoint.position + new Vector3(offsetX, 0, 3);
+                bullet.transform.rotation = shootingPoint.rotation;
 
                 bullet.GetComponent<Script_Bullet>().parentTag = gameObject.tag;
                 bullet.SetActive(true);
@@ -508,14 +507,20 @@ public class Script_Spaceship : MonoBehaviour
         else
             currentHeat+=0.8f;
 
+        int half = (shootsNum - 1) / 2;
+
         for (int i = 0; i < shootsNum; i++)
         {
             GameObject missile = Script_ObjectPooling.SharedInstance.GetPooledMissile();
             if (missile != null)
             {
                 missile.GetComponent<Script_Missile>().damageMissile = damage;
-                Vector3 offset = (i == 0) ? new Vector3(i + 1, 0, 0) : new Vector3(i - 1, 0, 0);
-                missile.transform.position = shootingPoint.position + new Vector3(0, 0, 3) + offset; 
+
+                float offsetDistance = 4f;
+                float offsetX = (i - half) * offsetDistance;  // i - half para distribuir a la izquierda y derecha
+
+                missile.transform.position = shootingPoint.position + new Vector3(offsetX, 0, 3);
+                missile.transform.rotation = shootingPoint.rotation;
                 missile.transform.rotation = shootingPoint.rotation;
                 muzzleVFX.transform.position = shootingPoint.position;
                 muzzleVFX.transform.rotation = shootingPoint.rotation;

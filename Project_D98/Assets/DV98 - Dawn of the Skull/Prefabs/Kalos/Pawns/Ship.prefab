@@ -1066,7 +1066,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: b490f90e-37a5-4fa5-a1c2-16c1d45d6556
-      m_Path: <Keyboard>/f
+      m_Path: <Keyboard>/numpad0
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -1091,7 +1091,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: ec836430-20b6-4c36-a4c5-6a8aa580b734
-      m_Path: <Keyboard>/j
+      m_Path: <Keyboard>/space
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -1141,7 +1141,7 @@ MonoBehaviour:
       m_Flags: 0
     - m_Name: 
       m_Id: 8dfc6b66-82e9-4ad3-b1e1-35b97541035e
-      m_Path: <Keyboard>/l
+      m_Path: <Keyboard>/q
       m_Interactions: 
       m_Processors: 
       m_Groups: 

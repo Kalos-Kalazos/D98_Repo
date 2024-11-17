@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5526379329805291165}
   - component: {fileID: 4002253550475066902}
-  - component: {fileID: 8667540224262397851}
   - component: {fileID: 3357807235675305000}
   m_Layer: 0
   m_Name: VFXVision
@@ -82,17 +81,9 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8667540224262397851
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1439293769831355517}
-  m_Enabled: 1
 --- !u!114 &3357807235675305000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 0
+  m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 1
@@ -207,7 +198,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 3500
+  far clip plane: 4200
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -325,7 +316,6 @@ GameObject:
   m_Component:
   - component: {fileID: 958653772728507221}
   - component: {fileID: 3923276957951997917}
-  - component: {fileID: 4147261100181977896}
   - component: {fileID: 9173446823828781987}
   m_Layer: 0
   m_Name: LockInVision
@@ -367,7 +357,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -382,7 +372,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 10000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 1
@@ -400,14 +390,6 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4147261100181977896
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6742793448636083268}
-  m_Enabled: 1
 --- !u!114 &9173446823828781987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,7 +418,7 @@ MonoBehaviour:
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
-  m_ClearDepth: 0
+  m_ClearDepth: 1
   m_AllowXRRendering: 1
   m_AllowHDROutput: 1
   m_UseScreenCoordOverride: 0
@@ -462,7 +444,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8486990613432132339}
   - component: {fileID: 7826981881462063796}
-  - component: {fileID: 1782343626391516171}
   - component: {fileID: 3026601740197294953}
   m_Layer: 0
   m_Name: SunVision
@@ -537,14 +518,6 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1782343626391516171
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7693949569882975844}
-  m_Enabled: 1
 --- !u!114 &3026601740197294953
 MonoBehaviour:
   m_ObjectHideFlags: 0

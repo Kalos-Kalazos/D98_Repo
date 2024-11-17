@@ -11,11 +11,6 @@ public class LevelUI : MonoBehaviour
 
     void Start()
     {
-
-        for (int i = 0; i < endLevelUI.Length; i++)
-        {
-            endLevelUI[i].SetActive(false);            
-        }
     }
 
     public void CompleteLevel(int i)

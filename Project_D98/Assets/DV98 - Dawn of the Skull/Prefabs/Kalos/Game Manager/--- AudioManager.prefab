@@ -44,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.18
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -53,7 +53,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 933.39
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -172,7 +172,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -181,7 +181,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 933.39
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -316,8 +316,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 18839c94bd8065c4693831de0fbf9bed, type: 3}
   - {fileID: 8300000, guid: 1f3ec7630131cc54a8c2091b5dc40aaf, type: 3}
   - {fileID: 8300000, guid: 8398df20969938c4a9cbbcc24d27d3ac, type: 3}
-  - {fileID: 8300000, guid: 9e0498379a7967543a4f9d14a4c6f245, type: 3}
+  - {fileID: 8300000, guid: 48710e4cafcf6eb449d9b93566562f6e, type: 3}
   - {fileID: 8300000, guid: 27d46ee754952eb4fb41cfb100289a29, type: 3}
   - {fileID: 8300000, guid: 0a1eb689bb1902240889da1c5067f98e, type: 3}
-  - {fileID: 8300000, guid: 2fbf23feee77fed448e0e20d05cbbf4e, type: 3}
+  - {fileID: 8300000, guid: 34a763387b1624c48b5071967d6f2adc, type: 3}
   globalSFXVolume: 0.15

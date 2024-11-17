@@ -137,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5356787755654515}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0023507387, y: 0.98663044, z: -0.16232905, w: 0.014287711}
+  m_LocalRotation: {x: 0.0023507394, y: 0.98663044, z: -0.16232911, w: 0.014287711}
   m_LocalPosition: {x: -2.5, y: 29.2, z: 86.3}
   m_LocalScale: {x: 0.20000002, y: 0.19999999, z: 0.20000002}
   m_ConstrainProportionsScale: 0
@@ -579,7 +579,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3183091084593967667
 Transform:
   m_ObjectHideFlags: 0
@@ -675,7 +675,7 @@ MonoBehaviour:
   rotationSpeedTurret: 1.5
   angleToTarget: 0
   maxLockAngle: 45
-  charge: 12.8
+  charge: 12
   distanceRay: 5000
   radiusRay: 20
   damageLaser: 0.2
@@ -868,7 +868,7 @@ GameObject:
   - component: {fileID: 2747732456471266008}
   - component: {fileID: 447721267432081597}
   - component: {fileID: 3012999483273579593}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -981,6 +981,7 @@ MonoBehaviour:
   pivot: {fileID: 0}
   bulletPrefab: {fileID: 555203903054649178, guid: 03986ffa15c59f54aaff3dde0e6daf1e,
     type: 3}
+  maskContainer: {fileID: 0}
   maskL: {fileID: 8450945298094675600}
   maskR: {fileID: 4304728876324153983}
   bigLaser: {fileID: 563602397583206326}
@@ -1003,6 +1004,10 @@ MonoBehaviour:
   - {fileID: 6903284620216522217}
   - {fileID: 2891228772167736967}
   - {fileID: 4754863522035644772}
+  maskLGlobalPosition: {x: 0, y: 0, z: 0}
+  maskLGlobalRotation: {x: 0, y: 0, z: 0, w: 0}
+  maskRGlobalPosition: {x: 0, y: 0, z: 0}
+  maskRGlobalRotation: {x: 0, y: 0, z: 0, w: 0}
   timeLine: {fileID: 0}
 --- !u!114 &62720815889692582
 MonoBehaviour:
@@ -1542,7 +1547,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5061658664231192665
 Transform:
   m_ObjectHideFlags: 0
@@ -1924,7 +1929,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8510191010837647146
 Transform:
   m_ObjectHideFlags: 0
@@ -2123,7 +2128,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7069653438489802981
 Transform:
   m_ObjectHideFlags: 0
@@ -2500,7 +2505,7 @@ MonoBehaviour:
   rotationSpeedTurret: 1.5
   angleToTarget: 0
   maxLockAngle: 45
-  charge: 12.8
+  charge: 12
   distanceRay: 5000
   radiusRay: 20
   damageLaser: 0.2
@@ -2606,7 +2611,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5061937400738717659
 Transform:
   m_ObjectHideFlags: 0
@@ -2658,7 +2663,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1588176593831339340
 Transform:
   m_ObjectHideFlags: 0
@@ -2710,7 +2715,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6782500753225508551
 Transform:
   m_ObjectHideFlags: 0
@@ -2762,7 +2767,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8506883139999631067
 Transform:
   m_ObjectHideFlags: 0
@@ -2814,7 +2819,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8311422035606820862
 Transform:
   m_ObjectHideFlags: 0
@@ -3144,7 +3149,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &860402802631915143
 Transform:
   m_ObjectHideFlags: 0
@@ -3279,7 +3284,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6810646985355386849
 Transform:
   m_ObjectHideFlags: 0
@@ -3525,7 +3530,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6030312484635860269
 Transform:
   m_ObjectHideFlags: 0
@@ -3577,7 +3582,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &729504824102041929
 Transform:
   m_ObjectHideFlags: 0
@@ -4578,7 +4583,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6996544572472887929
 Transform:
   m_ObjectHideFlags: 0
@@ -4879,7 +4884,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4201170698756249593
 Transform:
   m_ObjectHideFlags: 0
@@ -5236,7 +5241,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2219639405775231269
 Transform:
   m_ObjectHideFlags: 0
@@ -6575,7 +6580,7 @@ PrefabInstance:
     - target: {fileID: 8751065467293030626, guid: 92bb006c699d64543b9a7823c99fe501,
         type: 3}
       propertyPath: charge
-      value: 12.8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8751065467293030626, guid: 92bb006c699d64543b9a7823c99fe501,
         type: 3}

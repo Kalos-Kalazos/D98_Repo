@@ -48,6 +48,8 @@ public class Script_LaserEyes : MonoBehaviour
     [SerializeField]
     GameObject flashVFX;
     [SerializeField]
+    bool flashSFX;
+    [SerializeField]
     bool laserSFX;
 
     RaycastHit rayHit;
@@ -69,6 +71,19 @@ public class Script_LaserEyes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health < 0) health = 0;
+        if (charge < 0) charge = 0;
+        if (fireCooldown < 0) fireCooldown = 0;
+    }
+
+    private void FixedUpdate()
+    {
+        if (health > 0 && fireCooldown <= 0)
+        {
+            if (CompareTag("LaserBall") && padreControl.health < 2) AimAtPlayer(); 
+            else if(!CompareTag("LaserBall")) AimAtPlayer();
+        }
+
         if (fireCooldown <= 0 && !cantShoot)
         {
             if (CompareTag("LaserBall") && padreControl.health < 2)
@@ -81,16 +96,6 @@ public class Script_LaserEyes : MonoBehaviour
         {
             fireCooldown -= Time.deltaTime;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        if (health > 0 && fireCooldown <= 0)
-        {
-            if (CompareTag("LaserBall") && padreControl.health < 2) AimAtPlayer(); 
-            else if(!CompareTag("LaserBall")) AimAtPlayer();
-        }
-
     }
 
     private void AimAtPlayer()
@@ -113,17 +118,21 @@ public class Script_LaserEyes : MonoBehaviour
                 if (charge <= 0)
                 {
                     cantShoot = false;
-                    laserSFX = false;
+                    flashSFX = false;
                 }
                 else
                 {
                     charge -= Time.deltaTime;
                     cantShoot = true;
                     flashVFX.SetActive(true);
-                    if (!laserSFX)
+                    if (!flashSFX)
                     {
-                        Script_AudioManager.Instance.PlaySFX(7, 0.8f);
-                        laserSFX = true;
+                        if (CompareTag("LaserBall") && padreControl.health < 2)
+                        {
+                            Script_AudioManager.Instance.PlaySFX(11, 0.9f);
+                        }
+                        else if (!CompareTag("LaserBall")) Script_AudioManager.Instance.PlaySFX(7, 0.9f);
+                        flashSFX = true;
                     }
                 }
             }
@@ -144,9 +153,11 @@ public class Script_LaserEyes : MonoBehaviour
                 flashVFX.SetActive(true);
 
 
+
                 if (!laserSFX)
                 {
-                    Script_AudioManager.Instance.PlaySFX(8, 0.8f);
+                    Script_AudioManager.Instance.PlaySFX(8, 0.7f);
+                    Debug.Log("Suena");
                     laserSFX = true;
                 }
 
@@ -168,6 +179,7 @@ public class Script_LaserEyes : MonoBehaviour
         charge = 20;
         fireCooldown = fireRate;
         reseted = true;
+        laserSFX = false;
         Invoke(nameof(ResetReset),1);
     }
 

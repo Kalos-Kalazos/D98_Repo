@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7994650052699917560}
   - component: {fileID: 1896747793450626620}
   - component: {fileID: 7076925909215199596}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: VFX_HitEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 32294130445563127}
   - component: {fileID: 4315123773755470444}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Prefab_HittedEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

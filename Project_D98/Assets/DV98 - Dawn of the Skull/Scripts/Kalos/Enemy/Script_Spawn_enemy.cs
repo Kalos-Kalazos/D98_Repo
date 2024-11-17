@@ -13,7 +13,7 @@ public class Script_Spawn_enemy : MonoBehaviour
     [SerializeField]
     private bool overLoad = false;
     [SerializeField]
-    public bool startSpawn = false;
+    public bool startSpawn;
     [SerializeField]
     private float spawnRate;
     [SerializeField]
@@ -71,11 +71,28 @@ public class Script_Spawn_enemy : MonoBehaviour
         GameObject enemy = Script_ObjectPooling.SharedInstance.GetPooledEnemy();
         if (enemy != null)
         {
+            if (SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_LevelBoss")))
+            {
+                enemy.GetComponent<Script_Enemy>().enabled = false;
+                StartCoroutine(ActivateMinionAfterDelay(5, enemy));
+            }
             enemy.transform.position = gameObject.transform.position;
             enemy.transform.rotation = gameObject.transform.rotation;
             enemy.SetActive(true);
         }
     }
+
+    IEnumerator ActivateMinionAfterDelay(float delay, GameObject enemy)
+    {
+        yield return new WaitForSeconds(delay);
+        ActiveMinion(enemy);
+    }
+
+    void ActiveMinion(GameObject enemy)
+    {
+        enemy.GetComponent<Script_Enemy>().enabled = true;
+    }
+
     public void SpawnPowerUp()
     {
         GameObject powerUp = Script_ObjectPooling.SharedInstance.GetPooledPU();

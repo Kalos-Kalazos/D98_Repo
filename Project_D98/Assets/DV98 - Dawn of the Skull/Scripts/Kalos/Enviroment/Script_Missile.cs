@@ -53,7 +53,7 @@ public class Script_Missile : MonoBehaviour
         {
             missileVFX.transform.position = transform.position;
             missileVFX.transform.rotation = transform.rotation;
-            Script_AudioManager.Instance.PlaySFX(10, 0.5f);
+            Script_AudioManager.Instance.PlaySFX(10, 0.2f);
             missileVFX.SetActive(true);
         }
 

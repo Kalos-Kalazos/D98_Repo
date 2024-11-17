@@ -30,6 +30,8 @@ public class Script_Boss : MonoBehaviour
     [SerializeField]
     public GameObject bulletPrefab;
     [SerializeField]
+    GameObject maskContainer;
+    [SerializeField]
     GameObject maskL;
     [SerializeField]
     GameObject maskR;
@@ -41,6 +43,15 @@ public class Script_Boss : MonoBehaviour
     GameObject eyeLaserL;
     [SerializeField]
     GameObject[] minionsMouth;
+
+    [SerializeField]
+    Vector3 maskLGlobalPosition;
+    [SerializeField]
+    Quaternion maskLGlobalRotation;
+    [SerializeField]
+    Vector3 maskRGlobalPosition;
+    [SerializeField]
+    Quaternion maskRGlobalRotation;
 
     [SerializeField]
     PlayableDirector timeLine;
@@ -69,9 +80,7 @@ public class Script_Boss : MonoBehaviour
 
         skullHealth = maxSkullHealth;
 
-        NoGomitoMas();
-
-        //Script_AudioManager.Instance.PlayMusic(2);
+        Script_AudioManager.Instance.PlayMusic(2);
     }
 
     // Update is called once per frame
@@ -98,8 +107,8 @@ public class Script_Boss : MonoBehaviour
         {
             SceneManager.LoadScene("Scene_Victory");
         }
-
     }
+
     private void FixedUpdate()
     {
         PursuePlayer();
@@ -126,15 +135,33 @@ public class Script_Boss : MonoBehaviour
     }
     public void ChangeMask()
     {
+        maskL.transform.SetParent(null);
+        maskR.transform.SetParent(null);
+
+        maskLGlobalPosition = maskL.transform.position;
+        maskLGlobalRotation = maskL.transform.rotation;
+
+        maskRGlobalPosition = maskR.transform.position;
+        maskRGlobalRotation = maskR.transform.rotation;
+
         maskL.GetComponent<MeshCollider>().enabled = true;
         maskR.GetComponent<MeshCollider>().enabled = true;
 
         eyeLaserL.GetComponentInParent<Transform>().gameObject.SetActive(false);
         eyeLaserR.GetComponentInParent<Transform>().gameObject.SetActive(false);
 
-        maskL.transform.SetParent(null);
-        maskR.transform.SetParent(null);
+        gameObject.GetComponent<Animator>().enabled = false;
+        gameObject.GetComponent<Animator>().Rebind();
+        gameObject.GetComponent<Animator>().Update(0);
+
+        maskL.transform.position = maskLGlobalPosition;
+        maskR.transform.position = maskRGlobalPosition;
+        maskL.transform.rotation = maskLGlobalRotation;
+        maskR.transform.rotation = maskRGlobalRotation;
+
+        gameObject.GetComponent<Animator>().enabled = true;
     }
+
     public void GomitoMinions()
     {
         for (int i = 0; i < minionsMouth.Length; i++)
@@ -142,11 +169,12 @@ public class Script_Boss : MonoBehaviour
             minionsMouth[i].SetActive(true);
         }
     }
+
     public void NoGomitoMas()
     {
         for (int i = 0; i < minionsMouth.Length; i++)
         {
-            minionsMouth[i].SetActive(false);
+            minionsMouth[i].GetComponent<Script_Spawn_enemy>().startSpawn = false;
         }
     }
 

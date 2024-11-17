@@ -2504,6 +2504,7 @@ MonoBehaviour:
   - {fileID: 1752527676}
   - {fileID: 1752527675}
   - {fileID: 1752527674}
+  gameManager: {fileID: 1049698408}
 --- !u!1001 &1050314310
 PrefabInstance:
   m_ObjectHideFlags: 0

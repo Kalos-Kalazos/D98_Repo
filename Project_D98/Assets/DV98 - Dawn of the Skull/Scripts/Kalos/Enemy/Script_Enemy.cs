@@ -91,7 +91,10 @@ public class Script_Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("BB"))
         {
             Hitted(collision.collider);
-            gameManager.Achieved();
+            if (!SceneManager.Equals(SceneManager.GetActiveScene(), SceneManager.GetSceneByName("Scene_LevelBoss")))
+            {
+                gameManager.Achieved();
+            }
         }
     }
 

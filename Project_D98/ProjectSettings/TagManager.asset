@@ -14,6 +14,7 @@ TagManager:
   - SpawnEnemy
   - LaserBall
   - PowerUI
+  - BulletEnemy
   layers:
   - Default
   - TransparentFX
@@ -48,12 +49,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: VFXVision
+    uniqueID: 1723722769
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: SunVision
-    uniqueID: 2065907381
-    locked: 0
   - name: LockInVision
     uniqueID: 1707706269
+    locked: 0
+  - name: SunVision
+    uniqueID: 2065907381
     locked: 0

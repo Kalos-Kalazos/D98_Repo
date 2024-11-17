@@ -527,6 +527,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_Muzzle_VFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3388825103382057203, guid: f594cd19de662dc429312b4cd4baeffa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451420218399003552, guid: f594cd19de662dc429312b4cd4baeffa,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
